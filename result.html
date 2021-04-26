@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 
 <head>
+  <link rel="manifest" href="/manifest.json">
+  <!-- Najva Push Notification -->
+  <script type="text/javascript">
+      (function(){
+          var now = new Date();
+          var version = now.getFullYear().toString() + "0" + now.getMonth() + "0" + now.getDate() +
+              "0" + now.getHours();
+          var head = document.getElementsByTagName("head")[0];
+          var link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = "https://app.najva.com/static/css/local-messaging.css" + "?v=" + version;
+          head.appendChild(link);
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.async = true;
+          script.src = "https://app.najva.com/static/js/scripts/herokuapp716-website-25701-9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03.js" + "?v=" + version;
+          head.appendChild(script);
+          })()
+  </script>
+  <!-- END NAJVA PUSH NOTIFICATION -->
   <title>Topic based sentiment analysis</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,12 +38,12 @@
       width: 100%;
     }
 
-    
+
   </style>
 </head>
 
 <body background="background.JPG" class="mybody">
-  
+
   <div class="constant-header">
     <center>
       <p>
@@ -33,9 +53,9 @@
   </div>
 
   <div class="dynamic-body">
-    
+
     <center>
-      
+
 
 
         <table style="width:30%">
@@ -49,7 +69,7 @@
                 <tr>
                   <td>
                   <span class="current-price" id="BTC-USD">
-                    
+
                   </span>
                   </td>
                   <td id="BTC-USD-pstat">
@@ -78,7 +98,7 @@
                 <tr>
                   <td>
                   <span class="current-price" id="ETH-USD">
-                    
+
                   </span>
                   </td>
                   <td id="ETH-USD-pstat">
@@ -107,7 +127,7 @@
                 <tr>
                   <td>
                   <span class="current-price" id="XRP-USD">
-                    
+
                   </span>
                   </td>
                   <td id="XRP-USD-pstat">
@@ -136,7 +156,7 @@
                 <tr>
                   <td>
                   <span class="current-price" id="LTC-USD">
-                    
+
                   </span>
                   </td>
                   <td id="LTC-USD-pstat">
@@ -154,7 +174,7 @@
             </th>
           </tr>
         </table>
-      
+
     </center>
 
   </div>

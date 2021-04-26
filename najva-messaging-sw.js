@@ -1,0 +1,1 @@
+importScripts('https://van.najva.com/static/js/scripts/herokuapp716-website-25701-9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03-service-worker.js');
