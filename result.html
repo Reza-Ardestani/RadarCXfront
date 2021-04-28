@@ -21,7 +21,7 @@
           })()
   </script>
   <!-- END NAJVA PUSH NOTIFICATION -->
-  <title>Topic based sentiment analysis</title>
+  <title>Trading App</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -35,7 +35,7 @@
     table {
       font-family: arial, sans-serif;
       border-collapse: collapse;
-      width: 100%;
+      width: 80%;
     }
 
 
@@ -47,7 +47,7 @@
   <div class="constant-header">
     <center>
       <p>
-        <a href=#>Coins</a> | <a href=#>Conditions</a> | <a href=#>Charts</a> | <a href=#>About</a>
+        <a href=#>Coins</a> | <a href=#>Conditions</a> | <a href=#>About</a>
       </p>
     </center>
   </div>
@@ -58,121 +58,75 @@
 
 
 
-        <table style="width:30%">
+        <table class="table table-striped table-bordered mydatatable" style="width: 100%">
+          <tr>
+              <th>Coin</th>
+              <th>Current Price</th>
+              <th>Old Price</th>
+              <th>Status</th>
+          </tr>
 
           <tr>
-            <th>
-              <img src="img/coins/bitcoin-btc-logo.png" width="100" height="100">
-            </th>
-            <th>
-              <table>
-                <tr>
-                  <td>
-                  <span class="current-price" id="BTC-USD">
+            <td>
+              <img src="img/coins/bitcoin-btc-logo.png" class="responsive">
+            </td>
+            <td>
+              <span id="BTC-USD"></span>
+            </td>
+            <td>
+              <span id="BTC-USD-old"></span>
+            </td>
+            <td id="BTC-USD-pstat">
+              <img src="" id="BTC-USD-stat" class="responsive">
+            </td>
+          </tr>
 
-                  </span>
-                  </td>
-                  <td id="BTC-USD-pstat">
-                    <img src="" id="BTC-USD-stat" width="30" height="30">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                  <h5 id="BTC-USD-old">
+          <tr>
+            <td>
+              <img src="img/coins/ethereum-eth-logo.png" class="responsive">
+            </td>
+            <td>
+              <span id="ETH-USD"></span>
+            </td>
+            <td>
+              <span id="ETH-USD-old"></span>
+            </td>
+            <td id="ETH-USD-pstat">
+              <img src="" id="ETH-USD-stat" class="responsive">
+            </td>
+          </tr>
 
-                  </h5>
-                </td>
-                </tr>
-              </table>
-            </th>
+          <tr>
+            <td>
+              <img src="img/coins/xrp-xrp-logo.png" class="responsive">
+            </td>
+            <td>
+              <span id="XRP-USD"></span>
+            </td>
+            <td>
+              <span id="XRP-USD-old"></span>
+            </td>
+            <td id="XRP-USD-pstat">
+              <img src="" id="XRP-USD-stat" class="responsive">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <img src="img/coins/litecoin-ltc-logo.png" class="responsive">
+            </td>
+            <td>
+              <span id="LTC-USD"></span>
+            </td>
+            <td>
+              <span id="LTC-USD-old"></span>
+            </td>
+            <td id="LTC-USD-pstat">
+              <img src="" id="LTC-USD-stat" class="responsive">
+            </td>
           </tr>
 
 
-
-          <tr>
-            <th>
-              <img src="img/coins/ethereum-eth-logo.png" width="100" height="100">
-            </th>
-            <th>
-              <table>
-                <tr>
-                  <td>
-                  <span class="current-price" id="ETH-USD">
-
-                  </span>
-                  </td>
-                  <td id="ETH-USD-pstat">
-                    <img src="" id="ETH-USD-stat" width="30" height="30">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                  <h5 id="ETH-USD-old">
-
-                  </h5>
-                </td>
-                </tr>
-              </table>
-            </th>
-          </tr>
-
-
-
-          <tr>
-            <th>
-              <img src="img/coins/xrp-xrp-logo.png" width="100" height="100">
-            </th>
-            <th>
-              <table>
-                <tr>
-                  <td>
-                  <span class="current-price" id="XRP-USD">
-
-                  </span>
-                  </td>
-                  <td id="XRP-USD-pstat">
-                    <img src="" id="XRP-USD-stat" width="30" height="30">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                  <h5 id="XRP-USD-old">
-
-                  </h5>
-                </td>
-                </tr>
-              </table>
-            </th>
-          </tr>
-
-
-
-          <tr>
-            <th>
-              <img src="img/coins/litecoin-ltc-logo.png" width="100" height="100">
-            </th>
-            <th>
-              <table>
-                <tr>
-                  <td>
-                  <span class="current-price" id="LTC-USD">
-
-                  </span>
-                  </td>
-                  <td id="LTC-USD-pstat">
-                    <img src="" id="LTC-USD-stat" width="30" height="30">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                  <h5 id="LTC-USD-old">
-
-                  </h5>
-                </td>
-                </tr>
-              </table>
-            </th>
-          </tr>
         </table>
 
     </center>
@@ -180,6 +134,7 @@
   </div>
 
   <script>
+
     setInterval(getCoin, 5000, "BTC", "USD");
     setInterval(getCoin, 5000, "ETH", "USD");
     setInterval(getCoin, 5000, "XRP", "USD");
@@ -207,5 +162,7 @@
         var parent = document.getElementById(coin1 + '-' + coin2 + '-pstat');
         parent.replaceChild(img, parent.childNodes[1]);
       }
+
+     $('.mydatatable').DataTable();
   </script>
 </body>
