@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="formtest.css">
+</head>
+
+<body background="background.JPG" class="mybody">
+
+    <div class="constant-header">
+        <center>
+          <p>
+            <a href="result.html">Coins</a> | <a href="conditions.html">Conditions</a> | <a href=#>About</a>
+          </p>
+        </center>
+    </div>
+
+    
+    <div class="container">
+        <form action="/new-cond">
+            <label for="cond_name">Name (optional):</label>
+            <input type="text" id="cond_name" name="cond_name">
+
+            <br><br>
+
+            <label for="cond_type">IF</label>
+            <select id="cond_type" name="cond_type">
+                <option value="realtime">Realtime Price</option>
+                <option value="volume">Volume</option>
+                <option value="maverage">Moving Average</option>
+            </select>
+
+            <label for="coin">FOR</label>
+            <select id="coin" name="coin">
+                <option value="BTC">BTC</option>
+                <option value="XRP">XRP</option>
+                <option value="LTC">LTC</option>
+            </select>
+
+            <label for="trigger">BECOMES</label>
+            <select id="trigger" name="trigger">
+                <option value="bigger-than">bigger than</option>
+                <option value="smaller-than">smaller than</option>
+                <option value="equal-to">equal to</option>
+            </select>
+
+            <input type="number" id="amount" name="amount"> 
+            <label>$, NOTIFY ME!</label>
+
+            <br>
+
+            <input class="submit" type="submit" id="submit" value="Add condition">
+
+        </form>
+</body>
+
+</html>
