@@ -3,11 +3,26 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 
+# To use class based views
+from django.views.generic import View
+
 def coinlist(request):
     return render(request, 'result.html')
     #return HttpResponse('<h1>Blog home</h1>')
 def conditions(request):
+    print(request)
     return render(request, 'conditions.html')
+
+# Start of new conditions capturing
+class new_cond(View):
+    def get(self, request):
+        return HttpResponse("We do not have GET at this URL")
+    def post(self, request):
+        print (request.POST)
+        return HttpResponse("Your condition added successfully!")
+
+# End of new condition capturing
+
 
 ''' Start of threading'''
 ## Frist integration of multithreading part
