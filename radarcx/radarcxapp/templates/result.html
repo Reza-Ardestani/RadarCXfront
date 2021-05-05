@@ -49,9 +49,9 @@
       <a class="navbar-brand" href="#">Trader App</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
-      <li class="active"><a href="{% static 'result.html' %}">Coins</a></li>
-      <li><a href="{% static 'conditions.html' %}">Conditions</a></li>
+      <li><a href="{% url 'result' %}">Home</a></li>
+      <li class="active"><a href="{% url 'result' %}">Coins</a></li>
+      <li><a href="{% url 'conditions' %}">Conditions</a></li>
       <li><a href="#">About</a></li>
     </ul>
   </div>

@@ -6,7 +6,7 @@ from .models import *
 # To use class based views
 from django.views.generic import View
 
-def coinlist(request):
+def result(request):
     return render(request, 'result.html')
     #return HttpResponse('<h1>Blog home</h1>')
 def conditions(request):
