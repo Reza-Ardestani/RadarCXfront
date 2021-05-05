@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+  <link rel="manifest" href="/manifest.json">
+  <!-- Najva Push Notification -->
+  <script type="text/javascript">
+      (function(){
+          var now = new Date();
+          var version = now.getFullYear().toString() + "0" + now.getMonth() + "0" + now.getDate() +
+              "0" + now.getHours();
+          var head = document.getElementsByTagName("head")[0];
+          var link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = "https://app.najva.com/static/css/local-messaging.css" + "?v=" + version;
+          head.appendChild(link);
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.async = true;
+          script.src = "https://app.najva.com/static/js/scripts/herokuapp716-website-25701-9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03.js" + "?v=" + version;
+          head.appendChild(script);
+          })()
+  </script>
+  <!-- END NAJVA PUSH NOTIFICATION -->
+  <title>Trading App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='Mystyle.css') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 80%;
+    }
+  </style>
+</head>
+
+<body background="{% static 'background.JPG' %}" class="mybody">
+
+  <nav class="navbar sticky-top navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Trader App</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li class="active"><a href="{% templates 'result.html' %}">Coins</a></li>
+      <li><a href="{% templates 'conditions.html' %}">Conditions</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </div>
+  </nav>
+
+  <div class="dynamic-body">
+
+    <center>
+
+
+
+        <table class="table table-striped table-bordered mydatatable" style="width: 80%">
+          <tr>
+              <th>Coin</th>
+              <th>Current Price</th>
+              <th>Old Price</th>
+              <th>Status</th>
+          </tr>
+
+          <tr>
+            <td>
+              <img src="{%static 'img/coins/bitcoin-btc-logo.png' %}" class="responsive">
+            </td>
+            <td>
+              <span id="BTC-USD"></span>
+            </td>
+            <td>
+              <span id="BTC-USD-old"></span>
+            </td>
+            <td id="BTC-USD-pstat">
+              <img src="" id="BTC-USD-stat" class="responsive">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <img src="{%static 'img/coins/ethereum-eth-logo.png' %}" class="responsive">
+            </td>
+            <td>
+              <span id="ETH-USD"></span>
+            </td>
+            <td>
+              <span id="ETH-USD-old"></span>
+            </td>
+            <td id="ETH-USD-pstat">
+              <img src="" id="ETH-USD-stat" class="responsive">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <img src="{%static 'img/coins/xrp-xrp-logo.png' %}" class="responsive">
+            </td>
+            <td>
+              <span id="XRP-USD"></span>
+            </td>
+            <td>
+              <span id="XRP-USD-old"></span>
+            </td>
+            <td id="XRP-USD-pstat">
+              <img src="" id="XRP-USD-stat" class="responsive">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <img src="{%static 'img/coins/litecoin-ltc-logo.png' %}" class="responsive">
+            </td>
+            <td>
+              <span id="LTC-USD"></span>
+            </td>
+            <td>
+              <span id="LTC-USD-old"></span>
+            </td>
+            <td id="LTC-USD-pstat">
+              <img src="" id="LTC-USD-stat" class="responsive">
+            </td>
+          </tr>
+
+
+        </table>
+
+    </center>
+
+  </div>
+
+  <script>
+
+    setInterval(getCoin, 5000, "BTC", "USD");
+    setInterval(getCoin, 5000, "ETH", "USD");
+    setInterval(getCoin, 5000, "XRP", "USD");
+    setInterval(getCoin, 5000, "LTC", "USD");
+      async function getCoin(coin1, coin2){
+        const api_url = 'https://min-api.cryptocompare.com/data/price?fsym=' + coin1 + '&tsyms=' + coin2
+        const response = await fetch(api_url);
+        const data = await response.json();
+        const { USD } = data;
+        var newPrice = USD;
+        var oldPrice = document.getElementById(coin1 + '-' + coin2).textContent;
+        document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
+        document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
+        var img = document.createElement("img");
+        if (newPrice > oldPrice) {
+          img.src = "{%static 'img/diff/gain.png' %}";
+        } else if (newPrice < oldPrice) {
+          img.src = "{%static 'img/diff/loss.png' %}";
+        } else {
+          img.src = "{%static 'img/diff/court.png' %}";
+        }
+        img.setAttribute("id", coin1 + '-' + coin2 + '-stat')
+        img.setAttribute("width", "30")
+        img.setAttribute("height", "30")
+        var parent = document.getElementById(coin1 + '-' + coin2 + '-pstat');
+        parent.replaceChild(img, parent.childNodes[1]);
+      }
+
+     $('.mydatatable').DataTable();
+  </script>
+</body>
