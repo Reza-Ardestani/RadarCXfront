@@ -13,15 +13,21 @@ def conditions(request):
     print(request)
     return render(request, 'conditions.html')
 
-# Start of new conditions capturing
+# Start of new conditions capturing ---> '/new_cond
 class new_cond(View):
     def get(self, request):
         return HttpResponse("We do not have GET at this URL")
     def post(self, request):
-        print (request.POST)
+        c = Condition()
+        c.type = request.POST["cond_type"]
+        c.quantity = request.POST["amount"]
+        c.coin = request.POST["coin"]
+        c.smaller_or_greater = request.POST["trigger"]
+        c.save()
+        print(Condition.objects.all())
+        # print (request.POST)
         return HttpResponse("Your condition added successfully!")
-
-# End of new condition capturing
+# End of new condition capturing ---> '/new_cond
 
 
 ''' Start of threading'''
