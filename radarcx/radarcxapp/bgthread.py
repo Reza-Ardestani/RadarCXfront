@@ -48,9 +48,9 @@ def fetchData_and_check():
         response = requests.get(url, params=parameters)
         data = response.json()
 
-        print(data)
-        print(parameters["fsym"])
-        print(data[parameters["tsyms"]])
+        # print(data)
+        # print(parameters["fsym"])
+        # print(data[parameters["tsyms"]])
         Coin(name=parameters["fsym"], realtime_price=data[parameters["tsyms"]], moving_average=123, volume=222).save()
 
         # return data
