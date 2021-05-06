@@ -1,5 +1,5 @@
 import time, requests, threading
-from .models import Coin
+from .models import Coin, Condition
 
 ''' Start of threading'''
 # Frist integration of multithreading part
@@ -16,6 +16,14 @@ def notifSpecitic(userToken):
 
 def conditionsChecker():
     #here we check whether any of conditions has been triggerd or #
+    
+    # new thread realtimeprice_checker()
+    conditions = Condition.objects.all()
+    # if Coin.
+    # new thread movingaverage_checker()
+
+    # new thread volume_checker()
+
 
     # call "notifSpecitic" func if it's necessary
     pass

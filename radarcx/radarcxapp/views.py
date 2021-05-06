@@ -34,7 +34,7 @@ class new_cond(View):
         c.coin = request.POST["coin"]
         c.smaller_or_greater = request.POST["trigger"]
         c.save()
-        print(Condition.objects.all())
+        # print(Condition.objects.all())
         # print (request.POST)
         return HttpResponse("Your condition added successfully!")
 # End of new condition capturing ---> '/new_cond
