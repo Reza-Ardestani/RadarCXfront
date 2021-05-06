@@ -7,3 +7,9 @@ width: 40%;
 max-width: 40px;
 height: auto;
 }
+
+table {
+font-family: arial, sans-serif;
+border-collapse: collapse;
+width: 80%;
+}

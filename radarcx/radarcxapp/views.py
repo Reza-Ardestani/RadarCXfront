@@ -12,10 +12,8 @@ from . import bgthread
 import threading
 
 
-def result(request):
-    return render(request, 'result.html')
-    # return HttpResponse('<h1>Blog home</h1>')
-
+def coins(request):
+    return render(request, 'coins.html')
 
 def conditions(request):
     print(request)

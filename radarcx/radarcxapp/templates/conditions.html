@@ -1,78 +1,43 @@
-{% load static %}
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html>
+{% block title %} - Conditions{% endblock %}
 
-<head>
+{% block dbody %}
+<div class="container">
+  <form action="/new_cond" method="POST">{% csrf_token %}
+    <label for="cond_name">Name (optional):</label>
+    <input type="text" id="cond_name" name="cond_name">
 
-  <title>Trading App</title>
+    <br><br>
 
-  <link rel="stylesheet" href="formtest.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  {# <link rel="stylesheet" href="{{url_for('static', filename='Mystyle.css') }}"> #}
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+    <label for="cond_type">IF</label>
+    <select id="cond_type" name="cond_type">
+      <option value="realtime">Realtime Price</option>
+      <option value="volume">Volume</option>
+      <option value="maverage">Moving Average</option>
+    </select>
 
-<body background="{% static 'background.JPG' %}" class="mybody">
+    <label for="coin">FOR</label>
+    <select id="coin" name="coin">
+      <option value="BTC">BTC</option>
+      <option value="XRP">XRP</option>
+      <option value="LTC">LTC</option>
+    </select>
 
-<nav class="navbar sticky-top navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Trader App</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="{% url 'result' %}">Home</a></li>
-      <li><a href="{% url 'result' %}">Coins</a></li>
-      <li class="active"><a href="{% url 'conditions' %}">Conditions</a></li>
-      <li><a href="#">About</a></li>
-    </ul>
-  </div>
-  </nav>
+    <label for="trigger">BECOMES</label>
+    <select id="trigger" name="trigger">
+      <option value="bigger-than">bigger than</option>
+      <option value="smaller-than">smaller than</option>
+      <option value="equal-to">equal to</option>
+    </select>
 
-    <center>
-    <div class="container">
-        <form action="/new_cond" method="POST">{% csrf_token %}
-            <label for="cond_name">Name (optional):</label>
-            <input type="text" id="cond_name" name="cond_name">
+    <input type="number" id="amount" name="amount">
+    <label>$, NOTIFY ME!</label>
 
-            <br><br>
+    <br>
 
-            <label for="cond_type">IF</label>
-            <select id="cond_type" name="cond_type">
-                <option value="realtime">Realtime Price</option>
-                <option value="volume">Volume</option>
-                <option value="maverage">Moving Average</option>
-            </select>
+    <input class="submit" type="submit" id="submit" value="Add condition">
 
-            <label for="coin">FOR</label>
-            <select id="coin" name="coin">
-                <option value="BTC">BTC</option>
-                <option value="XRP">XRP</option>
-                <option value="LTC">LTC</option>
-            </select>
-
-            <label for="trigger">BECOMES</label>
-            <select id="trigger" name="trigger">
-                <option value="bigger-than">bigger than</option>
-                <option value="smaller-than">smaller than</option>
-                <option value="equal-to">equal to</option>
-            </select>
-
-            <input type="number" id="amount" name="amount">
-            <label>$, NOTIFY ME!</label>
-
-            <br>
-
-            <input class="submit" type="submit" id="submit" value="Add condition">
-
-        </form>
-    </div>
-    </center>
-</body>
-
-</html>
+  </form>
+</div>
+{% endblock %}
