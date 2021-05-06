@@ -9,6 +9,8 @@ from django.views.generic import View
 # To use threading used by Morty
 from . import bgthread
 
+import threading
+
 
 def result(request):
     return render(request, 'result.html')
@@ -19,9 +21,8 @@ def conditions(request):
     print(request)
     return render(request, 'conditions.html')
 
+
 # Start of new conditions capturing ---> '/new_cond
-
-
 class new_cond(View):
     def get(self, request):
         return HttpResponse("We do not have GET at this URL")
@@ -39,4 +40,5 @@ class new_cond(View):
 # End of new condition capturing ---> '/new_cond
 
 
-
+coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+coinsData_thread.start()
