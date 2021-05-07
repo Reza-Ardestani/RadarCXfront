@@ -1,1 +1,1 @@
-web: gunicorn radarcx.radarcx.wsgi
+web: gunicorn radarcx.wsgi
