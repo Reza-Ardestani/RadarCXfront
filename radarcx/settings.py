@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-83@=@4aa&zg-u$g*izwt*c!^rq4=6%99ivlmj1tad6!s!s^8z=
 DEBUG = True
 
 ALLOWED_HOSTS = ['radarcx.herokuapp.com',
+                 '127.0.0.1',
                 ]
 
 
