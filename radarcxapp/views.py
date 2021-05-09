@@ -43,10 +43,17 @@ class new_cond(View):
 # coinsData_thread.start()
 
 
-# manifest.json handling
+# manifest.json handler
 from radarcx import settings
+import json
 from django.http import JsonResponse
 def manifest(request):
     manifest_file = open(os.path.join(settings.BASE_DIR, 'manifest.json'))
     #print(json.load(manifest_file))
     return JsonResponse(json.load(manifest_file))
+
+# najva-messaging-sw.js handler
+from radarcx import settings
+def sw(request):
+    sw_file = open(os.path.join(settings.BASE_DIR, 'najva-messaging-sw.js'))
+    return HttpResponse(sw_file.read())
