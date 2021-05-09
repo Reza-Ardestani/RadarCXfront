@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 # for using temporary html file, showing to users
 from django.http import HttpResponse
 from .models import Condition, Coin, user
@@ -8,9 +9,10 @@ from django.views.generic import View
 
 # To use threading used by Morty
 from . import bgthread
-
 import threading
 
+# to use simple json
+import os
 
 def coins(request):
     return render(request, 'coins.html')
@@ -37,6 +39,14 @@ class new_cond(View):
         return HttpResponse("Your condition added successfully!")
 # End of new condition capturing ---> '/new_cond
 
+# coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+# coinsData_thread.start()
 
-coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
-coinsData_thread.start()
+
+# manifest.json handling
+from radarcx import settings
+from django.http import JsonResponse
+def manifest(request):
+    manifest_file = open(os.path.join(settings.BASE_DIR, 'manifest.json'))
+    #print(json.load(manifest_file))
+    return JsonResponse(json.load(manifest_file))
