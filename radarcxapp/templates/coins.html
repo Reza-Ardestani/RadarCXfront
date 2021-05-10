@@ -124,12 +124,13 @@
       document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
       document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
       var img = document.createElement("img");
+      <!-- May10th comments -->
       if (newPrice > oldPrice) {
-        img.src = "{%static 'img/diff/gain.png' %}";
+        <!-- img.src = "{%static 'img/diff/gain.png' %}";  -->
       } else if (newPrice < oldPrice) {
-        img.src = "{%static 'img/diff/loss.png' %}";
+        <!-- img.src = "{%static 'img/diff/loss.png' %}";  -->
       } else {
-        img.src = "{%static 'img/diff/court.png' %}";
+        <!-- img.src = "{%static 'img/diff/court.png' %}";  -->
       }
       img.setAttribute("id", coin1 + '-' + coin2 + '-stat')
       img.setAttribute("width", "30")
@@ -137,7 +138,7 @@
       var parent = document.getElementById(coin1 + '-' + coin2 + '-pstat');
       parent.replaceChild(img, parent.childNodes[1]);
     }
-
-    $('.mydatatable').DataTable();
+    <!-- May10th comments -->
+    <!-- $('.mydatatable').DataTable(); -->
   </script>
 {% endblock %}
