@@ -9,4 +9,5 @@ urlpatterns = [
     url('new_cond', views.new_cond.as_view(), name='new_cond'),
     url('manifest.json', views.manifest, name='manifest'),
     url('najva-messaging-sw.js', views.sw, name='sw'),
+    url('log', views.log, name='log'),
 ]

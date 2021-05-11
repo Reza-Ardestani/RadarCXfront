@@ -1,5 +1,8 @@
 import time, requests, threading
 from .models import Coin, Condition
+from radarcx import settings
+
+string_test = "logs:\n"
 
 ''' Start of threading'''
 # Frist integration of multithreading part
@@ -12,7 +15,7 @@ def listOfClients():
 
     # getting all connected clients to our website
     accounts_str = client.get_onesignal_accounts()
-    print(accounts_str)
+    string_test += (accounts_str) + '\n'
 
 def notifgeneral():
     pass
@@ -106,10 +109,10 @@ def conditionsChecker():
 
 
 def fetchData_and_check():
+    global string_test
     # print(user.objects.values())
-    sleep(60) #remove this line later _matthew_
-    listOfClients()
-    Coin.objects.all().delete() #handle this later _matt_
+    #:sleep(60) #remove this line later _matthew_
+    listOfClients()_
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
@@ -130,7 +133,7 @@ def fetchData_and_check():
         # print(data)
         # print(parameters["fsym"])
         # print(data[parameters["tsyms"]])
-        Coin(name=parameters["fsym"], realtime_price=data[parameters["tsyms"]], moving_average=123, volume=222).save()
+        #Coin(name=parameters["fsym"], realtime_price=data[parameters["tsyms"]], moving_average=123, volume=222).save()
 
         # return data
 
@@ -141,3 +144,4 @@ def fetchData_and_check():
         #     sleep(round(endOfLoopTime-startOfLoopTime, 0))
 
 ''' End of threading '''
+
