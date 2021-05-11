@@ -3,6 +3,20 @@
 {% block title %} - Conditions{% endblock %}
 
 {% block dbody %}
+
+<nav class="navbar sticky-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Trader App</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="{% url 'coins' %}">Coins</a></li>
+            <li class="active"><a href="{% url 'conditions' %}">Conditions</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container">
   <form action="/new_cond" method="POST">{% csrf_token %}
     <label for="cond_name">Name (optional):</label>

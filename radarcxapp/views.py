@@ -56,4 +56,4 @@ def manifest(request):
 from radarcx import settings
 def sw(request):
     sw_file = open(os.path.join(settings.BASE_DIR, 'najva-messaging-sw.js'))
-    return HttpResponse(sw_file.read())
+    return HttpResponse(sw_file.read(), headers={'content-type': 'application/javascript; charset=utf-8'})

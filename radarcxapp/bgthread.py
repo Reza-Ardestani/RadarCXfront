@@ -4,19 +4,28 @@ from .models import Coin, Condition
 ''' Start of threading'''
 # Frist integration of multithreading part
 
+def listOfClients():
+    from najva_api_client.najva import Najva
+    client = Najva()
+    client.apikey = "9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03"
+    client.token = "4fa9220c03c0483ccd5dbced0b83a78c9e242e3f"
+
+    # getting all connected clients to our website
+    accounts_str = client.get_onesignal_accounts()
+    print(accounts_str)
 
 def notifgeneral():
     pass
 
 
-def notifSpecitic(userToken):
+def notifSpecific(userToken):
     # Notify user
     pass
 
 
 def conditionsChecker():
     #here we check whether any of conditions has been triggerd or #
-    
+
     # new thread realtimeprice_checker()
     conditions = Condition.objects.filter(type="price", smaller_or_greater="greater")
 
@@ -98,6 +107,9 @@ def conditionsChecker():
 
 def fetchData_and_check():
     # print(user.objects.values())
+    sleep(60) #remove this line later _matthew_
+    listOfClients()
+    Coin.objects.all().delete() #handle this later _matt_
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
@@ -110,7 +122,7 @@ def fetchData_and_check():
         if exchange:
             print('exchange: ', exchange)
             parameters['e'] = exchange
-        
+
         # response comes as json
         response = requests.get(url, params=parameters)
         data = response.json()
