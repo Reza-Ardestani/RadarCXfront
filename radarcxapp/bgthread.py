@@ -111,8 +111,14 @@ def conditionsChecker():
 def fetchData_and_check():
     global string_test
     # print(user.objects.values())
+<<<<<<< HEAD
     #:sleep(60) #remove this line later _matthew_
     listOfClients()_
+=======
+    sleep(60) #remove this line later _matthew_
+    listOfClients()
+    Coin.objects.all().delete() #handle this later _matt_
+>>>>>>> ed830554a9ca057aef90be5fd91f5c8789794976
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
