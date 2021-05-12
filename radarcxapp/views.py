@@ -39,8 +39,8 @@ class new_cond(View):
         return HttpResponse("Your condition added successfully!")
 # End of new condition capturing ---> '/new_cond
 
-# coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
-# coinsData_thread.start()
+coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+coinsData_thread.start()
 
 
 # manifest.json handler
