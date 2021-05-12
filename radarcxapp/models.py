@@ -11,7 +11,7 @@ class Coin(models.Model):
     date_updated = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{name}'
+        return f'{self.name}'
 
 
 class FavoriteCoins(models.Model):
@@ -19,7 +19,7 @@ class FavoriteCoins(models.Model):
     favorite_coin = models.ForeignKey(Coin, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{user} likes {favorite_coin} coin!'
+        return f'{self.user} likes {self.favorite_coin} coin!'
 
 
 class Condition(models.Model):
@@ -42,4 +42,4 @@ class Condition(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{creator} {coin} {type} {smaller_or_greator} {quantity}'
+        return f'{self.creator} {self.coin} {self.type} {self.smaller_or_greater} {self.quantity}'
