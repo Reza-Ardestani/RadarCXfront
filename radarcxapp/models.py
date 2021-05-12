@@ -7,16 +7,6 @@ class Coin(models.Model):
     volume = models.IntegerField()
 
 
-class user(models.Model):
-    username = models.CharField(max_length=16)
-    password = models.CharField(max_length=16)
-    email = models.EmailField()
-    first_name = models.CharField(max_length=16)
-    last_name = models.CharField(max_length=16)
-    phone_number = models.IntegerField()
-    # favorite_coins = models.ForeignKey()
-
-
 class Condition(models.Model):
     TYPE_CHOICES = (
         ("p", "price"),
