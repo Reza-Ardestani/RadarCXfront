@@ -22,6 +22,11 @@ class FavoriteCoins(models.Model):
         return f'{self.user} likes {self.favorite_coin} coin!'
 
 
+class UserToken(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=2)
+
+
 class Condition(models.Model):
     TYPE_CHOICES = (
         ("p", "price"),
