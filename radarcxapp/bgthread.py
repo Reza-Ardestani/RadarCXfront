@@ -1,3 +1,4 @@
+from os import spawnve
 import time, requests, threading
 from .models import Coin, Condition
 from radarcx import settings
@@ -130,10 +131,6 @@ def conditionsChecker():
 
 
 def fetchData_and_check():
-    global string_test
-    # print(user.objects.values())
-    #get_onesignal_accounts()
-    #sleep(60) #remove this line later _matthew_
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
@@ -151,12 +148,9 @@ def fetchData_and_check():
         response = requests.get(url, params=parameters)
         data = response.json()
 
-        # print(data)
-        # print(parameters["fsym"])
-        # print(data[parameters["tsyms"]])
-        #Coin(name=parameters["fsym"], realtime_price=data[parameters["tsyms"]], moving_average=123, volume=222).save()
-
-        # return data
+        c = Coin.objects.get(name=parameters["fsym"])
+        c.realtime_price=data[parameters["tsyms"]]
+        c.save()
 
         conditionsChecker()  # Synchronizicly we runn this fun & wait till it ends
 
