@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %} - Register{% endblock %}
+
+{% block dbody %} 
+
+<nav class="navbar sticky-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Trader App</a>
+        </div>
+        <ul class="nav navbar-nav">
+			<li class="active"><a href="{% url 'coins' %}">Coins</a></li>
+            <li><a href="{% url 'conditions' %}">Conditions</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+{% if messages %} 
+	{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">
+			{{ message }}
+		</div>
+	{% endfor %} 
+{% endif %}
+	<h2> You have been logged out </h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+    </div>
+
+{% endblock %}
