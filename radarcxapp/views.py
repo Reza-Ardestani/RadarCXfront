@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # for using temporary html file, showing to users
 from django.http import HttpResponse
-from .models import Condition, Coin, user
+from .models import *
 
 # To use class based views
 from django.views.generic import View
