@@ -148,6 +148,13 @@ def fetchData_and_check():
         response = requests.get(url, params=parameters)
         data = response.json()
 
+        cleanup = Coin.objects.all()
+        cleanup.delete()
+        cleanup = Condition.objects.all()
+        cleanup.delete()
+        
+        c = Coin(name="BTC", realtime_price=123, moving_average=123, volume=213)
+        c.save()
         c = Coin.objects.get(name=parameters["fsym"])
         c.realtime_price=data[parameters["tsyms"]]
         c.save()
