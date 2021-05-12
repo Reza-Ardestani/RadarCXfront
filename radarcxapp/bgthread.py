@@ -22,8 +22,22 @@ def get_onesignal_accounts():
     accounts_str = client.get_onesignal_accounts()
     string_test += (accounts_str) + '\n'
 
-def notifgeneral():
-    pass
+def notifAll(titleText , bodyText):
+    # notifying all users
+    # make sure title and body are str
+
+    client = Najva()
+    client.apikey = "9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03"
+    client.token = "6e83d4164baf569f345ab556b01347b1178776c5"
+    notifAll_response = client.send_to_all(title=titleText,
+    body=bodyText,
+    url="https://radarcx.herokuapp.com/",
+    icon="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
+    image="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
+    onclick="open-link",
+    one_signal_enabled=False,)
+
+    return notifAll_response
 
 
 def notifSpecific(userToken , titleText , bodyText ):
