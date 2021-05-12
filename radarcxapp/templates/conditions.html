@@ -13,8 +13,15 @@
             <li><a href="{% url 'coins' %}">Coins</a></li>
             <li class="active"><a href="{% url 'conditions' %}">Conditions</a></li>
             <li><a href="#">About</a></li>
-			<li><a href="{% url 'register' %}">register</a></li>
-			<li><a href="{% url 'login' %}">sing in </a></li>
+			
+			{% if user.is_authenticated %}
+
+                <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+				<li><a href="{% url 'register' %}">register</a></li>
+				<li><a href="{% url 'login' %}">sing in </a></li>
+			{% endif %}
+			
         </ul>
     </div>
 </nav>
