@@ -59,5 +59,5 @@ def sw(request):
     return HttpResponse(sw_file.read(), headers={'content-type': 'application/javascript; charset=utf-8'})
 
 
-def log(request):
-    return HttpResponse(bgthread.string_test)
+# def log(request):
+#     return HttpResponse(bgthread.string_test)
