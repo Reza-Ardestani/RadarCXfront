@@ -1,10 +1,18 @@
 {% extends "layout.html" %}
 
+{% block someheader %}
+<script>
+window.najvaUserSubscribed = function(najva_user_token){
+// you have user specific najva_user_token, add your logic here
+}
+</script>
+{% endblock %}
+
 {% block title %} - Register{% endblock %}
 
 {% block dbody %}
 
-{% load crispy_forms_tags %} 
+{% load crispy_forms_tags %}
 
 <nav class="navbar sticky-top navbar-inverse">
     <div class="container-fluid">
@@ -20,12 +28,12 @@
 </nav>
 
 
-{% if messages %} 
+{% if messages %}
 	{% for message in messages %}
 		<div class="alert alert-{{ message.tags }}">
 			{{ message }}
 		</div>
-	{% endfor %} 
+	{% endfor %}
 {% endif %}
 
 <div class="content-section">
