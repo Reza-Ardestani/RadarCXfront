@@ -7,7 +7,11 @@ string_test = "logs:\n"
 ''' Start of threading'''
 # Frist integration of multithreading part
 
-def listOfClients():
+def get_onesignal_accounts():
+    # rename listOfClients to get_onesignal_accounts
+    #based on Najva's Docs, this func return googleAnalyt, firebase, and
+    #other connected accounts
+    # this function return list of listOf_onesignal_accounts
     from najva_api_client.najva import Najva
     client = Najva()
     client.apikey = "9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03"
@@ -111,7 +115,7 @@ def conditionsChecker():
 def fetchData_and_check():
     global string_test
     # print(user.objects.values())
-    listOfClients()
+    #get_onesignal_accounts()
     #sleep(60) #remove this line later _matthew_
     while(True):
         # startOfLoopTime = perf_counter()
@@ -144,4 +148,3 @@ def fetchData_and_check():
         #     sleep(round(endOfLoopTime-startOfLoopTime, 0))
 
 ''' End of threading '''
-
