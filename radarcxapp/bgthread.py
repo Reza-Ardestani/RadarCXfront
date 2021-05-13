@@ -145,6 +145,9 @@ def conditionsChecker():
 
 
 def fetchData_and_check():
+
+    MattewsToken = '8d705edd-f193-4f5a-a9d5-d63e802f2fb3'
+    
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
@@ -166,7 +169,7 @@ def fetchData_and_check():
         cleanup.delete()
         cleanup = Condition.objects.all()
         cleanup.delete()
-        
+
         c = Coin(name="BTC", realtime_price=123, moving_average=123, volume=213)
         c.save()
         c = Coin.objects.get(name=parameters["fsym"])

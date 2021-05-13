@@ -3,7 +3,7 @@
 {% block title %} - Profile{% endblock %}
 
 {% block dbody %}
- 
+
 <nav class="navbar sticky-top navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -13,7 +13,7 @@
 			<li class="active"><a href="{% url 'coins' %}">Coins</a></li>
             <li><a href="{% url 'conditions' %}">Conditions</a></li>
             <li><a href="#">About</a></li>
-			
+
 			{% if user.is_authenticated %}
                 <li class="active"><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
                 <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
@@ -21,11 +21,11 @@
 				<li><a href="{% url 'register' %}">register</a></li>
 				<li ><a href="{% url 'login' %}">sing in </a></li>
 			{% endif %}
-			
+
         </ul>
     </div>
 </nav>
-	
+
 <h2> {{ user.username }} </h2>
 
 {% endblock %}
