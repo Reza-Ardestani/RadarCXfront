@@ -16,7 +16,7 @@ import os
 
 def coins(request):
     res = render(request, 'radarcxapp/coins.html', {})
-    res['Access-Control-Allow-Origin'] = '*'
+    # res['Access-Control-Allow-Origin'] = '*'
     return res
 
 def conditions(request):
