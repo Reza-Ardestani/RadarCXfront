@@ -15,11 +15,11 @@ import threading
 import os
 
 def coins(request):
-    return render(request, 'coins.html')
+    return render(request, 'radarcxapp/coins.html')
 
 def conditions(request):
     print(request)
-    return render(request, 'conditions.html')
+    return render(request, 'radarcxapp/conditions.html')
 
 
 # Start of new conditions capturing ---> '/new_cond
@@ -39,11 +39,12 @@ class new_cond(View):
         return HttpResponse("Your condition added successfully!")
 # End of new condition capturing ---> '/new_cond
 
-coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
-coinsData_thread.start()
+# coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+# coinsData_thread.start()
 
 
 # manifest.json handler
+"""
 from radarcx import settings
 import json
 from django.http import JsonResponse
@@ -51,8 +52,10 @@ def manifest(request):
     manifest_file = open(os.path.join(settings.BASE_DIR, 'manifest.json'))
     #print(json.load(manifest_file))
     return JsonResponse(json.load(manifest_file))
+"""
 
 # najva-messaging-sw.js handler
+"""
 from radarcx import settings
 def sw(request):
     sw_file = open(os.path.join(settings.BASE_DIR, 'najva-messaging-sw.js'))
@@ -61,3 +64,4 @@ def sw(request):
 
 # def log(request):
 #     return HttpResponse(bgthread.string_test)
+"""
