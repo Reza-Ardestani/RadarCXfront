@@ -12,7 +12,8 @@ def iranTimeZone(delay = 0):
     # time should be in this format :"%Y-%m-%dT%H:%M:%S"
     sent_time = datetime.now()
     #string_test += sent_time
-    print(sent_time)
+    print("Heroku system current time:" sent_time)
+    # 2021-05-14 09:10:37.611888 -> 2021-05-14 13:55:40.339310
 
 
 def get_onesignal_accounts():
