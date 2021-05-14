@@ -169,13 +169,13 @@ window.najvaUserSubscribed = function(najva_user_token){
       document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
       document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
       var img = document.createElement("img");
-      <!-- May10th comments -->
+      
       if (newPrice > oldPrice) {
-        <!-- img.src = "{%static 'img/diff/gain.png' %}";  -->
+        img.src = "{%static 'img/diff/gain.png' %}";
       } else if (newPrice < oldPrice) {
-        <!-- img.src = "{%static 'img/diff/loss.png' %}";  -->
+        img.src = "{%static 'img/diff/loss.png' %}";
       } else {
-        <!-- img.src = "{%static 'img/diff/court.png' %}";  -->
+        img.src = "{%static 'img/diff/court.png' %}";
       }
       img.setAttribute("id", coin1 + '-' + coin2 + '-stat')
       img.setAttribute("width", "30")
