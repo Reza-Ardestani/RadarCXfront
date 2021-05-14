@@ -33,6 +33,17 @@ window.najvaUserSubscribed = function(najva_user_token){
   })()
 </script>
 <!-- END NAJVA PUSH NOTIFICATION -->
+
+<!-- User-specific tokens -->
+<script>
+  window.najvaUserSubscribed = function(najva_user_token){
+  // you have user specific najva_user_token, add your logic here
+  var body = document.getElementsByTagName("body")[0];
+  console.log(najva_user_token)
+  }
+  </script>
+<!-- End -->
+
 {% endblock %}
 
 
