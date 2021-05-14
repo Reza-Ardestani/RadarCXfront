@@ -23,6 +23,9 @@ window.najvaUserSubscribed = function(najva_user_token){
 			<li><a href="{% url 'coins' %}">Coins</a></li>
             <li><a href="{% url 'conditions' %}">Conditions</a></li>
             <li><a href="#">About</a></li>
+		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
 			
 			{% if user.is_authenticated %}
                 <li><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
