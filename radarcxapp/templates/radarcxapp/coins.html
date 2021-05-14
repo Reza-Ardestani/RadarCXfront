@@ -88,7 +88,7 @@ window.najvaUserSubscribed = function(najva_user_token){
 
         <tr>
           <td>
-            <img src="https://cryptoicons.org/api/icon/btc/50" class="responsive">
+            <img src="{% static 'radarcxapp/img/coins/bitcoin-btc-logo.png' %}" class="responsive">
           </td>
           <td>
             <span id="BTC-USD"></span>
@@ -103,7 +103,7 @@ window.najvaUserSubscribed = function(najva_user_token){
 
         <tr>
           <td>
-            <img src="https://cryptoicons.org/api/icon/eth/50" class="responsive">
+            <img src="{% static 'radarcxapp/img/coins/ethereum-eth-logo.png' %}" class="responsive">
           </td>
           <td>
             <span id="ETH-USD"></span>
@@ -118,7 +118,7 @@ window.najvaUserSubscribed = function(najva_user_token){
 
         <tr>
           <td>
-            <img src="https://cryptoicons.org/api/icon/xrp/50" class="responsive">
+            <img src="{% static 'radarcxapp/img/coins/litecoin-ltc-logo.png' %}" class="responsive">
           </td>
           <td>
             <span id="XRP-USD"></span>
@@ -133,7 +133,7 @@ window.najvaUserSubscribed = function(najva_user_token){
 
         <tr>
           <td>
-            <img src="https://cryptoicons.org/api/icon/ltc/50" class="responsive">
+            <img src="{% static 'radarcxapp/img/coins/xrp-xrp-logo.png' %}" class="responsive">
           </td>
           <td>
             <span id="LTC-USD"></span>
@@ -171,11 +171,11 @@ window.najvaUserSubscribed = function(najva_user_token){
       var img = document.createElement("img");
       
       if (newPrice > oldPrice) {
-        img.src = "{%static 'radarcxapp/img/diff/gain.png' %}";
+        img.src = "{% static 'radarcxapp/img/diff/gain.png' %}";
       } else if (newPrice < oldPrice) {
-        img.src = "{%static 'radarcxapp/img/diff/loss.png' %}";
+        img.src = "{% static 'radarcxapp/img/diff/loss.png' %}";
       } else {
-        img.src = "{%static 'radarcxapp/img/diff/court.png' %}";
+        img.src = "{% static 'radarcxapp/img/diff/court.png' %}";
       }
       img.setAttribute("id", coin1 + '-' + coin2 + '-stat')
       img.setAttribute("width", "30")
