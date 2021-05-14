@@ -3,7 +3,45 @@ import time, requests, threading
 from .models import Coin, Condition
 from radarcx import settings
 from datetime import datetime, timedelta # for iranTimeZone func
+import requests
+import json as json_parser
 string_test = "logs:\n"
+
+''' start of my func for sending notif '''
+def send_to_users(apikey, token ,title, body, url, icon,subscriber_tokens, onclick='open-link', image=None,
+    content=None,json=None,sent_time=None):
+
+    urlNajva = 'https://app.najva.com/notification/api/v1/notifications/'
+
+    if sent_time==None:
+        sent_time = datetime.now() + timedelta(minutes=3)
+
+
+    body = {
+        'api-key': apikey,
+        'title': title,
+        'body': body,
+        'onclick-action': onclick,
+        'url': url,
+        'content': content,
+        'json': '"%s"' % json,
+        'icon': icon,
+        'image': image,
+        'sent_time': sent_time.strftime("%Y-%m-%dT%H:%M:%S"),
+        'subscriber_tokens': subscriber_tokens
+    }
+
+    headers = {
+        'authorization': "Token %s" % token,
+        'content-type': "application/json",
+        'cache-control': "no-cache",
+    }
+
+    response = requests.request(method="POST", url=urlNajva, data = json_parser.dumps(body), headers= headers)
+
+    return response.text
+
+'''end of my func for sending notifSpecific '''
 
 ''' Start of threading'''
 # Frist integration of multithreading part
@@ -163,7 +201,19 @@ def fetchData_and_check():
     MattewsToken = '8d705edd-f193-4f5a-a9d5-d63e802f2fb3'
     MattewsTokenNum2 = '1ba8d7be-5038-4754-8f3a-7f0e902f6c4e'
     tokens = [MattewsToken,MattewsTokenNum2]
-    print( "result of notify func:",notifSpecific(tokens ,"a test tiltle from heroku ","a test body from heroku") )
+    #print( "result of notify func:",notifSpecific(tokens ,"a test tiltle from heroku ","a test body from heroku") )
+    notifSpecific_response = send_to_users(apikey = "9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03",
+    token = "6e83d4164baf569f345ab556b01347b1178776c5",
+    title="test title for heroku",
+    body= "test body from heroku",
+    url="https://radarcx.herokuapp.com/",
+    icon="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
+    image="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
+    onclick="open-link",
+    subscriber_tokens=['8d705edd-f193-4f5a-a9d5-d63e802f2fb3','1ba8d7be-5038-4754-8f3a-7f0e902f6c4e','6685a775-c3a4-418b-af80-cc7c31eac2f5'])
+
+    print("najjjjjva response:",notifSpecific_response)
+    
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
