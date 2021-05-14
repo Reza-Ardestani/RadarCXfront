@@ -171,11 +171,11 @@ window.najvaUserSubscribed = function(najva_user_token){
       var img = document.createElement("img");
       
       if (newPrice > oldPrice) {
-        img.src = "{%static 'img/diff/gain.png' %}";
+        img.src = "{%static 'radarcxapp/img/diff/gain.png' %}";
       } else if (newPrice < oldPrice) {
-        img.src = "{%static 'img/diff/loss.png' %}";
+        img.src = "{%static 'radarcxapp/img/diff/loss.png' %}";
       } else {
-        img.src = "{%static 'img/diff/court.png' %}";
+        img.src = "{%static 'radarcxapp/img/diff/court.png' %}";
       }
       img.setAttribute("id", coin1 + '-' + coin2 + '-stat')
       img.setAttribute("width", "30")
