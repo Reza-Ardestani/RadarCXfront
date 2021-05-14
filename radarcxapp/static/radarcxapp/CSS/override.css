@@ -9,7 +9,12 @@
 }
 
 table {
-font-family: arial, sans-serif;
-border-collapse: collapse;
-width: 80%;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 80%;
+}
+
+.mynav {
+	border-radius: 0px;
+	border-color: #222;
 }
