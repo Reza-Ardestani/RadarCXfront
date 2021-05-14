@@ -2,7 +2,7 @@ from os import spawnve
 import time, requests, threading
 from .models import Coin, Condition
 from radarcx import settings
-
+from datetime import datetime, timedelta # for iranTimeZone func
 string_test = "logs:\n"
 
 ''' Start of threading'''
@@ -10,7 +10,8 @@ string_test = "logs:\n"
 
 def iranTimeZone(delay = 0):
     # time should be in this format :"%Y-%m-%dT%H:%M:%S"
-    pass
+    sent_time = datetime.now()
+    string_test += sent_time
 
 def get_onesignal_accounts():
     # rename listOfClients to get_onesignal_accounts
