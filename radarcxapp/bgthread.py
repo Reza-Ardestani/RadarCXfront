@@ -11,7 +11,9 @@ string_test = "logs:\n"
 def iranTimeZone(delay = 0):
     # time should be in this format :"%Y-%m-%dT%H:%M:%S"
     sent_time = datetime.now()
-    string_test += sent_time
+    #string_test += sent_time
+    print(sent_time)
+
 
 def get_onesignal_accounts():
     # rename listOfClients to get_onesignal_accounts
@@ -153,7 +155,7 @@ def fetchData_and_check():
 
     MattewsToken = '8d705edd-f193-4f5a-a9d5-d63e802f2fb3'
     MattewsTokenNum2 = '1ba8d7be-5038-4754-8f3a-7f0e902f6c4e'
-
+    iranTimeZone() # For testing purpose , remove later
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
