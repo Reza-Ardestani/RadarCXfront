@@ -15,10 +15,11 @@ import threading
 import os
 
 def coins(request):
-    return render(request, 'radarcxapp/coins.html')
+    res = render(request, 'radarcxapp/coins.html', {})
+    res['Access-Control-Allow-Origin'] = '*'
+    return res
 
 def conditions(request):
-    print(request)
     return render(request, 'radarcxapp/conditions.html')
 
 
