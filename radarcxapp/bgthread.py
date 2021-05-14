@@ -14,7 +14,8 @@ def iranTimeZone():
     # iran = UTC + 270 minuts
     # send time = irantime + 3 min delay
     sent_time = datetime.now() + timedelta(minutes=273)
-    sent_time = sent_time.strftime("%Y-%m-%dT%H:%M:%S")
+    #najva has asked to send in the following format but they actually do that in their code!(line66)
+    #sent_time = sent_time.strftime("%Y-%m-%dT%H:%M:%S")
     return sent_time
 
 
