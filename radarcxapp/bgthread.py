@@ -8,6 +8,10 @@ string_test = "logs:\n"
 ''' Start of threading'''
 # Frist integration of multithreading part
 
+def iranTimeZone(delay = 0):
+    # time should be in this format :"%Y-%m-%dT%H:%M:%S"
+    pass
+
 def get_onesignal_accounts():
     # rename listOfClients to get_onesignal_accounts
     #based on Najva's Docs, this func return googleAnalyt, firebase, and
@@ -148,7 +152,7 @@ def fetchData_and_check():
 
     MattewsToken = '8d705edd-f193-4f5a-a9d5-d63e802f2fb3'
     MattewsTokenNum2 = '1ba8d7be-5038-4754-8f3a-7f0e902f6c4e'
-    
+
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
