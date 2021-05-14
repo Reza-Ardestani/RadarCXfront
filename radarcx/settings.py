@@ -161,3 +161,8 @@ LOGIN_URL = 'login'
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
+
+# fix issue with MyStyle.css
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
