@@ -8,13 +8,16 @@ string_test = "logs:\n"
 ''' Start of threading'''
 # Frist integration of multithreading part
 
-def iranTimeZone(delay = 0):
+def iranTimeZone():
     # time should be in this format :"%Y-%m-%dT%H:%M:%S"
-    sent_time = datetime.now()
-    #string_test += sent_time
-    print("Heroku system current time:", sent_time)
-    # 2021-05-14 09:10:37.611888 -> 2021-05-14 13:55:40.339310
-    # 2021-05-14T09:10:44.321010+00:00 and iran:2021-05-14 14:07:02.831328
+    # Notice: by our settings Heroku uses UTC tim zone
+    # iran = UTC + 270 minuts
+    # send time = irantime + 3 min delay
+    sent_time = datetime.now() + timedelta(minutes=273)
+    sent_time = sent_time.strftime("%Y-%m-%dT%H:%M:%S")
+    return sent_time
+
+
 
 def get_onesignal_accounts():
     # rename listOfClients to get_onesignal_accounts
@@ -48,8 +51,9 @@ def notifAll(titleText , bodyText):
     return notifAll_response
 
 
-def notifSpecific(userToken , titleText , bodyText ):
+def notifSpecific(userTokens , titleText , bodyText ):
     #make sure userToken is str and in other forms
+    #userTokens = list of tokens, each one is a str
     from najva_api_client.najva import Najva
     # Najve requirements for the Notify_specific_user:
     #send_to_users(self,title, body, url, icon,subscriber_tokens,
@@ -65,7 +69,8 @@ def notifSpecific(userToken , titleText , bodyText ):
     icon="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
     image="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
     onclick="open-link",
-    subscriber_tokens=[userToken])
+    subscriber_tokens=userTokens,
+    sent_time=iranTimeZone() )
 
     return notifSpecific_response
 
@@ -156,7 +161,8 @@ def fetchData_and_check():
 
     MattewsToken = '8d705edd-f193-4f5a-a9d5-d63e802f2fb3'
     MattewsTokenNum2 = '1ba8d7be-5038-4754-8f3a-7f0e902f6c4e'
-    iranTimeZone() # For testing purpose , remove later
+    tokens = [MattewsToken,MattewsTokenNum2]
+    print("result of notify func:" , notifSpecific(tokens , "a test tiltle from heroku " , "a test body from heroku" )
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
