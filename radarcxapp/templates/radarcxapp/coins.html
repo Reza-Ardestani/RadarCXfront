@@ -59,9 +59,9 @@ window.najvaUserSubscribed = function(najva_user_token){
             <li><a href="{% url 'conditions' %}">Conditions</a></li>
 			<li><a href="#">About</a></li>
 		</ul>
-		
+
 		<ul class="nav navbar-nav navbar-right">
-		
+
 			{% if user.is_authenticated %}
                 <li><a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> Profile</a></li>
                 <li><a class="nav-item nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</a></li>
@@ -69,7 +69,7 @@ window.najvaUserSubscribed = function(najva_user_token){
 				<li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a></li>
 				<li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a></li>
 			{% endif %}
-			
+
         </ul>
     </div>
 </nav>
@@ -121,13 +121,13 @@ window.najvaUserSubscribed = function(najva_user_token){
             <img src="{% static 'radarcxapp/img/coins/litecoin-ltc-logo.png' %}" class="responsive">
           </td>
           <td>
-            <span id="XRP-USD"></span>
+            <span id="LTC-USD"></span>
           </td>
           <td>
-            <span id="XRP-USD-old"></span>
+            <span id="LTC-USD-old"></span>
           </td>
-          <td id="XRP-USD-pstat">
-            <img src="" id="XRP-USD-stat" class="responsive">
+          <td id="LTC-USD-pstat">
+            <img src="" id="LTC-USD-stat" class="responsive">
           </td>
         </tr>
 
@@ -136,13 +136,13 @@ window.najvaUserSubscribed = function(najva_user_token){
             <img src="{% static 'radarcxapp/img/coins/xrp-xrp-logo.png' %}" class="responsive">
           </td>
           <td>
-            <span id="LTC-USD"></span>
+            <span id="XRP-USD"></span>
           </td>
           <td>
-            <span id="LTC-USD-old"></span>
+            <span id="XRP-USD-old"></span>
           </td>
-          <td id="LTC-USD-pstat">
-            <img src="" id="LTC-USD-stat" class="responsive">
+          <td id="XRP-USD-pstat">
+            <img src="" id="XRP-USD-stat" class="responsive">
           </td>
         </tr>
 
@@ -169,7 +169,7 @@ window.najvaUserSubscribed = function(najva_user_token){
       document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
       document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
       var img = document.createElement("img");
-      
+
       if (newPrice > oldPrice) {
         img.src = "{% static 'radarcxapp/img/diff/gain.png' %}";
       } else if (newPrice < oldPrice) {
