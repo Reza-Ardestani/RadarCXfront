@@ -14,11 +14,14 @@ import threading
 # to use simple json
 import os
 
+from django.contrib.auth.decorators import login_required
+
 def coins(request):
     res = render(request, 'radarcxapp/coins.html', {})
     # res['Access-Control-Allow-Origin'] = '*'
     return res
 
+@login_required
 def conditions(request):
     return render(request, 'radarcxapp/conditions.html')
 

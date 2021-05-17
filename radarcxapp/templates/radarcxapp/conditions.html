@@ -30,7 +30,6 @@
   </div>
 </nav>
 
-{% if user.is_authenticated %}
 <div class="container">
   <form action="/new_cond" method="POST">{% csrf_token %}
     <label for="cond_name">Name (optional):</label>
@@ -68,5 +67,4 @@
 
   </form>
 </div>
-{% endif %}
 {% endblock %}
