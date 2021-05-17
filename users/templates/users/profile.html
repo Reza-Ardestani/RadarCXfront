@@ -11,7 +11,7 @@
         </div>
         <ul class="nav navbar-nav">
 			<li><a href="{% url 'coins' %}">Coins</a></li>
-            <li><a href="{% url 'conditions' %}">Conditions</a></li>
+            {% if user.is_authenticated %}<li><a href="{% url 'conditions' %}">Conditions</a></li>{% endif %}
             <li><a href="#">About</a></li>
 		</ul>
 		
@@ -28,6 +28,14 @@
         </ul>
     </div>
 </nav>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
 <h2> {{ user.username }} </h2>
 
