@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # for using temporary html file, showing to users
 from django.http import HttpResponse
@@ -15,6 +15,7 @@ import threading
 import os
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def coins(request):
     res = render(request, 'radarcxapp/coins.html', {})
@@ -23,7 +24,10 @@ def coins(request):
 
 @login_required
 def conditions(request):
-    return render(request, 'radarcxapp/conditions.html')
+    context = {
+        'conditions' : Condition.objects.get(creator=user)
+    }
+    return render(request, 'radarcxapp/conditions.html', context)
 
 
 # Start of new conditions capturing ---> '/new_cond
@@ -40,7 +44,8 @@ class new_cond(View):
         c.save()
         # print(Condition.objects.all())
         # print (request.POST)
-        return HttpResponse("Your condition added successfully!")
+        messages.success(request, "Your condition added successfully!")
+        return redirect('conditions')
 # End of new condition capturing ---> '/new_cond
 
 # coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
