@@ -17,6 +17,8 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from django.views.generic import ListView
+
 def coins(request):
     res = render(request, 'radarcxapp/coins.html', {})
     # res['Access-Control-Allow-Origin'] = '*'
@@ -25,10 +27,16 @@ def coins(request):
 @login_required
 def conditions(request):
     context = {
-        'conditions' : Condition.objects.get(creator=user)
+        #'conditions' : Condition.objects.get(creator=user)
     }
     return render(request, 'radarcxapp/conditions.html', context)
+ 
+class ConditionListView(ListView):
+    model = Condition
+    template_name = 'radarcxapp/conditions.html'
+    context_object_name = 'conditions'
 
+     
 
 # Start of new conditions capturing ---> '/new_cond
 class new_cond(View):
@@ -41,7 +49,7 @@ class new_cond(View):
         c.quantity = request.POST["amount"]
         c.coin = request.POST["coin"]
         c.smaller_or_greater = request.POST["trigger"]
-        c.save()
+        #c.save()
         # print(Condition.objects.all())
         # print (request.POST)
         messages.success(request, "Your condition added successfully!")
