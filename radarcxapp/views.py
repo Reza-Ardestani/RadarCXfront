@@ -20,7 +20,9 @@ from django.contrib import messages
 from django.views.generic import ListView
 
 def coins(request):
-    res = render(request, 'radarcxapp/coins.html', {})
+    coins = Coin.objects.all()
+    context = {'coins' : coins}
+    res = render(request, 'radarcxapp/coins.html', context)
     # res['Access-Control-Allow-Origin'] = '*'
     return res
 
