@@ -139,8 +139,25 @@
                     <img src="" id="XRP-USD-stat" class="responsive">
                 </td>
             </tr>
-
-            {% for coin in coins %}
+			
+			{% for coin in coins %}
+			<tr>
+                <td>
+                    <img src="{% static 'radarcxapp/img/coins/xrp-xrp-logo.png' %}" class="responsive">
+                </td>
+                <td>
+                    <span id= {{ coin.name }} + "-USD"></span>
+                </td>
+                <td>
+                    <span id="XRP-USD-old"></span>
+                </td>
+                <td id="XRP-USD-pstat">
+                    <img src="" id="XRP-USD-stat" class="responsive">
+                </td>
+            </tr>
+			{% endfor %}
+            
+			{% for coin in coins %}
             <tr>
                 <td>
                     <span> {{ coin.name }}
