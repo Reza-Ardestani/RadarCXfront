@@ -21,7 +21,10 @@ from django.views.generic import ListView
 
 def coins(request):
     coins = Coin.objects.all()
-    context = {'coins' : coins}
+    context = {
+        'title' : 'Coins',
+        'coins' : coins
+    }
     res = render(request, 'radarcxapp/coins.html', context)
     # res['Access-Control-Allow-Origin'] = '*'
     return res
@@ -29,6 +32,7 @@ def coins(request):
 @login_required
 def conditions(request):
     context = {
+        'title' : 'Conditions',
         #'conditions' : Condition.objects.get(creator=user)
     }
     return render(request, 'radarcxapp/conditions.html', context)

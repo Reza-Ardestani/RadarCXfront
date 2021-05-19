@@ -13,9 +13,16 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+    context = {
+        'title' : 'Login',
+        'form' : form
+    }
+    return render(request, 'users/register.html', context)
 
 
 @login_required
 def profile(request):
+    contex = {
+        'title' : 'Profile'
+    }
     return render(request, 'users/profile.html')
