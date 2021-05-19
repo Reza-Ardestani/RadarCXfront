@@ -29,9 +29,9 @@ class UserToken(models.Model):
 
 class Condition(models.Model):
     TYPE_CHOICES = (
-        ("p", "price"),
-        ("v", "volume"),
-        ("m", "moving_average")
+        ("realtime_price", "realtime_price"),
+        ("volume", "volume"),
+        ("moving_average", "moving_average")
     )
 
     OPERATOR_CHOICES = (
