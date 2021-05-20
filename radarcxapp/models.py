@@ -26,6 +26,9 @@ class UserToken(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     token = models.CharField(max_length=40)
 
+    def __str__(self):
+        return f'{self.user} {self.token}'
+
 
 class Condition(models.Model):
     TYPE_CHOICES = (
