@@ -3,11 +3,11 @@ from django.shortcuts import render,redirect
 ''' testing purpose'''
 from .notif import *
 
-notifSpecific_response = send_to_users(body= "May 20th Heroku test",
-subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
-sent_time=UTC_to_IR_TimeZone())
+#notifSpecific_response = send_to_users(body= "May 20th Heroku test",
+#ubscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
+#sent_time=UTC_to_IR_TimeZone())
 
-print("Najjjjjva response:",notifSpecific_response)
+#print("Najjjjjva response:",notifSpecific_response)
 '''End test '''
 # for using temporary html file, showing to users
 from radarcxapp.models import *
@@ -16,8 +16,8 @@ from radarcxapp.models import *
 from django.views.generic import View
 
 # To use threading used by Morty
-# from . import bgthread
-# import threading
+from . import bgthread
+import threading
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -42,7 +42,12 @@ def conditions(request):
         'conditions' : conditions
     }
     return render(request, 'radarcxapp/conditions.html', context)
- 
+
+#class ConditionListView(ListView):
+#    model = Condition
+#    template_name = 'radarcxapp/conditions.html'
+#    context_object_name = 'conditions'
+
 # Start of new conditions capturing ---> '/new_cond
 class new_cond(View):
     def post(self, request):
@@ -60,10 +65,11 @@ class new_cond(View):
         return redirect('conditions')
 # End of new condition capturing ---> '/new_cond
 
+
 # manifest.json handler
 from radarcx import settings
 import os, json
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 def manifest(request):
     manifest_file = open(os.path.join(settings.BASE_DIR, 'manifest.json'))
     return JsonResponse(json.load(manifest_file))
@@ -75,5 +81,5 @@ def sw(request):
     sw_file = open(os.path.join(settings.BASE_DIR, 'najva-messaging-sw.js'))
     return HttpResponse(sw_file.read(), headers={'content-type': 'application/javascript; charset=utf-8'})
 
-# coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
-# coinsData_thread.start()
+coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+coinsData_thread.start()

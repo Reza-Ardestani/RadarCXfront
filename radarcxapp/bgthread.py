@@ -3,6 +3,7 @@ import time, requests, threading
 from .models import Coin, Condition
 from radarcx import settings
 from .notif import *
+from radarcxapp.models import *
 #string_test = "logs:\n"
 
 
@@ -11,26 +12,29 @@ def conditionsChecker():
     ''' note: we have not implemented 'equal' and 'moving_average','volume' yet. '''
     conditions = Condition.objects.all()
     for condition in conditions:
-        coin_quantity = Coin.objects.filter(name=condition.coin).values_list(condition.type).last()[0]
+        coin_quantity = Coin.objects.filter(name=condition.coin).last()
+        user  = User.objects.filter(id=condition.creator_id).first()
+        usertokens = user.usertoken_set.all()
+        print(usertokens)
 
         if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
-            print(f"The {condition.type} of {condition.coin} is greater than {condition.quantity} ")
-            Bodytext = "May 20th Heroku test"
-            user_toekn = 'get it from DB'
+            #print(f"The {condition.type} of {condition.coin} is greater than {condition.quantity} ")
+            username = User.objects.filter(id=condition.creator_id).first()
+            coinName= condition.coin
+            Bodytext = "Dear" + username + "your condition on"  + coinName +"at price"+condition.quantity + "has been triggered "
+            user_token = ""
             NajveResponse = send_to_users(body= Bodytext,
-            subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
+            subscriber_tokens=[user_token],
             sent_time=UTC_to_IR_TimeZone())
 
         if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
             print(f"The {condition.type} of {condition.coin} is smaller than {condition.quantity} ")
-            Bodytext = "May 20th Heroku test"
-            NajveResponse = send_to_users(body= Bodytext,
-            subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
-            sent_time=UTC_to_IR_TimeZone())
+
 
 
 def fetchData_and_check():
-
+    conditionsChecker()
+    '''
     while(True):
         # startOfLoopTime = perf_counter()
         # print("here I receive data of all coins and store them in DB")
@@ -60,7 +64,7 @@ def fetchData_and_check():
         c.save()
 
         conditionsChecker()  # Synchronizicly we runn this fun & wait till it ends
-
+        '''
         # endOfLoopTime = perf_counter()
         # if(endOfLoopTime-startOfLoopTime < 60):
         #     sleep(round(endOfLoopTime-startOfLoopTime, 0))
