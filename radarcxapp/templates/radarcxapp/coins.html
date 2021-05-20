@@ -76,7 +76,8 @@
             {% for coin in coins %}
             <tr>
                 <td>
-                    <img src="{% static 'radarcxapp/img/coins/xrp.png' %}" class="responsive">
+                    <!--<img src={% static 'radarcxapp/img/coins/BTC.png' %} class="responsive">-->
+					<p>{{coin.name}} </p>
                 </td>
                 <td>
                     <span id= {{ coin.name|add:"-USD"}} ></span>
