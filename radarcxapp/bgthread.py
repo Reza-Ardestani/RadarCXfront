@@ -17,18 +17,18 @@ def conditionsChecker():
         usertokens = user.usertoken_set.all()
         print(usertokens)
 
-        if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
-            #print(f"The {condition.type} of {condition.coin} is greater than {condition.quantity} ")
-            username = User.objects.filter(id=condition.creator_id).first()
-            coinName= condition.coin
-            Bodytext = "Dear" + username + "your condition on"  + coinName +"at price"+condition.quantity + "has been triggered "
-            user_token = ""
-            NajveResponse = send_to_users(body= Bodytext,
-            subscriber_tokens=[user_token],
-            sent_time=UTC_to_IR_TimeZone())
+        # if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
+        #     #print(f"The {condition.type} of {condition.coin} is greater than {condition.quantity} ")
+        #     username = User.objects.filter(id=condition.creator_id).first()
+        #     coinName= condition.coin
+        #     Bodytext = "Dear" + username + "your condition on"  + coinName +"at price"+condition.quantity + "has been triggered "
+        #     user_token = ""
+        #     NajveResponse = send_to_users(body= Bodytext,
+        #     subscriber_tokens=[user_token],
+        #     sent_time=UTC_to_IR_TimeZone())
 
-        if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
-            print(f"The {condition.type} of {condition.coin} is smaller than {condition.quantity} ")
+        # if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
+        #     print(f"The {condition.type} of {condition.coin} is smaller than {condition.quantity} ")
 
 
 
