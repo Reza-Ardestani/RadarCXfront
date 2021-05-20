@@ -17,7 +17,7 @@ def conditionsChecker():
         if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
             #print(f"The {condition.type} of {condition.coin} is greater than {condition.quantity} ")
             username = User.objects.filter(id=condition.creator_id)
-            Bodytext = "Dear" +
+            Bodytext = "Dear" + ""
             user_token = 'test token'
             NajveResponse = send_to_users(body= Bodytext,
             subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],

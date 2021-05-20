@@ -39,6 +39,7 @@ class Condition(models.Model):
         ("s", "smaller_than"),
     )
 
+    name = models.CharField(max_length=100)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     coin = models.CharField(max_length=20)
     type = models.CharField(max_length=16, choices=TYPE_CHOICES)
@@ -47,4 +48,4 @@ class Condition(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{self.creator} {self.coin} {self.type} {self.smaller_or_greater} {self.quantity}'
+        return f'{self.creator} -> {self.name}'
