@@ -24,7 +24,7 @@ class FavoriteCoins(models.Model):
 
 class UserToken(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    token = models.CharField(max_length=2)
+    token = models.CharField(max_length=200)
 
 
 class Condition(models.Model):
