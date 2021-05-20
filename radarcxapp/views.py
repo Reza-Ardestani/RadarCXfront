@@ -1,5 +1,14 @@
 from django.shortcuts import render
 
+''' testing purpose'''
+from .notif import *
+
+notifSpecific_response = send_to_users(body= "May 20th Heroku test",
+subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
+sent_time=UTC_to_IR_TimeZone())
+
+print("Najjjjjva response:",notifSpecific_response)
+'''End test '''
 # for using temporary html file, showing to users
 from django.http import HttpResponse
 from .models import *
