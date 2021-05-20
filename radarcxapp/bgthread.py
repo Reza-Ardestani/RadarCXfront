@@ -2,90 +2,31 @@ from os import spawnve
 import time, requests, threading
 from .models import Coin, Condition
 from radarcx import settings
-from .notif import * 
+from .notif import *
 #string_test = "logs:\n"
 
 
 def conditionsChecker():
     #here we check whether any of conditions has been triggerd or #
+    ''' note: we have not implemented 'equal' and 'moving_average','volume' yet. '''
+    conditions = Condition.objects.all()
+    for condition in conditions:
+        coin_quantity = Coin.objects.filter(name=condition.coin).values_list(condition.type).last()[0]
 
-    # new thread realtimeprice_checker()
-    conditions = Condition.objects.filter(type="price", smaller_or_greater="greater")
+        if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
+            print(f"The {condition.type} of {condition.coin} is greater than {condition.quantity} ")
+            Bodytext = "May 20th Heroku test"
+            user_toekn = 'get it from DB'
+            NajveResponse = send_to_users(body= Bodytext,
+            subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
+            sent_time=UTC_to_IR_TimeZone())
 
-    for condition in conditions :
-        coin = condition.coin
-        realtime_price = Coin.objects.filter(name=coin).last().realtime_price
-        quantity = condition.quantity
-
-        if realtime_price >= quantity :
-            #call "notifSpecitic" func
-            print("price greater")
-            pass
-
-    conditions = Condition.objects.filter(type="price", smaller_or_greater="smaller")
-
-    for condition in conditions :
-        coin = condition.coin
-        realtime_price = Coin.objects.filter(name=coin).last().realtime_price
-        quantity = condition.quantity
-
-        if realtime_price <= quantity :
-            #call "notifSpecitic" func
-            print("price smaller")
-            pass
-
-    # new thread movingaverage_checker()
-    conditions = Condition.objects.filter(type="moving_average", smaller_or_greater="smaller")
-
-    for condition in conditions :
-        coin = condition.coin
-        moving_average = Coin.objects.filter(name=coin).last().moving_average
-        quantity = condition.quantity
-
-        if moving_average <= quantity :
-            #call "notifSpecitic" func
-            print("moving_average smaller")
-            pass
-
-    conditions = Condition.objects.filter(type="moving_average", smaller_or_greater="greater")
-
-    for condition in conditions :
-        coin = condition.coin
-        moving_average = Coin.objects.filter(name=coin).last().moving_average
-        quantity = condition.quantity
-
-        if moving_average >= quantity :
-            #call "notifSpecitic" func
-            print("moving_average greater")
-            pass
-
-
-    # new thread volume_checker()
-    conditions = Condition.objects.filter(type="volume", smaller_or_greater="smaller")
-
-    for condition in conditions :
-        coin = condition.coin
-        volume = Coin.objects.filter(name=coin).last().volume
-        quantity = condition.quantity
-
-        if volume <= quantity :
-            #call "notifSpecitic" func
-            print("volume smaller")
-            pass
-
-    conditions = Condition.objects.filter(type="volume", smaller_or_greater="greater")
-
-    for condition in conditions :
-        coin = condition.coin
-        volume = Coin.objects.filter(name=coin).last().volume
-        quantity = condition.quantity
-
-        if volume >= quantity :
-            #call "notifSpecitic" func
-            print("volume greater")
-            pass
-
-    pass
+        if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
+            print(f"The {condition.type} of {condition.coin} is smaller than {condition.quantity} ")
+            Bodytext = "May 20th Heroku test"
+            NajveResponse = send_to_users(body= Bodytext,
+            subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
+            sent_time=UTC_to_IR_TimeZone())
 
 
 def fetchData_and_check():
@@ -123,5 +64,3 @@ def fetchData_and_check():
         # endOfLoopTime = perf_counter()
         # if(endOfLoopTime-startOfLoopTime < 60):
         #     sleep(round(endOfLoopTime-startOfLoopTime, 0))
-
-''' End of threading '''
