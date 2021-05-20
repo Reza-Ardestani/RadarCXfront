@@ -16,8 +16,8 @@ from radarcxapp.models import *
 from django.views.generic import View
 
 # To use threading used by Morty
-# from . import bgthread
-# import threading
+from . import bgthread
+import threading
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -42,18 +42,12 @@ def conditions(request):
         'conditions' : conditions
     }
     return render(request, 'radarcxapp/conditions.html', context)
-<<<<<<< HEAD
 
-class ConditionListView(ListView):
-    model = Condition
-    template_name = 'radarcxapp/conditions.html'
-    context_object_name = 'conditions'
+#class ConditionListView(ListView):
+#    model = Condition
+#    template_name = 'radarcxapp/conditions.html'
+#    context_object_name = 'conditions'
 
-
-
-=======
- 
->>>>>>> d99ad5bf16603245e15012c629dae4d6f3f62498
 # Start of new conditions capturing ---> '/new_cond
 class new_cond(View):
     def post(self, request):
@@ -71,17 +65,11 @@ class new_cond(View):
         return redirect('conditions')
 # End of new condition capturing ---> '/new_cond
 
-<<<<<<< HEAD
-coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
-coinsData_thread.start()
 
-
-=======
->>>>>>> d99ad5bf16603245e15012c629dae4d6f3f62498
 # manifest.json handler
 from radarcx import settings
 import os, json
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 def manifest(request):
     manifest_file = open(os.path.join(settings.BASE_DIR, 'manifest.json'))
     return JsonResponse(json.load(manifest_file))
@@ -93,5 +81,5 @@ def sw(request):
     sw_file = open(os.path.join(settings.BASE_DIR, 'najva-messaging-sw.js'))
     return HttpResponse(sw_file.read(), headers={'content-type': 'application/javascript; charset=utf-8'})
 
-# coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
-# coinsData_thread.start()
+coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+coinsData_thread.start()
