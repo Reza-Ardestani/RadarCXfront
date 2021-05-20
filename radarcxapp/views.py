@@ -26,7 +26,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView
 
 def coins(request):
-
+    user = request.user
     if user.is_authenticated:
         username = request.user
         user  = User.objects.filter(username=username).first()
@@ -35,8 +35,8 @@ def coins(request):
         return render(request, 'radarcxapp/coins.html', context)
 
     else:
-        coins = list({'name' : "BTC"}, {'name' : "ETH"}, {'name' : "XRP"}, {'name' : "LTC"})
-        context = {'coins', coins}
+        coins = Coin.objects.all()
+        context = {'coins' : coins}
         return render(request, 'radarcxapp/coins.html', context)
 
 @login_required
