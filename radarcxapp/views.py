@@ -21,16 +21,23 @@ import threading
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 from django.views.generic import ListView
 
 def coins(request):
-    coins = Coin.objects.all()
-    context = {
-        'title' : 'Coins',
-        'coins' : coins
-    }
-    return render(request, 'radarcxapp/coins.html', context)
+
+    if user.is_authenticated:
+        username = request.user
+        user  = User.objects.filter(username=username).first()
+        coins = user.favoritecoins_set.all()
+        context = {'coins' : coins}
+        return render(request, 'radarcxapp/coins.html', context)
+
+    else:
+        coins = list({'name' : "BTC"}, {'name' : "ETH"}, {'name' : "XRP"}, {'name' : "LTC"})
+        context = {'coins', coins}
+        return render(request, 'radarcxapp/coins.html', context)
 
 @login_required
 def conditions(request):
