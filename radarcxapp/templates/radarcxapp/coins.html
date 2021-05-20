@@ -73,14 +73,30 @@
         <table class="table table-striped table-bordered mydatatable" style="width: 80%">
 
 
-            {% for coin in coins %}
+            {% if user.is_authenticated %} {% for coin in coins %}
             <tr>
                 <td>
                     <!--<img src={% static 'radarcxapp/img/coins/BTC.png' %} class="responsive">-->
-					<p>{{coin.name}} </p>
+                    <p>{{coin.favorite_coin.name}} </p>
                 </td>
                 <td>
-                    <span id= {{ coin.name|add:"-USD"}} ></span>
+                    <span id={{ coin.favorite_coin.name|add:"-USD"}}></span>
+                </td>
+                <td>
+                    <span id={{ coin.favorite_coin.name|add:"-USD-old"}}></span>
+                </td>
+                <td id={{ coin.favorite_coin.name|add:"-USD-pstat"}}>
+                    <img src="" id={{ coin.favorite_coin.name|add:"-USD-stat"}} class="responsive">
+                </td>
+            </tr>
+            {% endfor %} {% else %} {% for coin in coins %}
+            <tr>
+                <td>
+                    <!--<img src={% static 'radarcxapp/img/coins/BTC.png' %} class="responsive">-->
+                    <p>{{coin.name}} </p>
+                </td>
+                <td>
+                    <span id={{ coin.name|add:"-USD"}}></span>
                 </td>
                 <td>
                     <span id={{ coin.name|add:"-USD-old"}}></span>
@@ -89,9 +105,7 @@
                     <img src="" id={{ coin.name|add:"-USD-stat"}} class="responsive">
                 </td>
             </tr>
-            {% endfor %} 
-			
-
+            {% endfor %} {% endif %}
         </table>
 
     </center>
