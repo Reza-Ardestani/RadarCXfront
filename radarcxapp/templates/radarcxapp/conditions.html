@@ -1,33 +1,40 @@
 {% extends "layout.html" %}
 
-{% block title %} - Conditions{% endblock %}
-
 {% block dbody %}
 
 <nav class="navbar sticky-top navbar-inverse mynav">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-bitcoin"> Trader-App</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="{% url 'coins' %}">Coins</a></li>
-            <li class="active"><a href="{% url 'conditions' %}">Conditions</a></li>
-            <li><a href="#">About</a></li>	
-		</ul>
-		
-		<ul class="nav navbar-nav navbar-right">
-			
-			{% if user.is_authenticated %}
-                <li><a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user">Profile</a></li>
-                <li><a class="nav-item nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"><span class="glyphicon glyphicon-log-out"> Logout</a></li>
-            {% else %}
-				<li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a></li>
-				<li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a></li>
-			{% endif %}
-			
-        </ul>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-bitcoin"> Trader-App</a>
     </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'coins' %}">Coins</a></li>
+      {% if user.is_authenticated %}<li class="active"><a href="{% url 'conditions' %}">Conditions</a></li>{% endif %}
+      <li><a href="#">About</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+
+      {% if user.is_authenticated %}
+      <li><a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> Profile</a>
+      </li>
+      <li><a class="nav-item nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</a></li>
+      {% else %}
+      <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a></li>
+      <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a></li>
+      {% endif %}
+
+    </ul>
+  </div>
 </nav>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
 <div class="container">
   <form action="/new_cond" method="POST">{% csrf_token %}
@@ -66,4 +73,17 @@
 
   </form>
 </div>
+{% for condition in conditions %}
+  <article class="media content-section">
+    <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
+    <div class="media-body">
+      <div class="article-metadata">
+        <!-- <a class="mr-2" href="#">{{ .author }}</a> -->
+        <!-- <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> -->
+      </div>
+      <h2><a class="article-title" href="">{{ condition }}</a></h2>
+      <!-- <p class="article-content">{{ post.content }}</p> -->
+    </div>
+  </article>
+{% endfor %}
 {% endblock %}

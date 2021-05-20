@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 ''' testing purpose'''
 from .notif import *
@@ -23,14 +23,35 @@ import threading
 # to use simple json
 import os
 
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+from django.views.generic import ListView
+
 def coins(request):
-    res = render(request, 'radarcxapp/coins.html', {})
+    coins = Coin.objects.all()
+    context = {
+        'title' : 'Coins',
+        'coins' : coins
+    }
+    res = render(request, 'radarcxapp/coins.html', context)
     # res['Access-Control-Allow-Origin'] = '*'
     return res
 
+@login_required
 def conditions(request):
-    return render(request, 'radarcxapp/conditions.html')
+    context = {
+        'title' : 'Conditions',
+        #'conditions' : Condition.objects.get(creator=user)
+    }
+    return render(request, 'radarcxapp/conditions.html', context)
+ 
+class ConditionListView(ListView):
+    model = Condition
+    template_name = 'radarcxapp/conditions.html'
+    context_object_name = 'conditions'
 
+     
 
 # Start of new conditions capturing ---> '/new_cond
 class new_cond(View):
@@ -43,10 +64,11 @@ class new_cond(View):
         c.quantity = request.POST["amount"]
         c.coin = request.POST["coin"]
         c.smaller_or_greater = request.POST["trigger"]
-        c.save()
+        #c.save()
         # print(Condition.objects.all())
         # print (request.POST)
-        return HttpResponse("Your condition added successfully!")
+        messages.success(request, "Your condition added successfully!")
+        return redirect('conditions')
 # End of new condition capturing ---> '/new_cond
 
 # coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)

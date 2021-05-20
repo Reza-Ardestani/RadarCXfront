@@ -113,87 +113,19 @@ def notifSpecific(userTokens , titleText , bodyText ):
 
     return notifSpecific_response
 
-
+#here we check whether any of conditions has been triggerd or not
 def conditionsChecker():
-    #here we check whether any of conditions has been triggerd or #
+    
+    conditions = Condition.objects.all()
+    for condition in conditions:
+        coin_quantity = Coin.objects.filter(name=condition.coin).values_list(condition.type).last()[0]
 
-    # new thread realtimeprice_checker()
-    conditions = Condition.objects.filter(type="price", smaller_or_greater="greater")
-
-    for condition in conditions :
-        coin = condition.coin
-        realtime_price = Coin.objects.filter(name=coin).last().realtime_price
-        quantity = condition.quantity
-
-        if realtime_price >= quantity :
-            #call "notifSpecitic" func
-            print("price greater")
-            pass
-
-    conditions = Condition.objects.filter(type="price", smaller_or_greater="smaller")
-
-    for condition in conditions :
-        coin = condition.coin
-        realtime_price = Coin.objects.filter(name=coin).last().realtime_price
-        quantity = condition.quantity
-
-        if realtime_price <= quantity :
-            #call "notifSpecitic" func
-            print("price smaller")
-            pass
-
-    # new thread movingaverage_checker()
-    conditions = Condition.objects.filter(type="moving_average", smaller_or_greater="smaller")
-
-    for condition in conditions :
-        coin = condition.coin
-        moving_average = Coin.objects.filter(name=coin).last().moving_average
-        quantity = condition.quantity
-
-        if moving_average <= quantity :
-            #call "notifSpecitic" func
-            print("moving_average smaller")
-            pass
-
-    conditions = Condition.objects.filter(type="moving_average", smaller_or_greater="greater")
-
-    for condition in conditions :
-        coin = condition.coin
-        moving_average = Coin.objects.filter(name=coin).last().moving_average
-        quantity = condition.quantity
-
-        if moving_average >= quantity :
-            #call "notifSpecitic" func
-            print("moving_average greater")
-            pass
-
-
-    # new thread volume_checker()
-    conditions = Condition.objects.filter(type="volume", smaller_or_greater="smaller")
-
-    for condition in conditions :
-        coin = condition.coin
-        volume = Coin.objects.filter(name=coin).last().volume
-        quantity = condition.quantity
-
-        if volume <= quantity :
-            #call "notifSpecitic" func
-            print("volume smaller")
-            pass
-
-    conditions = Condition.objects.filter(type="volume", smaller_or_greater="greater")
-
-    for condition in conditions :
-        coin = condition.coin
-        volume = Coin.objects.filter(name=coin).last().volume
-        quantity = condition.quantity
-
-        if volume >= quantity :
-            #call "notifSpecitic" func
-            print("volume greater")
-            pass
-
-    pass
+        if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
+            print(f"The {condition.type} of {condition.coin} is greater than {condition.quantity} ")
+        
+        if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
+            print(f"The {condition.type} of {condition.coin} is smaller than {condition.quantity} ")
+        
 
 
 def fetchData_and_check():
