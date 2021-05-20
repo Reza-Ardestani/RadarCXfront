@@ -35,12 +35,11 @@ def coins(request):
 @login_required
 def conditions(request):
     username = request.user
-    # print(user)
     user  = User.objects.filter(username=username).first()
-    print(user.condition_set)
+    conditions = user.condition_set.all()
     context = {
        'title' : 'Conditions',
-        #'conditions' : Condition.objects.get(creator=user)
+        'conditions' : conditions
     }
     return render(request, 'radarcxapp/conditions.html', context)
  
