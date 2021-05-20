@@ -3,11 +3,11 @@ from django.shortcuts import render,redirect
 ''' testing purpose'''
 from .notif import *
 
-notifSpecific_response = send_to_users(body= "May 20th Heroku test",
-subscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
-sent_time=UTC_to_IR_TimeZone())
+#notifSpecific_response = send_to_users(body= "May 20th Heroku test",
+#ubscriber_tokens=['476f636f-ceda-470a-b8de-2ed4c32f5a3d','6685a775-c3a4-418b-af80-cc7c31eac2f5'],
+#sent_time=UTC_to_IR_TimeZone())
 
-print("Najjjjjva response:",notifSpecific_response)
+#print("Najjjjjva response:",notifSpecific_response)
 '''End test '''
 # for using temporary html file, showing to users
 from django.http import HttpResponse
@@ -45,13 +45,13 @@ def conditions(request):
         #'conditions' : Condition.objects.get(creator=user)
     }
     return render(request, 'radarcxapp/conditions.html', context)
- 
+
 class ConditionListView(ListView):
     model = Condition
     template_name = 'radarcxapp/conditions.html'
     context_object_name = 'conditions'
 
-     
+
 
 # Start of new conditions capturing ---> '/new_cond
 class new_cond(View):
@@ -71,8 +71,8 @@ class new_cond(View):
         return redirect('conditions')
 # End of new condition capturing ---> '/new_cond
 
-# coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
-# coinsData_thread.start()
+coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+coinsData_thread.start()
 
 
 # manifest.json handler
