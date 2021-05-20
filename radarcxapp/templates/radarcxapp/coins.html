@@ -82,7 +82,7 @@
 
             <tr>
                 <td>
-                    <img src="{% static 'radarcxapp/img/coins/bitcoin-btc-logo.png' %}" class="responsive">
+                    <img src="{% static 'radarcxapp/img/coins/btc.png' %}" class="responsive">
                 </td>
                 <td>
                     <span id="BTC-USD"></span>
@@ -97,7 +97,7 @@
 
             <tr>
                 <td>
-                    <img src="{% static 'radarcxapp/img/coins/ethereum-eth-logo.png' %}" class="responsive">
+                    <img src="{% static 'radarcxapp/img/coins/eth.png' %}" class="responsive">
                 </td>
                 <td>
                     <span id="ETH-USD"></span>
@@ -112,7 +112,7 @@
 
             <tr>
                 <td>
-                    <img src="{% static 'radarcxapp/img/coins/litecoin-ltc-logo.png' %}" class="responsive">
+                    <img src="{% static 'radarcxapp/img/coins/ltc.png' %}" class="responsive">
                 </td>
                 <td>
                     <span id="LTC-USD"></span>
@@ -127,7 +127,7 @@
 
             <tr>
                 <td>
-                    <img src="{% static 'radarcxapp/img/coins/xrp-xrp-logo.png' %}" class="responsive">
+                    <img src="{% static 'radarcxapp/img/coins/xrp.png' %}" class="responsive">
                 </td>
                 <td>
                     <span id="XRP-USD"></span>
@@ -143,10 +143,10 @@
 			{% for coin in coins %}
 			<tr>
                 <td>
-                    <img src="{% static 'radarcxapp/img/coins/xrp-xrp-logo.png' %}" class="responsive">
+                    <img src="{% static 'radarcxapp/img/coins/xrp.png' %}" class="responsive">
                 </td>
                 <td>
-                    <span id= {{ coin.name }} + "-USD"></span>
+                    <span id={{ coin.name }}"-USD"></span>
                 </td>
                 <td>
                     <span id="XRP-USD-old"></span>
@@ -157,7 +157,7 @@
             </tr>
 			{% endfor %}
             
-			{% for coin in coins %}
+			<!-- {% for coin in coins %}
             <tr>
                 <td>
                     <span> {{ coin.name }}
@@ -172,7 +172,7 @@
                     <img>
                 </td>
             </tr>
-            {% endfor %}
+            {% endfor %} -->
 
         </table>
 
