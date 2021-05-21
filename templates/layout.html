@@ -29,6 +29,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'radarcxapp/CSS/override.css' %}">
 
     <link rel="manifest" href="/manifest.json">
+
+    {% if user.is_authenticated %}
     <!-- Najva Push Notification -->
     <script type="text/javascript">
         (function () {
@@ -60,6 +62,7 @@
         }
     </script>
     <!-- End -->
+    {% endif %}
 </head>
 
 <body class="mybody">
