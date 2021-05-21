@@ -88,6 +88,9 @@
                 <td id={{ coin.favorite_coin.name|add:"-USD-pstat"}}>
                     <img src="" id={{ coin.favorite_coin.name|add:"-USD-stat"}} class="responsive">
                 </td>
+				<td>
+					<button type="button">Delete row</button>
+				</td>
             </tr>
             {% endfor %} {% else %} {% for coin in coins %}
             <tr>
