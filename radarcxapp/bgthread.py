@@ -12,10 +12,8 @@ def conditionsChecker():
     ''' note: we have not implemented 'equal' and 'moving_average','volume' yet. '''
     conditions = Condition.objects.all()
     for condition in conditions:
-        print('im here in for of coditionCheker')
         coin_quantity = Coin.objects.filter(name=condition.coin).last().realtime_price
         if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
-            print('ipython pym here if')
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
             Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( > " + condition.quantity + "$ )"
@@ -25,10 +23,8 @@ def conditionsChecker():
             NajveResponse = send_to_users(body= Bodytext,
             subscriber_tokens= one_user_tokens,
             sent_time=UTC_to_IR_TimeZone())
-            print(NajveResponse)
 
         if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
-            print('im here if') # testing puprose
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
             Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( < " + condition.quantity + "$ )"
@@ -38,12 +34,10 @@ def conditionsChecker():
             NajveResponse = send_to_users(body= Bodytext,
             subscriber_tokens= one_user_tokens,
             sent_time=UTC_to_IR_TimeZone())
-            print(NajveResponse)
 
 
 
 def fetchData_and_check():
-    print('im here in fetch data')
     while(True):
         conditionsChecker()
         time.sleep(60)
