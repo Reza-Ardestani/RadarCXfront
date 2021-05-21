@@ -93,6 +93,7 @@ def sw(request):
 def najva_token(request):
     if request.user.is_authenticated:
         print(request.GET)    
+    return HttpResponse("you shit")
 
 coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
 coinsData_thread.start()
