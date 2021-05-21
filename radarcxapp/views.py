@@ -91,8 +91,8 @@ def sw(request):
 
 # getting najva token from user's browser
 def najva_token(request):
-    if request.user.is_authenticated():
-        print(request.body)    
+    if request.user.is_authenticated:
+        print(request.GET)    
 
 coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
 coinsData_thread.start()
