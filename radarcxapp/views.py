@@ -88,5 +88,11 @@ def sw(request):
     sw_file = open(os.path.join(settings.BASE_DIR, 'najva-messaging-sw.js'))
     return HttpResponse(sw_file.read(), headers={'content-type': 'application/javascript; charset=utf-8'})
 
+
+# getting najva token from user's browser
+def najva_token(request):
+    if request.user.is_authenticated():
+        print(request.body)    
+
 coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
 coinsData_thread.start()
