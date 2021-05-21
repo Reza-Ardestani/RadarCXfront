@@ -45,8 +45,8 @@ def conditionsChecker():
 def fetchData_and_check():
     print('im here in fetch data')
     while(True):
-        conditionsChecker()
-        time.sleep(60)
+        #conditionsChecker()
+        time.sleep(300)
     '''
     while(True):
         # startOfLoopTime = perf_counter()
