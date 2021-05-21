@@ -91,8 +91,9 @@ def sw(request):
 
 # getting najva token from user's browser
 def najva_token(request):
+    print(request.headers)
     if request.user.is_authenticated:
-        t = UserToken(user=request.user, token=request.META['SHIT'])    
+        t = UserToken(user=request.user, token=request.headers['SHIT'])    
         t.save()
     return HttpResponse("you shit")
 
