@@ -24,6 +24,7 @@
 <!-- User-specific tokens -->
 <script>
     window.najvaUserSubscribed = function(najva_user_token) {
+        var xhr = new XMLHttpRequest();
         xhr.open("POST", 'https://radarcx.herokuapp.com/najva-token', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         xhr.send(najva_user_token);
