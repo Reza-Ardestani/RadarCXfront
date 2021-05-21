@@ -26,7 +26,7 @@ def coins(request):
         return render(request, 'radarcxapp/coins.html', context)
 
     else:
-        coins = ["BTC","ETH","BNB"]
+        coins = ["BTC","ETH","BNB","CRV","XRP","THETA","DOGE","LTC"]
         context = {'coins' : coins}
         return render(request, 'radarcxapp/coins.html', context)
 
