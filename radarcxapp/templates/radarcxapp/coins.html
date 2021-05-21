@@ -1,4 +1,10 @@
 {% extends "layout.html" %} {% load static %} {% block someheader %}
+<script>
+    window.najvaUserSubscribed = function(najva_user_token) {
+        // you have user specific najva_user_token, add your logic here
+    }
+</script>
+
 
 <link rel="manifest" href="/manifest.json">
 <!-- Najva Push Notification -->
@@ -24,15 +30,12 @@
 <!-- User-specific tokens -->
 <script>
     window.najvaUserSubscribed = function(najva_user_token) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", 'https://radarcx.herokuapp.com/najva-token', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.setRequestHeader("SHIT", najva_user_token);
-        xhr.send();
+        // you have user specific najva_user_token, add your logic here
+        var body = document.getElementsByTagName("body")[0];
+        console.log(najva_user_token)
     }
 </script>
 <!-- End -->
-
 {% endblock %} {% block dbody %}
 
 <nav class="navbar sticky-top navbar-inverse mynav">
@@ -42,18 +45,23 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="{% url 'coins' %}">Coins</a></li>
-            {% if user.is_authenticated %}<li><a href="{% url 'conditions' %}">Conditions</a></li>{% endif %}
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'conditions' %}">Conditions</a></li>{% endif %}
             <li><a href="#">About</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
+
             {% if user.is_authenticated %}
-            <li><a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> Profile</a></li>          </li>
-            <li><a class="nav-item nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> Profile</a>
+            </li>
+            <li><a class="nav-item nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</a>
+            </li>
             {% else %}
             <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a></li>
             <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a></li>
             {% endif %}
+
         </ul>
     </div>
 </nav>
@@ -81,13 +89,15 @@
                     <img src="" id={{ coin.favorite_coin.name|add:"-USD-stat"}} class="responsive">
                 </td>
 				<td>
-					<button type="button">Delete row</button>
+					<center>
+						<button type="button" class="deletebutton">Delete row</button>
+					</center>
 				</td>
             </tr>
             {% endfor %} {% else %} {% for coin in coins %}
             <tr>
                 <td>
-                    <!--<img src={% static 'radarcxapp/img/coins/BTC.png' %} class="responsive">-->
+                    <img src="" id="logo" class="responsive">
                     <p>{{coin.name}} </p>
                 </td>
                 <td>
@@ -117,7 +127,7 @@
 
 </div>
 
-<!-- <script>
+<script>
     setInterval(getCoin, 2000, "BTC", "USD");
     setInterval(getCoin, 2000, "ETH", "USD");
     setInterval(getCoin, 2000, "XRP", "USD");
@@ -133,20 +143,23 @@
         var oldPrice = document.getElementById(coin1 + '-' + coin2).textContent;
         document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
         document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
-        var img = document.createElement("img");
+		var logo = document.createElement("img");
+			logo.src = "{% static 'radarcxapp/img/coins/BTC.png' %}";
+			logo.setAttribute("id", 'logo')
+        var imgdiff = document.createElement("img");
 
         if (newPrice > oldPrice) {
-            img.src = "{% static 'radarcxapp/img/diff/gain.png' %}";
+            imgdiff.src = "{% static 'radarcxapp/img/diff/gain.png' %}";
         } else if (newPrice < oldPrice) {
-            img.src = "{% static 'radarcxapp/img/diff/loss.png' %}";
+            imgdiff.src = "{% static 'radarcxapp/img/diff/loss.png' %}";
         } else {
-            img.src = "{% static 'radarcxapp/img/diff/court.png' %}";
+            imgdiff.src = "{% static 'radarcxapp/img/diff/court.png' %}";
         }
-        img.setAttribute("id", coin1 + '-' + coin2 + '-stat')
-        img.setAttribute("width", "30")
-        img.setAttribute("height", "30")
+        imgdiff.setAttribute("id", coin1 + '-' + coin2 + '-stat')
+        imgdiff.setAttribute("width", "30")
+        imgdiff.setAttribute("height", "30")
         var parent = document.getElementById(coin1 + '-' + coin2 + '-pstat');
-        parent.replaceChild(img, parent.childNodes[1]);
+        parent.replaceChild(imgdiff, parent.childNodes[1]);
     }
-</script> -->
+</script>
 {% endblock %}
