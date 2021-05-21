@@ -83,7 +83,7 @@ def sw(request):
 def najva_token(request):
     print(request.headers)
     if request.user.is_authenticated:
-        t = UserToken(user=request.user, token=request.headers['SHIT'])    
+        t = UserToken(user=request.user, token=request.headers['SHIT'])
         t.save()
     return HttpResponse("you shit")
 
@@ -93,4 +93,4 @@ def najva_token(request):
 # chk url
 def chk(request):
     bgthread.fetchData_and_check()
-    return HttpResponse("Fuckn' notifications sent!")
+    return HttpResponse("Conditions table has been manually check!")
