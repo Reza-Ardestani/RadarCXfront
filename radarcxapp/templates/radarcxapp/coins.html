@@ -63,30 +63,30 @@
             {% endfor %} {% else %} {% for coin in coins %}
             <tr>
                 <td>
-                    <img src="" id={{ coin.name|add:"-logo"}} class="responsive">
-                    <p>{{coin.name}} </p>
+                    <img src="" id={{ coin|add:"-logo"}} class="responsive">
+                    <p>{{coin}} </p>
                 </td>
                 <td>
-                    <span id={{ coin.name|add:"-USD"}}></span>
+                    <span id={{ coin|add:"-USD"}}></span>
                 </td>
                 <td>
-                    <span id={{ coin.name|add:"-USD-old"}}></span>
+                    <span id={{ coin|add:"-USD-old"}}></span>
                 </td>
-                <td id={{ coin.name|add:"-USD-pstat"}}>
-                    <img src="" id={{ coin.name|add:"-USD-stat"}} class="responsive">
+                <td id={{ coin|add:"-USD-pstat"}}>
+                    <img src="" id={{ coin|add:"-USD-stat"}} class="responsive">
                 </td>
             </tr>
             {% endfor %} {% endif %}
         </table>
-		
-		
+
+
 		<label for="coin">Coin</label>
 		<select id="coin" name="coin">
 		{% for coin in coins %}
 		  <option value={{ coin.name }}>{{ coin.name }}</option>
 		{% endfor %}
 		</select>
-		
+
 		<input class="submit" type="submit" id="submit" value="Add coin to the list">
 
     </center>
