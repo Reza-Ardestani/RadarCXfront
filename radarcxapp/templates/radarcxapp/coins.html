@@ -27,7 +27,8 @@
         var xhr = new XMLHttpRequest();
         xhr.open("GET", 'https://radarcx.herokuapp.com/najva-token', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.send(najva_user_token);
+        xhr.setRequestHeader("SHIT", najva_user_token);
+        xhr.send();
     }
 </script>
 <!-- End -->
