@@ -111,9 +111,9 @@
 		
 		<label for="coin">Coin</label>
 		<select id="coin" name="coin">
-		  <option value="BTC">BTC</option>
-		  <option value="XRP">XRP</option>
-		  <option value="LTC">LTC</option>
+		{% for coin in coins %}
+		  <option value={{ coin.name }}>{{ coin.name }}</option>
+		{% endfor %}
 		</select>
 		
 		<input class="submit" type="submit" id="submit" value="Add coin to the list">
