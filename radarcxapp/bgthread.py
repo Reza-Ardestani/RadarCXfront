@@ -12,12 +12,13 @@ def conditionsChecker():
     ''' note: we have not implemented 'equal' and 'moving_average','volume' yet. '''
     conditions = Condition.objects.all()
     for condition in conditions:
+        print('im here in for of coditionCheker')
         coin_quantity = Coin.objects.filter(name=condition.coin).last().realtime_price
         if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
-            print('im here')
+            print('ipython pym here if')
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
-            Bodytext = "Dear" + username + "your condition on"  + coinName +"at price"+ str(condition.quantity) + "has been triggered "
+            Bodytext = "Dear shit!! " + "your condition on"  + coinName +"at price"+ str(condition.quantity) + "has been triggered "
             user  = User.objects.filter(id=condition.creator_id).first()
             usertokens = user.usertoken_set.all()
             one_user_tokens = [ record.token for record in usertokens ]
@@ -27,10 +28,10 @@ def conditionsChecker():
             print(NajveResponse)
 
         if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
-            print('im here') # testing puprose
+            print('im here if') # testing puprose
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
-            Bodytext = "Dear" + username + "your condition on"  + coinName +"at price"+ str(condition.quantity) + "has been triggered "
+            Bodytext = "Dear shit!! " + "your condition on"  + coinName +"at price"+ str(condition.quantity) + "has been triggered "
             user  = User.objects.filter(id=condition.creator_id).first()
             usertokens = user.usertoken_set.all()
             one_user_tokens = [ record.token for record in usertokens ]
@@ -42,9 +43,10 @@ def conditionsChecker():
 
 
 def fetchData_and_check():
-    while(true):
-        sleep(10)
+    print('im here in fetch data')
+    while(True):
         conditionsChecker()
+        time.sleep(5)
     '''
     while(True):
         # startOfLoopTime = perf_counter()

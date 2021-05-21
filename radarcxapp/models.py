@@ -46,7 +46,7 @@ class Condition(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     coin = models.CharField(max_length=20)
     type = models.CharField(max_length=16, choices=TYPE_CHOICES)
-    smaller_or_greater = models.CharField(max_length=16, choices=OPERATOR_CHOICES)
+    smaller_or_greater = models.CharField(max_length=16)
     quantity = models.IntegerField()
     date_created = models.DateTimeField(default=timezone.now)
 
