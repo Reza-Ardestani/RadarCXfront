@@ -14,8 +14,8 @@ def conditionsChecker():
     for condition in conditions:
         print('im here in for of coditionCheker')
         coin_quantity = Coin.objects.filter(name=condition.coin).last().realtime_price
-        if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
-            print('im here if')
+        if condition.smaller_or_greater == "greater_than" and coin_quantity >= condition.quantity :
+            print('ipython pym here if')
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
             Bodytext = "Dear" + username + "your condition on"  + coinName +"at price"+ str(condition.quantity) + "has been triggered "
@@ -27,7 +27,7 @@ def conditionsChecker():
             sent_time=UTC_to_IR_TimeZone())
             print(NajveResponse)
 
-        if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
+        if condition.smaller_or_greater == "smaller_than" and coin_quantity <= condition.quantity :
             print('im here if') # testing puprose
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
