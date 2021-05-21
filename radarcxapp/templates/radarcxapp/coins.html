@@ -62,7 +62,7 @@
             {% endfor %} {% else %} {% for coin in coins %}
             <tr>
                 <td>
-                    <img src="" id="logo" class="responsive">
+                    <img src="" id={{ coin.name|add:"-logo"}} class="responsive">
                     <p>{{coin.name}} </p>
                 </td>
                 <td>
@@ -108,9 +108,9 @@
         var oldPrice = document.getElementById(coin1 + '-' + coin2).textContent;
         document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
         document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
-		var logo = document.createElement("img");
-			logo.src = "{% static 'radarcxapp/img/coins/BTC.png' %}";
-			logo.setAttribute("id", 'logo')
+		var logo = document.getElementById(coin1 + '-logo');
+			logo.src = `{% static 'radarcxapp/img/coins/${coin1}.png' %}`;
+			logo.setAttribute("id", coin1 + '-logo')
         var imgdiff = document.createElement("img");
 
         if (newPrice > oldPrice) {
