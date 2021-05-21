@@ -42,7 +42,7 @@ def conditionsChecker():
 
 
 def fetchData_and_check():
-    while(true):
+    while(True):
         sleep(10)
         conditionsChecker()
     '''
