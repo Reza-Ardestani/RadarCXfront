@@ -82,7 +82,7 @@
 		
 		<label for="coin">Coin</label>
 		<select id="coin" name="coin">
-		{% for coin in coins %}
+		{% for coin in all_coins %}
 		  <option value={{ coin.name }}>{{ coin.name }}</option>
 		{% endfor %}
 		</select>

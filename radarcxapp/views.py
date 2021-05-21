@@ -22,7 +22,8 @@ def coins(request):
         username = request.user
         user  = User.objects.filter(username=username).first()
         coins = user.favoritecoins_set.all()
-        context = {'coins' : coins}
+        all_coins = Coin.objects.all()
+        context = {'coins' : coins, 'all_coins' : all_coins}
         return render(request, 'radarcxapp/coins.html', context)
 
     else:
