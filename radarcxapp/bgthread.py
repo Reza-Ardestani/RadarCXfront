@@ -38,7 +38,9 @@ def conditionsChecker():
 
 
 def fetchData_and_check():
-    conditionsChecker()
+    while(true):
+        sleep(10)
+        conditionsChecker()
     '''
     while(True):
         # startOfLoopTime = perf_counter()
