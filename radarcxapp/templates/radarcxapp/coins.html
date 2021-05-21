@@ -1,37 +1,6 @@
 {% extends "layout.html" %} {% load static %} {% block someheader %}
 
-<link rel="manifest" href="/manifest.json">
-<!-- Najva Push Notification -->
-<script type="text/javascript">
-    (function() {
-        var now = new Date();
-        var version = now.getFullYear().toString() + "0" + now.getMonth() + "0" + now.getDate() +
-            "0" + now.getHours();
-        var head = document.getElementsByTagName("head")[0];
-        var link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = "https://app.najva.com/static/css/local-messaging.css" + "?v=" + version;
-        head.appendChild(link);
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.async = true;
-        script.src = "https://app.najva.com/static/js/scripts/herokuapp716-website-25701-9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03.js" + "?v=" + version;
-        head.appendChild(script);
-    })()
-</script>
-<!-- END NAJVA PUSH NOTIFICATION -->
 
-<!-- User-specific tokens -->
-<script>
-    window.najvaUserSubscribed = function(najva_user_token) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", 'https://radarcx.herokuapp.com/najva-token', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.setRequestHeader("SHIT", najva_user_token);
-        xhr.send();
-    }
-</script>
-<!-- End -->
 {% endblock %} {% block dbody %}
 
 <nav class="navbar sticky-top navbar-inverse mynav">
