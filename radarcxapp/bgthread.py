@@ -18,7 +18,7 @@ def conditionsChecker():
             print('ipython pym here if')
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
-            Bodytext = "Dear shit!! " + "your condition on"  + coinName +"at price"+ str(condition.quantity) + "has been triggered "
+            Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( > " + condition.quantity + "$ )"
             user  = User.objects.filter(id=condition.creator_id).first()
             usertokens = user.usertoken_set.all()
             one_user_tokens = [ record.token for record in usertokens ]
@@ -31,7 +31,7 @@ def conditionsChecker():
             print('im here if') # testing puprose
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
-            Bodytext = "Dear shit!! " + "your condition on"  + coinName +"at price"+ str(condition.quantity) + "has been triggered "
+            Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( < " + condition.quantity + "$ )"
             user  = User.objects.filter(id=condition.creator_id).first()
             usertokens = user.usertoken_set.all()
             one_user_tokens = [ record.token for record in usertokens ]
