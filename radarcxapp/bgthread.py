@@ -16,7 +16,7 @@ def conditionsChecker():
         if condition.smaller_or_greater == "g" and coin_quantity >= condition.quantity :
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
-            Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( > " + condition.quantity + "$ )"
+            Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( > " + str(condition.quantity) + "$ )"
             user  = User.objects.filter(id=condition.creator_id).first()
             usertokens = user.usertoken_set.all()
             one_user_tokens = [ record.token for record in usertokens ]
@@ -27,7 +27,7 @@ def conditionsChecker():
         if condition.smaller_or_greater == "s" and coin_quantity <= condition.quantity :
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
-            Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( < " + condition.quantity + "$ )"
+            Bodytext = coinName + " is now " + str(condition.quantity) + "$ --- ( < " + str(condition.quantity) + "$ )"
             user  = User.objects.filter(id=condition.creator_id).first()
             usertokens = user.usertoken_set.all()
             one_user_tokens = [ record.token for record in usertokens ]
@@ -40,7 +40,7 @@ def conditionsChecker():
 def fetchData_and_check():
     while(True):
         conditionsChecker()
-        time.sleep(60)
+        time.sleep(10)
     '''
     while(True):
         # startOfLoopTime = perf_counter()

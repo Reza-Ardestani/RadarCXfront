@@ -12,6 +12,7 @@
         <ul class="nav navbar-nav">
             <li><a href="{% url 'coins' %}">Coins</a></li>
             {% if user.is_authenticated %}<li><a href="{% url 'conditions' %}">Conditions</a></li>{% endif %}
+            <li><a href="{% url 'signals' %}">Signals</a></li>
             <li><a href="#">About</a></li>
         </ul>
 
