@@ -35,6 +35,36 @@ def coins(request):
         context = {'coins' : coins}
         return render(request, 'radarcxapp/coins.html', context)
 
+
+# Start of deleting coin by user ---> '/delete_coin
+class delete_coin(View):
+    def post(self, request):
+        username = request.user
+        user  = User.objects.filter(username=username).first()
+        favorite_coin_name = request.POST["coin"]
+        favorite_coin = FavoriteCoins.objects.filter(user=user,favorite_coin__name=favorite_coin_name).last()
+        favorite_coin.delete()
+        messages.success(request, "Your wanted coin deleted successfully!")
+        return redirect('coins')
+# End of deleting coin by user ---> '/delete_coin
+
+
+# Start of adding coin by user ---> '/add_coin
+class add_coin(View):
+    def post(self, request):
+        username = request.user
+        user  = User.objects.filter(username=username).first()
+        f_coin = FavoriteCoins()
+        f_coin.user = user
+        favorite_coin = request.POST["coin"]
+        coin = Coin.objects.filter(name=favorite_coin).first()
+        f_coin.favorite_coin = coin
+        f_coin.save()
+        messages.success(request, "Your favorite coin added successfully!")
+        return redirect('coins')
+# End of adding coin by user ---> '/add_coin
+
+
 @login_required
 def conditions(request):
     username = request.user
