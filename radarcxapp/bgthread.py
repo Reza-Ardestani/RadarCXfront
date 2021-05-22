@@ -5,9 +5,7 @@ from radarcx import settings
 from .notif import *
 from radarcxapp.models import *
 #string_test = "logs:\n"
-coins = ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT',
- 'ICP', 'BCH', 'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM',
- 'VET', 'ETC', 'THETA', 'EOS', 'TRX', 'FIL', 'NEO', 'CRV']
+
 
 def conditionsChecker():
     #here we check whether any of conditions has been triggerd or #
@@ -50,17 +48,20 @@ def fetchData_and_check():
         single record for all coins that doesn't have already
 
     '''
+    coins = ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT',
+     'ICP', 'BCH', 'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM',
+     'VET', 'ETC', 'THETA', 'EOS', 'TRX', 'FIL', 'NEO', 'CRV']
+
     testObj = Coin.objects.filter(name="BNB").first()
     if (not (testObj) ):
         for coinName in coins:
-            tmp = Coin.objects.filter(name="LTC").first()
+            tmp = Coin.objects.filter(name=coinName).first()
             if (not (tmp)):
-                initiating_coin = Coin.objects.create(name=coinNmae)
+                initiating_coin = Coin.objects.create(name=coinName)
                 initiating_coin.save()
     # while(True):
     # print("here I receive data of all coins and store them in DB")
     url = 'https://min-api.cryptocompare.com/data/price'
-    coins = ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT', 'ICP', 'BCH', 'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM', 'VET', 'ETC', 'THETA', 'EOS', 'TRX', 'FIL', 'NEO', 'CRV']
     parameters = {'fsym': "BTC",'tsyms': "USD"}
 
     list = []
