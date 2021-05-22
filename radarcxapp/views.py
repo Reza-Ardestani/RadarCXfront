@@ -95,7 +95,7 @@ def najva_token(request):
 # coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
 # coinsData_thread.start()
 
-# chk url
+# chk url , this url make fetchData_and_check run one time
 def chk(request):
     bgthread.fetchData_and_check()
     return HttpResponse("Conditions table has been manually check!")
