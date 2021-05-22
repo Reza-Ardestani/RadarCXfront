@@ -3,11 +3,11 @@
 {% block dbody %}
 
 {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-    {% endfor %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+  {{ message }}
+</div>
+{% endfor %}
 {% endif %}
 
 <div class="container">
@@ -23,40 +23,38 @@
       <option value="volume">Volume</option>
       <option value="maverage">Moving Average</option>
     </select>
-
+    <br>
     <label for="coin">FOR</label>
     <select id="coin" name="coin">
       <option value="BTC">BTC</option>
       <option value="XRP">XRP</option>
       <option value="LTC">LTC</option>
     </select>
-
+    <br>
     <label for="trigger">BECOMES</label>
     <select id="trigger" name="trigger">
       <option value="g">greater than</option>
       <option value="s">smaller than</option>
     </select>
-
+    <br>
     <input type="number" id="amount" name="amount">
     <label>$, NOTIFY ME!</label>
-
     <br>
-
     <input class="submit" type="submit" id="submit" value="Add condition">
 
   </form>
 </div>
 {% for condition in conditions %}
-  <article class="media content-section">
-    <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
-    <div class="media-body">
-      <div class="article-metadata">
-        <!-- <a class="mr-2" href="#">{{ .author }}</a> -->
-        <!-- <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> -->
-      </div>
-      <h2><a class="article-title" href="">{{ condition }}</a></h2>
-      <!-- <p class="article-content">{{ post.content }}</p> -->
+<article class="media content-section">
+  <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
+  <div class="media-body">
+    <div class="article-metadata">
+      <!-- <a class="mr-2" href="#">{{ .author }}</a> -->
+      <!-- <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> -->
     </div>
-  </article>
+    <h2><a class="article-title" href="">{{ condition }}</a></h2>
+    <!-- <p class="article-content">{{ post.content }}</p> -->
+  </div>
+</article>
 {% endfor %}
 {% endblock %}
