@@ -4,7 +4,7 @@ from .models import Coin, Condition
 from radarcx import settings
 from .notif import *
 from radarcxapp.models import *
-<<<<<<< HEAD
+
 #string_test = "logs:\n"
 
 
