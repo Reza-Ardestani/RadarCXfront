@@ -4,7 +4,6 @@ from .models import Coin, Condition
 from radarcx import settings
 from .notif import *
 from radarcxapp.models import *
-#string_test = "logs:\n"
 
 
 def conditionsChecker():
@@ -13,7 +12,9 @@ def conditionsChecker():
     conditions = Condition.objects.all()
     for condition in conditions:
         coin_quantity = Coin.objects.filter(name=condition.coin).last().realtime_price
+        print(condition.smaller_or_greater)
         if condition.smaller_or_greater == ">" and coin_quantity >= condition.quantity :
+            print('here')
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
             Bodytext = coinName + " is now " + str(coin_quantity) + "$ --- ( > " + str(condition.quantity) + "$ )"
