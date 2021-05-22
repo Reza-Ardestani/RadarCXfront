@@ -27,7 +27,11 @@ def coins(request):
         return render(request, 'radarcxapp/coins.html', context)
 
     else:
-        coins = ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT', 'ICP', 'BCH', 'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM', 'VET', 'ETC', 'THETA', 'EOS', 'TRX', 'FIL', 'NEO', 'CRV']
+        coins = [
+            'BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT', 'ICP', 'BCH',
+            'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM', 'VET', 'ETC', 'THETA',
+            'EOS', 'TRX', 'FIL', 'NEO', 'CRV'
+        ]
         context = {'coins' : coins}
         return render(request, 'radarcxapp/coins.html', context)
 
