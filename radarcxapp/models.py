@@ -5,15 +5,9 @@ from django.utils import timezone
 
 class Coin(models.Model):
     name = models.CharField(max_length=20)
-<<<<<<< HEAD
     realtime_price = models.IntegerField(default=0)
     moving_average = models.IntegerField(default=0)
     volume = models.IntegerField(default=0)
-=======
-    realtime_price = models.FloatField()
-    moving_average = models.FloatField()
-    volume = models.FloatField()
->>>>>>> 4c3840ca255ac4657e517d25705f4e71978dd1ac
     date_updated = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
