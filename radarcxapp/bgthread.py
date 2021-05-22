@@ -4,8 +4,15 @@ from .models import Coin, Condition
 from radarcx import settings
 from .notif import *
 from radarcxapp.models import *
+<<<<<<< HEAD
 #string_test = "logs:\n"
 
+=======
+
+coins = ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT',
+ 'ICP', 'BCH', 'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM',
+ 'VET', 'ETC', 'THETA', 'EOS', 'TRX', 'FIL', 'NEO', 'CRV']
+>>>>>>> 4b8472280f986b13ba1b36feae26fe32a25c34b9
 
 def conditionsChecker():
     #here we check whether any of conditions has been triggerd or #
@@ -13,7 +20,9 @@ def conditionsChecker():
     conditions = Condition.objects.all()
     for condition in conditions:
         coin_quantity = Coin.objects.filter(name=condition.coin).last().realtime_price
+        print(condition.smaller_or_greater)
         if condition.smaller_or_greater == ">" and coin_quantity >= condition.quantity :
+            print('here')
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
             Bodytext = coinName + " is now " + str(coin_quantity) + "$ --- ( > " + str(condition.quantity) + "$ )"

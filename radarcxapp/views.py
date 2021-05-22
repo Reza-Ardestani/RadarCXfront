@@ -116,10 +116,11 @@ def sw(request):
 
 # getting najva token from user's browser
 def najva_token(request):
-    print(request.headers)
     if request.user.is_authenticated:
-        t = UserToken(user=request.user, token=request.headers['SHIT'])
-        t.save()
+        najva = token=request.headers['SHIT']
+        if len(UserToken.objects.filter(token=najva))==0:
+            t = UserToken(user=request.user, token=najva)
+            t.save()
     return HttpResponse("you shit")
 
 # coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
