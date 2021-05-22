@@ -5,6 +5,9 @@ from radarcx import settings
 from .notif import *
 from radarcxapp.models import *
 
+coins = ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT',
+ 'ICP', 'BCH', 'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM',
+ 'VET', 'ETC', 'THETA', 'EOS', 'TRX', 'FIL', 'NEO', 'CRV']
 
 def conditionsChecker():
     #here we check whether any of conditions has been triggerd or #
@@ -39,23 +42,39 @@ def conditionsChecker():
 
 
 def fetchData_and_check():
-    # while(True): 
+    ''' In this part we check whether for every coin that we
+        support , there exist a single record in our coins table or not
+        This is temporary. The best way to do this is by using "signal"
+        concept in django.
+
+        the way that we do this, is by chekcing that we have a rocord for
+        ,for instance, "BNB" or not. If we don't have we go through creating
+        single record for all coins that doesn't have already
+
+    '''
+    testObj = Coin.objects.filter(name="BNB").first()
+    if (not (testObj) ):
+        for coinName in coins:
+            tmp = Coin.objects.filter(name="LTC").first()
+            if (not (tmp)):
+                initiating_coin = Coin.objects.create(name=coinNmae)
+                initiating_coin.save()
+    # while(True):
     # print("here I receive data of all coins and store them in DB")
     url = 'https://min-api.cryptocompare.com/data/price'
+    coins = ['BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT', 'ICP', 'BCH', 'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM', 'VET', 'ETC', 'THETA', 'EOS', 'TRX', 'FIL', 'NEO', 'CRV']
+    parameters = {'fsym': "BTC",'tsyms': "USD"}
 
-    parameters = {'fsym': "BTC",
-                'tsyms': "USD"}
-    exchange = ''
-
-    if exchange:
-        print('exchange: ', exchange)
-        parameters['e'] = exchange
-
+    list = []
+    ''' getting data and storing them in DB '''
     # response comes as json
-    response = requests.get(url, params=parameters)
-    data = response.json()
+    for nameOfCoin in coins:
+        parameters["fsym"] =nameOfCoin
+        response = requests.get(url, params=parameters)
+        data = response.json()
+        c = Coin.objects.filter(name=parameters["fsym"]).first()
+        c.realtime_price=data[parameters["tsyms"]]
+        c.save()
 
-    c = Coin.objects.filter(name=parameters["fsym"]).first()
-    c.realtime_price=data[parameters["tsyms"]]
-    c.save()
+
     conditionsChecker()  # Synchronizicly we runn this fun & wait till it ends

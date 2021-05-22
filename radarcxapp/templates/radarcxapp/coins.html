@@ -36,6 +36,7 @@
             
 			{% endfor %} 
 			
+				<form action="/add_coin" method="POST">{% csrf_token %}
 					<label for="coin">Coin</label>
 					<select id="coin" name="coin">
 					{% for coin in all_coins %}
@@ -43,6 +44,17 @@
 					{% endfor %}
 					</select>
 					<input class="submit" type="submit" id="submit" value="Add coin to the list">
+				</form>	
+					
+				<form action="/delete_coin" method="POST">{% csrf_token %}
+					<label for="coin">Coin</label>
+					<select id="coin" name="coin">
+					{% for coin in coins %}
+						<option value={{ coin.favorite_coin.name }}>{{ coin.favorite_coin.name }}</option>
+					{% endfor %}
+					</select>
+					<input class="submit" type="submit" id="submit" value="Delete coin from the list">
+				</form>	
 					
 			{% else %} 
 			
