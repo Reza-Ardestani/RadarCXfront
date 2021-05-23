@@ -11,7 +11,7 @@
 <html>
 
 <head>
-    {% block someheader %}{% endblock %}
+    
     <title>
         {% if title %}
         Trading App - {{ title }}
@@ -51,18 +51,8 @@
     </script>
     <!-- END NAJVA PUSH NOTIFICATION -->
 
-    <!-- User-specific tokens -->
-    <script>
-        window.najvaUserSubscribed = function (najva_user_token) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", 'https://radarcx.herokuapp.com/najva-token', true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            xhr.setRequestHeader("SHIT", najva_user_token);
-            xhr.send();
-        }
-    </script>
-    <!-- End -->
     {% endif %}
+    {% block someheader %}{% endblock %}
 </head>
 
 <body class="mybody">
