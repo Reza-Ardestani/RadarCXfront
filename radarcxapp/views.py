@@ -117,7 +117,7 @@ def sw(request):
 # getting najva token from user's browser
 def najva_token(request):
     if request.user.is_authenticated:
-        najva = token=request.headers['SHIT']
+        najva = token=request.headers['najva-token']
         if len(UserToken.objects.filter(token=najva))==0:
             t = UserToken(user=request.user, token=najva)
             t.save()
