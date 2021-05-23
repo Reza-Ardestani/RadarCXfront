@@ -24,7 +24,7 @@ def coins(request):
         fav_coins = user.favoritecoins_set.all()
     else:
         fav_coins = all_coins
-    context = {'fav_coins' : coins, 'all_coins' : all_coins}
+    context = {'fav_coins' : fav_coins, 'all_coins' : all_coins}
     return render(request, 'radarcxapp/coins.html', context)
 
 
