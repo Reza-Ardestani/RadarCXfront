@@ -71,8 +71,7 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <li {% if request.resolver_match.url_name=='home' or request.resolver_match.url_name=='coins'
-                    %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name=='home' or request.resolver_match.url_name=='coins' %}class="active" {% endif %}>
                     <a href="{% url 'coins' %}">
                         Coins
                     </a>
