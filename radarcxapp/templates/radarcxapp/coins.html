@@ -10,7 +10,7 @@
             <tr>
                 <td>
                     {% with 'radarcxapp/img/coins/'|add:coin.name|add:'.png' as image_static %}
-                    <img src={% static image_static %}  class="responsive">
+                    <img src="{% static image_static %}"  class="responsive">
                     {% endwith %}
                 </td>
                 <td>
