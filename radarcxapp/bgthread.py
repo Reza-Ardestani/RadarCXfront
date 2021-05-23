@@ -20,7 +20,8 @@ def conditionsChecker():
     conditions = Condition.objects.all()
     for condition in conditions:
         coin_quantity = Coin.objects.filter(name=condition.coin).last().realtime_price
-        print(condition.smaller_or_greater)
+        if (condition.triggered == True):
+            continue
         if condition.smaller_or_greater == ">" and coin_quantity >= condition.quantity :
             print('here')
             username = User.objects.filter(id=condition.creator_id).first()
@@ -32,8 +33,7 @@ def conditionsChecker():
             NajveResponse = send_to_users(body= Bodytext,
             subscriber_tokens= one_user_tokens,
             sent_time=UTC_to_IR_TimeZone())
-
-        if condition.smaller_or_greater == "<" and coin_quantity <= condition.quantity :
+        elif condition.smaller_or_greater == "<" and coin_quantity <= condition.quantity :
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
             Bodytext = coinName + " is now " + str(coin_quantity) + "$ --- ( < " + str(condition.quantity) + "$ )"

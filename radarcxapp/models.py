@@ -38,6 +38,7 @@ class Condition(models.Model):
     smaller_or_greater = models.CharField(max_length=1)
     quantity = models.FloatField()
     date_created = models.DateTimeField(default=timezone.now)
+    triggered = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.creator} -> {self.name}'
