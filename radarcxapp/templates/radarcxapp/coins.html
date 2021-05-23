@@ -9,8 +9,9 @@
             {% for coin in all_coins %}
             <tr>
                 <td>
-                    <img src={% static 'radarcxapp/img/coins/{{ coin.name }}.png' %} class="responsive">
-                    <p>{{coin.name}}</p>
+                    {% with 'radarcxapp/img/coins/'|add:coin.name|add:'.png' as image_static %}
+                    <img src={% static image_static %}  class="responsive">
+                    {% endwith %}
                 </td>
                 <td>
                     <span id={{ coin.name|add:"-USD" }}></span>
