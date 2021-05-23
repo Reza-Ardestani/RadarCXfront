@@ -3,92 +3,66 @@
 
 {% block dbody %}
 <div class="dynamic-body">
-
-
     <center>
         <table class="table table-striped table-bordered mydatatable" style="width: 80%">
 
-
-            {% if user.is_authenticated %}
-
-			{% for coin in coins %}
+            {% for coin in all_coins %}
             <tr>
                 <td>
-                    <!--<img src={% static 'radarcxapp/img/coins/BTC.png' %} class="responsive">-->
-                    <p>{{coin.favorite_coin.name}} </p>
+                    <img src={% static 'radarcxapp/img/coins/{{ coin.name }}.png' %} class="responsive">
+                    <p>{{coin.name}}</p>
                 </td>
                 <td>
-                    <span id={{ coin.favorite_coin.name|add:"-USD"}}></span>
+                    <span id={{ coin.name|add:"-USD" }}></span>
                 </td>
                 <td>
-                    <span id={{ coin.favorite_coin.name|add:"-USD-old"}}></span>
+                    <span id={{ coin.name|add:"-USD-old"}}></span>
                 </td>
-                <td id={{ coin.favorite_coin.name|add:"-USD-pstat"}}>
+                <td id={{ coin.name|add:"-USD-pstat"}}>
                     <img src="" id={{ coin.favorite_coin.name|add:"-USD-stat"}} class="responsive">
                 </td>
-				<td>
-					<center>
-						<button type="button" class="deletebutton">Delete row</button>
-					</center>
-				</td>
-            </tr>
-            
-			{% endfor %} 
-			
-				<form action="/add_coin" method="POST">{% csrf_token %}
-					<label for="coin">Coin</label>
-					<select id="coin" name="coin">
-					{% for coin in all_coins %}
-						<option value={{ coin.name }}>{{ coin.name }}</option>
-					{% endfor %}
-					</select>
-					<input class="submit" type="submit" id="submit" value="Add coin to the list">
-				</form>	
-					
-				<form action="/delete_coin" method="POST">{% csrf_token %}
-					<label for="coin">Coin</label>
-					<select id="coin" name="coin">
-					{% for coin in coins %}
-						<option value={{ coin.favorite_coin.name }}>{{ coin.favorite_coin.name }}</option>
-					{% endfor %}
-					</select>
-					<input class="submit" type="submit" id="submit" value="Delete coin from the list">
-				</form>	
-					
-			{% else %} 
-			
-			{% for coin in coins %}
-            <tr>
                 <td>
-                    <img src="" id={{ coin|add:"-logo"}} class="responsive">
-                    <p>{{coin}} </p>
-                </td>
-                <td>
-                    <span id={{ coin|add:"-USD"}}></span>
-                </td>
-                <td>
-                    <span id={{ coin|add:"-USD-old"}}></span>
-                </td>
-                <td id={{ coin|add:"-USD-pstat"}}>
-                    <img src="" id={{ coin|add:"-USD-stat"}} class="responsive">
+                    <center>
+                        <button type="button" class="deletebutton">Delete row</button>
+                    </center>
                 </td>
             </tr>
-            {% endfor %} 
-			
-			{% endif %}
-			
+            {% endfor %}
+
+            {% if user.is_authenticated %}
+            <form action="/add_coin" method="POST">{% csrf_token %}
+                <label for="coin">Coin</label>
+                <select id="coin" name="coin">
+                    
+                    {% for coin in all_coins %}
+                    <option value={{ coin.name }}>{{ coin.name }}</option>
+                    {% endfor %}
+
+                </select>
+                <input class="submit" type="submit" id="submit" value="Add coin to the list">
+            </form>
+
+            <form action="/delete_coin" method="POST">{% csrf_token %}
+                <label for="coin">Coin</label>
+                <select id="coin" name="coin">
+                    
+                    {% for coin in coins %}
+                    <option value={{ coin.favorite_coin.name }}>{{ coin.favorite_coin.name }}</option>
+                    {% endfor %}
+                
+                </select>
+                <input class="submit" type="submit" id="submit" value="Delete coin from the list">
+            </form>
+            {% endif %}
+        
         </table>
-
-
     </center>
-
 </div>
 
-<!-- <script>
-    setInterval(getCoin, 2000, "BTC", "USD");
-    setInterval(getCoin, 2000, "ETH", "USD");
-    setInterval(getCoin, 2000, "XRP", "USD");
-    setInterval(getCoin, 2000, "LTC", "USD");
+<script>
+    {% for coin in all_coins %}
+    setInterval(getCoin, 2000, "{{ coin.name }}", "USD");
+    {% endfor %}
     async function getCoin(coin1, coin2) {
         const api_url = 'https://min-api.cryptocompare.com/data/price?fsym=' + coin1 + '&tsyms=' + coin2
         const response = await fetch(api_url);
@@ -100,9 +74,9 @@
         var oldPrice = document.getElementById(coin1 + '-' + coin2).textContent;
         document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
         document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
-		var logo = document.getElementById(coin1 + '-logo');
-			logo.src = `{% static 'radarcxapp/img/coins/${coin1}.png' %}`;
-			logo.setAttribute("id", coin1 + '-logo')
+        var logo = document.getElementById(coin1 + '-logo');
+        logo.src = `{% static 'radarcxapp/img/coins/${coin1}.png' %}`;
+        logo.setAttribute("id", coin1 + '-logo')
         var imgdiff = document.createElement("img");
 
         if (newPrice > oldPrice) {
@@ -118,5 +92,5 @@
         var parent = document.getElementById(coin1 + '-' + coin2 + '-pstat');
         parent.replaceChild(imgdiff, parent.childNodes[1]);
     }
-</script> -->
+</script>
 {% endblock %}

@@ -17,23 +17,15 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView
 
 def coins(request):
-    user = request.user
-    if user.is_authenticated:
+    all_coins = Coin.objects.all()
+    if request.user.is_authenticated:
         username = request.user
         user  = User.objects.filter(username=username).first()
-        coins = user.favoritecoins_set.all()
-        all_coins = Coin.objects.all()
-        context = {'coins' : coins, 'all_coins' : all_coins}
-        return render(request, 'radarcxapp/coins.html', context)
-
+        fav_coins = user.favoritecoins_set.all()
     else:
-        coins = [
-            'BTC', 'ETH', 'BNB', 'ADA', 'DOGE', 'XRP', 'DOT', 'ICP', 'BCH',
-            'UNI', 'LTC', 'LINK', 'MATIC', 'SOL', 'XLM', 'VET', 'ETC', 'THETA',
-            'EOS', 'TRX', 'FIL', 'NEO', 'CRV'
-        ]
-        context = {'coins' : coins}
-        return render(request, 'radarcxapp/coins.html', context)
+        fav_coins = all_coins
+    context = {'fav_coins' : coins, 'all_coins' : all_coins}
+    return render(request, 'radarcxapp/coins.html', context)
 
 
 # Start of deleting coin by user ---> '/delete_coin
