@@ -6,7 +6,7 @@
     <center>
         <table class="table table-striped table-bordered mydatatable" style="width: 80%">
 
-            {% for coin in all_coins %}
+            {% for coin in fav_coins %}
             <tr>
                 <td>
                     {% with 'radarcxapp/img/coins/'|add:coin.name|lower|add:'.png' as image_static %}
@@ -32,11 +32,10 @@
 
             {% if user.is_authenticated %}
             <form action="/add_coin" method="POST">{% csrf_token %}
-                <label for="coin">Coin</label>
                 <select id="coin" name="coin">
                     
                     {% for coin in all_coins %}
-                    <option value={{ coin.name }}>{{ coin.name }}</option>
+                    <option value="{{ coin.name }}">{{ coin.name }}</option>
                     {% endfor %}
 
                 </select>
@@ -48,7 +47,7 @@
                 <select id="coin" name="coin">
                     
                     {% for coin in coins %}
-                    <option value={{ coin.favorite_coin.name }}>{{ coin.favorite_coin.name }}</option>
+                    <option value="{{ coin.favorite_coin.name }}">{{ coin.favorite_coin.name }}</option>
                     {% endfor %}
                 
                 </select>
