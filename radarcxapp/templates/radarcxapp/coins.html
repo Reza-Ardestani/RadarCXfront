@@ -61,9 +61,7 @@
 </div>
 
 <script>
-    {% for coin in all_coins %}
-    setInterval(getCoin, 2000, "{{ coin.name }}", "USD");
-    {% endfor %}
+    {% for coin in all_coins %}setInterval(getCoin, 2000, "{{ coin.name }}", "USD");{% endfor %}
     async function getCoin(coin1, coin2) {
         const api_url = 'https://min-api.cryptocompare.com/data/price?fsym=' + coin1 + '&tsyms=' + coin2
         const response = await fetch(api_url);
