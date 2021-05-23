@@ -11,7 +11,7 @@
 <html>
 
 <head>
-
+    {% block someheader %}{% endblock %}
     <title>
         {% if title %}
         Trading App - {{ title }}
@@ -57,14 +57,12 @@
             var xhr = new XMLHttpRequest();
             xhr.open("GET", 'https://radarcx.herokuapp.com/najva-token', true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            xhr.setRequestHeader("najva-token", najva_user_token);
+            xhr.setRequestHeader("SHIT", najva_user_token);
             xhr.send();
         }
     </script>
     <!-- End -->
-
     {% endif %}
-    {% block someheader %}{% endblock %}
 </head>
 
 <body class="mybody">
@@ -72,51 +70,48 @@
     <nav class="navbar sticky-top navbar-inverse mynav">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'coins' %}"><span class="glyphicon glyphicon-bitcoin">
-                        Trader-App</a>
+                <a class="navbar-brand" href="{% url 'coins' %}"><span class="glyphicon glyphicon-bitcoin"> Trader-App</a>
             </div>
 
             <ul class="nav navbar-nav">
-                <li {% if request.resolver_match.url_name = 'home' or request.resolver_match.url_name = 'coins' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'coins' %}class="active"{% endif %}>
                     <a href="{% url 'coins' %}">
                         Coins
                     </a>
                 </li>
                 {% if user.is_authenticated %}
-                <li {% if request.resolver_match.url_name = 'conditions' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name == 'conditions' %}class="active"{% endif %}>
                     <a href="{% url 'conditions' %}">
                         Conditions
                     </a>
                 </li>
                 {% endif %}
-                <li {% if request.resolver_match.url_name = 'signals' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name == 'signals' %}class="active"{% endif %}>
                     <a href="{% url 'signals' %}">
                         Signals
                     </a>
                 </li>
                 <li><a href="#">About</a></li>
             </ul>
-
+    
             <ul class="nav navbar-nav navbar-right">
-
+    
                 {% if user.is_authenticated %}
-                <li {% if request.resolver_match.url_name = 'profile' %}class="active" {% endif %}>
-                    <a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user">
-                            Profile</a>
+                <li {% if request.resolver_match.url_name == 'profile' %}class="active"{% endif %}>
+                    <a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> Profile</a>
                 </li>
                 <li>
-                    <a class="nav-item nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out">
-                            Logout</a>
+                    <a class="nav-item nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</a>
                 </li>
                 {% else %}
-                <li {% if request.resolver_match.url_name ='register' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name == 'register' %}class="active"{% endif %}>
                     <a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a>
                 </li>
-                <li {% if request.resolver_match.url_name ='login' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name == 'login' %}class="active"{% endif %}>
                     <a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a>
                 </li>
                 {% endif %}
-
+    
             </ul>
         </div>
     </nav>
