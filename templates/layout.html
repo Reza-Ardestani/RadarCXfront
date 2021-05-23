@@ -77,19 +77,19 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <li {% if request.resolver_match.url_name=='home' or request.resolver_match.url_name=='coins' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name = 'home' or request.resolver_match.url_name = 'coins' %}class="active" {% endif %}>
                     <a href="{% url 'coins' %}">
                         Coins
                     </a>
                 </li>
                 {% if user.is_authenticated %}
-                <li {% if request.resolver_match.url_name=='conditions' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name = 'conditions' %}class="active" {% endif %}>
                     <a href="{% url 'conditions' %}">
                         Conditions
                     </a>
                 </li>
                 {% endif %}
-                <li {% if request.resolver_match.url_name=='signals' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name = 'signals' %}class="active" {% endif %}>
                     <a href="{% url 'signals' %}">
                         Signals
                     </a>
@@ -100,7 +100,7 @@
             <ul class="nav navbar-nav navbar-right">
 
                 {% if user.is_authenticated %}
-                <li {% if request.resolver_match.url_name=='profile' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name = 'profile' %}class="active" {% endif %}>
                     <a class="nav-item nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user">
                             Profile</a>
                 </li>
@@ -109,10 +109,10 @@
                             Logout</a>
                 </li>
                 {% else %}
-                <li {% if request.resolver_match.url_name=='register' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name ='register' %}class="active" {% endif %}>
                     <a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a>
                 </li>
-                <li {% if request.resolver_match.url_name=='login' %}class="active" {% endif %}>
+                <li {% if request.resolver_match.url_name ='login' %}class="active" {% endif %}>
                     <a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a>
                 </li>
                 {% endif %}
