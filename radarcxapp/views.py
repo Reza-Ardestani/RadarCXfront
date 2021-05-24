@@ -22,6 +22,11 @@ def coins(request):
         username = request.user
         user  = User.objects.filter(username=username).first()
         fav_coins = user.favoritecoins_set.all()
+        fcoins = []
+        for c in fav_coins:
+            fcoins.append(c.favorite_coin)
+        print(fcoins)
+        fav_coins = fcoins
         all_coins = Coin.objects.values_list("name").difference(user.favoritecoins_set.values_list('favorite_coin__name'))
     else:
         fav_coins = all_coins
