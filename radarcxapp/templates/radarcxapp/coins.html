@@ -50,10 +50,9 @@
 					<input class="submit" type="submit" id="submit" value="Add coin to the list">
 				</form>
 			{% endif %}
-			
+			<br>
 			{% if fav_coins %}
 				<form action="/delete_coin" method="POST">{% csrf_token %}
-					<label for="coin">Coin</label>
 					<select id="coin" name="coin">
 						
 						{% for coin in fav_coins %}
