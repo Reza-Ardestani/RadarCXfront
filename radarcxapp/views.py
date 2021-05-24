@@ -22,6 +22,7 @@ def coins(request):
         username = request.user
         user  = User.objects.filter(username=username).first()
         fav_coins = user.favoritecoins_set.all()
+        all_coins = Coin.objects.values_list("name").difference(user.favoritecoins_set.values_list('favorite_coin__name'))
     else:
         fav_coins = all_coins
     context = {'fav_coins' : fav_coins, 'all_coins' : all_coins}
@@ -36,7 +37,7 @@ class delete_coin(View):
         favorite_coin_name = request.POST["coin"]
         favorite_coin = FavoriteCoins.objects.filter(user=user,favorite_coin__name=favorite_coin_name).last()
         favorite_coin.delete()
-        messages.success(request, "Your wanted coin deleted successfully!")
+        messages.success(request, "The coin deleted successfully!")
         return redirect('coins')
 # End of deleting coin by user ---> '/delete_coin
 

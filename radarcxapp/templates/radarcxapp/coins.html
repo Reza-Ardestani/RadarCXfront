@@ -2,10 +2,20 @@
 {% load static %}
 
 {% block dbody %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
 <div class="dynamic-body">
     <center>
         <table class="table table-striped table-bordered mydatatable" style="width: 80%">
 
+		{% if not user.is_authenticated %}
             {% for coin in fav_coins %}
             <tr>
                 <td>
@@ -28,32 +38,61 @@
                     </center>
                 </td>
             </tr>
-            {% endfor %}
+				{% endfor %}
+		{% endif %}
+		
+        {% if user.is_authenticated %}
+		
+			{% if all_coins %}
+				<form action="/add_coin" method="POST">{% csrf_token %}
+					<select id="coin" name="coin">
 
-            {% if user.is_authenticated %}
-            <form action="/add_coin" method="POST">{% csrf_token %}
-                <select id="coin" name="coin">
-                    
-                    {% for coin in all_coins %}
-                    <option value="{{ coin.name }}">{{ coin.name }}</option>
-                    {% endfor %}
-
-                </select>
-                <input class="submit" type="submit" id="submit" value="Add coin to the list">
-            </form>
-
-            <form action="/delete_coin" method="POST">{% csrf_token %}
-                <label for="coin">Coin</label>
-                <select id="coin" name="coin">
-                    
-                    {% for coin in coins %}
-                    <option value="{{ coin.favorite_coin.name }}">{{ coin.favorite_coin.name }}</option>
-                    {% endfor %}
-                
-                </select>
-                <input class="submit" type="submit" id="submit" value="Delete coin from the list">
-            </form>
-            {% endif %}
+						{% for coin in all_coins %}
+						<option value="{{ coin|first }}">{{ coin|first }}</option>
+						{% endfor %}
+					</select>
+					<input class="submit" type="submit" id="submit" value="Add coin to the list">
+				</form>
+			{% endif %}
+			
+			{% if fav_coins %}
+				<form action="/delete_coin" method="POST">{% csrf_token %}
+					<label for="coin">Coin</label>
+					<select id="coin" name="coin">
+						
+						{% for coin in fav_coins %}
+						<option value="{{ coin.favorite_coin.name }}">{{ coin.favorite_coin.name }}</option>
+						{% endfor %}
+					
+					</select>
+					<input class="submit" type="submit" id="submit" value="Delete coin from the list">
+				</form>
+			{% endif %}
+			
+			{% for coin in fav_coins %}
+            <tr>
+                <td>
+                    {% with 'radarcxapp/img/coins/'|add:coin.favorite_coin.name|lower|add:'.png' as image_static %}
+                    <img src="{% static image_static %}"  class="responsive">
+                    {% endwith %}
+                </td>
+                <td>
+                    <span id="{{ coin.favorite_coin.name|add:'-USD' }}"></span>
+                </td>
+                <td>
+                    <span id="{{ coin.favorite_coin.name|add:'-USD-old'}}"></span>
+                </td>
+                <td id="{{ coin.favorite_coin.name|add:'-USD-pstat'}}">
+                    <img src="" id="{{ coin.favorite_coin.name|add:'-USD-stat'}}" class="responsive">
+                </td>
+                <td>
+                    <center>
+                        <button type="button" class="deletebutton">Delete row</button>
+                    </center>
+                </td>
+            </tr>
+			{% endfor %}
+        {% endif %}
         
         </table>
     </center>
