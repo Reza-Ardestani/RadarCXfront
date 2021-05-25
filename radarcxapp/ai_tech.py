@@ -9,7 +9,7 @@ import ta
 global Current_day_tech_signal
 
 
-def load_from_googleDrive(url = None):
+def loadFromGoogleDrive(url = None):
     #Due to Heroku restrictions, we need to store date on other clouds and pass its link
     # loading csv data from googleDrive
     if url == None:
@@ -21,11 +21,31 @@ def load_from_googleDrive(url = None):
     df.set_index('Date', inplace=True)# Datetime conversion
 
     return df
-def load_from_yfinance():
-    pass
+
+def loadFrom_yfinance(tickers ='BTC-USD' , period='1mo', interval='1d'):
+    # Using yahooFinance! API to fetch price of stocks
+    df = yf.download(tickers=tickers,period=period,interval=interval)
+
+    return df
+
+def technicalCalculations(dt):
+    ''' using ta to do some technical analysis '''
+    dt['ta_rsi'] = ta.momentum.rsi(dt.Close)
+    # TA's Stochastic Oscillator
+    dt['ta_stoch_k'] = ta.momentum.stoch(dt.High, dt.Low, dt.Close)
+    dt['ta_stoch_d'] = ta.momentum.stoch_signal(dt.High, dt.Low, dt.Close)
 
 
 def tech_signal():
     # based on daily data, we provide signals for bitcoin
     # the result will be available on "Current_day_tech_signal"
-    pass
+
+    # for the time being, we use yfinance as the source of data
+    df = loadFrom_yfinance()
+
+    #Using ta for tech analysis
+    technicalCalculations(df)
+
+    # based on  our meta-knowlege we elicit signals out of data
+    # the result will be stored in "Current_day_tech_signal"
+    elicitSignals(df)
