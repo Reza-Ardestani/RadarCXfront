@@ -35,6 +35,20 @@ def technicalCalculations(dt):
     dt['ta_stoch_k'] = ta.momentum.stoch(dt.High, dt.Low, dt.Close)
     dt['ta_stoch_d'] = ta.momentum.stoch_signal(dt.High, dt.Low, dt.Close)
 
+def elicitSignals(df):
+    global Current_day_tech_signal
+    # implementing naive RSI based elicitSignals
+    rsi = df['ta_rsi']
+    if rsi > 80:
+        Current_day_tech_signal = "Strong Sell"
+    elif rsi > 65:
+         Current_day_tech_signal = "Sell"
+    elif rsi > 45:
+        Current_day_tech_signal = "Neutral"
+    elif rsi > 25:
+        Current_day_tech_signal = "Buy"
+    else:
+        Current_day_tech_signal = " Strong Buy"
 
 def tech_signal():
     # based on daily data, we provide signals for bitcoin
