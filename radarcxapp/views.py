@@ -128,3 +128,15 @@ def najva_token(request):
 def chk(request):
     bgthread.fetchData_and_check()
     return HttpResponse("Conditions table has been manually check!")
+
+def overall(request):
+    return render(request, 'radarcxapp/overall.html')
+
+def technical(request):
+    return render(request, 'radarcxapp/technical.html')
+
+def fundamental(request):
+    return render(request, 'radarcxapp/fundamental.html')
+
+def sentiment(request):
+    return render(request, 'radarcxapp/sentiment.html')
