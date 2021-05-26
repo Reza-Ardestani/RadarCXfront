@@ -15,7 +15,7 @@ urlpatterns = [
     url('signals', views.signals, name='signals'),
     url('overall', views.overall, name='overall'),
     url('technical', views.technical, name='technical'),
-    url('fundamental', views.technical, name='fundamental'),
-    url('sentiment', views.technical, name='sentiment'),
+    url('fundamental', views.fundamental, name='fundamental'),
+    url('sentiment', views.sentiment, name='sentiment'),
     # url('log', views.log, name='log'),
 ]
