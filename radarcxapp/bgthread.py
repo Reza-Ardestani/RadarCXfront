@@ -68,21 +68,21 @@ def fetchData_and_check():
             if (not (tmp)):
                 initiating_coin = Coin.objects.create(name=coinName)
                 initiating_coin.save()
-    # while(True):
-    # print("here I receive data of all coins and store them in DB")
-    url = 'https://min-api.cryptocompare.com/data/price'
-    parameters = {'fsym': "BTC",'tsyms': "USD"}
 
-    list = []
-    ''' getting data and storing them in DB '''
-    # response comes as json
-    for nameOfCoin in coins:
-        parameters["fsym"] =nameOfCoin
-        response = requests.get(url, params=parameters)
-        data = response.json()
-        c = Coin.objects.filter(name=parameters["fsym"]).first()
-        c.realtime_price=data[parameters["tsyms"]]
-        c.save()
+    while(True):
+        # print("here I receive data of all coins and store them in DB")
+        url = 'https://min-api.cryptocompare.com/data/price'
+        parameters = {'fsym': "BTC",'tsyms': "USD"}
+        ''' getting data and storing them in DB '''
+        # response comes as json
+        for nameOfCoin in coins:
+            parameters["fsym"] =nameOfCoin
+            response = requests.get(url, params=parameters)
+            data = response.json()
+            c = Coin.objects.filter(name=parameters["fsym"]).first()
+            c.realtime_price=data[parameters["tsyms"]]
+            c.save()
 
-
-    conditionsChecker()  # Synchronizicly we runn this fun & wait till it ends
+        # Synchronizicly we runn this fun & wait till it ends
+        conditionsChecker()
+        time.sleep(300) # 300 sec

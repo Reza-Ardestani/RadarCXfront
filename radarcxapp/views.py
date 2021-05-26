@@ -126,10 +126,12 @@ def najva_token(request):
 ####
 # chk url , this url make fetchData_and_check run one time
 ''' fetchData_and_check func has a not ending loop,
- so we should only run it one time with the help of following global var'''
+    so we should only run it one time with the help of following global var'''
 fetchData_and_check_status = "notRunning"
-''' initiating fetchData_and_check func thread ''''
+
+''' initiating fetchData_and_check func thread '''
 coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+
 def chk(request):
     global fetchData_and_check_status
     if fetchData_and_check_status == "notRunning":
@@ -137,6 +139,7 @@ def chk(request):
         # bgthread.fetchData_and_check() // wrong, we need a thread
         coinsData_thread.start()
     return HttpResponse("Conditions table has been manually check!")
+
 ####
 
 

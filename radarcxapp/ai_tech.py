@@ -53,13 +53,14 @@ def elicitSignals(df):
 def tech_signal():
     # based on daily data, we provide signals for bitcoin
     # the result will be available on "Current_day_tech_signal"
+    while(True):
+        # for the time being, we use yfinance as the source of data
+        df = loadFrom_yfinance()
 
-    # for the time being, we use yfinance as the source of data
-    df = loadFrom_yfinance()
+        #Using ta for tech analysis
+        technicalCalculations(df)
 
-    #Using ta for tech analysis
-    technicalCalculations(df)
-
-    # based on  our meta-knowlege we elicit signals out of data
-    # the result will be stored in "Current_day_tech_signal"
-    elicitSignals(df)
+        # based on  our meta-knowlege we elicit signals out of data
+        # the result will be stored in "Current_day_tech_signal"
+        elicitSignals(df)
+        sleep(3600)
