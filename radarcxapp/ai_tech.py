@@ -38,7 +38,7 @@ def technicalCalculations(dt):
 def elicitSignals(df):
     global Current_day_tech_signal
     # implementing naive RSI based elicitSignals
-    rsi = df['ta_rsi']
+    rsi = df['ta_rsi'].iloc[-1] # current day rsi
     if rsi > 80:
         Current_day_tech_signal = "Strong Sell"
     elif rsi > 65:
@@ -53,13 +53,14 @@ def elicitSignals(df):
 def tech_signal():
     # based on daily data, we provide signals for bitcoin
     # the result will be available on "Current_day_tech_signal"
+    print(" before loop :", Current_day_tech_signal)
     while(True):
         # for the time being, we use yfinance as the source of data
         df = loadFrom_yfinance()
-
+        print(" after loadFrom_yfinance :", Current_day_tech_signal)
         #Using ta for tech analysis
         technicalCalculations(df)
-
+        print(" after technicalCalculations func  :", Current_day_tech_signal)
         # based on  our meta-knowlege we elicit signals out of data
         # the result will be stored in "Current_day_tech_signal"
         elicitSignals(df)
