@@ -154,7 +154,7 @@ ai_tech_status = "notRunning"
 technical_signal_thread = threading.Thread(target=ai_tech.tech_signal)
 def ai_tech(request):
     global ai_tech_status
-    if ai_tech == "notRunning":
+    if ai_tech_status == "notRunning":
         technical_signal_thread.start()
         ai_tech_status = "running"
     return HttpResponse("Technical signal has been manually started!")
