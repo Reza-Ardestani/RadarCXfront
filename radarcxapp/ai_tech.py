@@ -1,12 +1,12 @@
 # Here we do technical analysis with help of Ai and statistics
+import time
 import requests
 import numpy as np
 import pandas as pd
 import yfinance as yf
 import ta
-
 ''' For the time being we pass data via global var, Upgrate it by using DB'''
-global Current_day_tech_signal
+Current_day_tech_signal = 'Not Calculated'
 
 
 def loadFromGoogleDrive(url = None):
@@ -66,4 +66,4 @@ def tech_signal():
         # the result will be stored in "Current_day_tech_signal"
         elicitSignals(df)
         print(" Final ai tech result:", Current_day_tech_signal)
-        sleep(3600)
+        time.sleep(3600)
