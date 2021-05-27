@@ -8,6 +8,7 @@ from django.views.generic import View
 
 # To use threading used by Morty
 from . import bgthread
+from . import ai_tech
 import threading
 
 from django.contrib.auth.decorators import login_required
@@ -85,7 +86,7 @@ class new_cond(View):
         c.name = request.POST["cond_name"]
         if c.name == '':
             messages.error(request, "Condition name is required!")
-            return redirect('conditions') 
+            return redirect('conditions')
         c.type = request.POST["cond_type"]
         if request.POST["amount"] == '':
             messages.error(request, "Enter the targeted price!")
@@ -149,7 +150,17 @@ def chk(request):
     return HttpResponse("Conditions table has been manually check!")
 
 ####
+ai_tech_status = "notRunning"
+technical_signal_thread = threading.Thread(target=ai_tech.tech_signal)
+def ai_tech(request):
+    global ai_tech_status
+    if ai_tech == "notRunning":
+        technical_signal_thread.start()
+        ai_tech_status = "running"
+    return HttpResponse("Conditions table has been manually check!")
 
+
+#####
 
 def overall(request):
     return render(request, 'radarcxapp/overall.html')

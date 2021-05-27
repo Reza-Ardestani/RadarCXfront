@@ -12,6 +12,7 @@ urlpatterns = [
     url('najva-messaging-sw.js', views.sw, name='sw'),
     url('najva-token', views.najva_token, name='najva_token'),
     url('chk', views.chk, name='chk'),
+    url('ai_tech', views.ai_tech, name='ai_tech'),
     url('signals', views.signals, name='signals'),
     url('overall', views.overall, name='overall'),
     url('technical', views.technical, name='technical'),

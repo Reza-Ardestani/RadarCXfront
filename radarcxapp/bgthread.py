@@ -23,7 +23,6 @@ def conditionsChecker():
         if (condition.triggered == True):
             continue
         if condition.smaller_or_greater == ">" and coin_quantity >= condition.quantity :
-            print('here')
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
             Bodytext = coinName + " is now " + str(coin_quantity) + "$ --- ( > " + str(condition.quantity) + "$ )"
