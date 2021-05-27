@@ -32,6 +32,8 @@ def conditionsChecker():
             NajveResponse = send_to_users(body= Bodytext,
             subscriber_tokens= one_user_tokens,
             sent_time=UTC_to_IR_TimeZone())
+            condition.triggered = True
+            condition.save()
         elif condition.smaller_or_greater == "<" and coin_quantity <= condition.quantity :
             username = User.objects.filter(id=condition.creator_id).first()
             coinName= condition.coin
@@ -42,6 +44,8 @@ def conditionsChecker():
             NajveResponse = send_to_users(body= Bodytext,
             subscriber_tokens= one_user_tokens,
             sent_time=UTC_to_IR_TimeZone())
+            condition.triggered = True
+            condition.save()
 
 
 
