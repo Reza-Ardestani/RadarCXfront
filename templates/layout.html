@@ -61,7 +61,7 @@
 
 <body class="mybody">
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark mynav">
 	  <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-bitcoin"> Trader-app</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -69,34 +69,34 @@
 
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-		  <li class="nav-item active">
+		  <li class="nav-item {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'coins' %}active{% endif %}">
 			<a class="nav-link" href="{% url 'coins' %}">Coins<span class="sr-only">(current)</span></a>
 		  </li>
 		  {% if user.is_authenticated %}
-		  <li class="nav-item">
+		  <li class="nav-item {% if request.resolver_match.url_name == 'conditions' %}active{% endif %}">
 			<a class="nav-link" href="{% url 'conditions' %}">Conditions</a>
 		  </li>
 		  {% endif %}
-		  <li class="nav-item">
+		  <li class="nav-item {% if request.resolver_match.url_name == 'signals' %}active{% endif %}">
 			<a class="nav-link" href="{% url 'signals' %}">Signals</a>
 		  </li>
-		  <li class="nav-item">
+		  <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
 			<a class="nav-link" href="#">About</a>
 		  </li>
 		</ul>
 		<ul class="navbar-nav ml-auto">
 		{% if user.is_authenticated %}
-		<li class="nav-item">
+		<li class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
 			<a class="nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> Profile</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</a>
 		</li>
 		{% else %}
-		<li class="nav-item">
+		<li class="nav-item {% if request.resolver_match.url_name == 'register' %}active{% endif %}">
 			<a class="nav-link" href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a>
 		</li>
-		<li class="nav-item">
+		<li class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
 			<a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a>
 		</li>
 		{% endif %}
