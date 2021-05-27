@@ -22,9 +22,9 @@
     </select>
     <br>
     <select id="coin" name="coin">
-      <option value="BTC">BTC</option>
-      <option value="XRP">XRP</option>
-      <option value="LTC">LTC</option>
+      {% for coin in coins %}
+      <option value="{{ coin.name }}">{{ coin.name }}</option>
+      {% endfor %}
     </select>
     <select id="trigger" name="trigger">
       <option value=">">></option>

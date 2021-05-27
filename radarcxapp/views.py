@@ -68,9 +68,11 @@ def conditions(request):
     username = request.user
     user  = User.objects.filter(username=username).first()
     conditions = user.condition_set.all()
+    all_coins = Coin.objects.all()
     context = {
-       'title' : 'Conditions',
-        'conditions' : conditions
+        'title' : 'Conditions',
+        'conditions' : conditions,
+        'coins' : all_coins
     }
     return render(request, 'radarcxapp/conditions.html', context)
 
