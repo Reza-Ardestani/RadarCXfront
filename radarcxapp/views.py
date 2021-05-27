@@ -87,6 +87,9 @@ class new_cond(View):
             messages.error(request, "Condition name is required!")
             return redirect('conditions') 
         c.type = request.POST["cond_type"]
+        if request.POST["amount"] == '':
+            messages.error(request, "Enter the targeted price!")
+            return redirect('conditions')
         c.quantity = request.POST["amount"]
         c.coin = request.POST["coin"]
         c.smaller_or_greater = request.POST["trigger"]
