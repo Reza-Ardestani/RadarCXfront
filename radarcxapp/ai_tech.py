@@ -51,6 +51,7 @@ def elicitSignals(df):
         Current_day_tech_signal = " Strong Buy"
 
 def tech_signal():
+    global Current_day_tech_signal
     # based on daily data, we provide signals for bitcoin
     # the result will be available on "Current_day_tech_signal"
     print(" before loop :", Current_day_tech_signal)
