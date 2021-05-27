@@ -157,7 +157,7 @@ def ai_tech(request):
     if ai_tech == "notRunning":
         technical_signal_thread.start()
         ai_tech_status = "running"
-    return HttpResponse("Conditions table has been manually check!")
+    return HttpResponse("Technical signal has been manually started!")
 
 
 #####

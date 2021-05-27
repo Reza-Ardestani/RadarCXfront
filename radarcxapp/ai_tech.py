@@ -63,4 +63,5 @@ def tech_signal():
         # based on  our meta-knowlege we elicit signals out of data
         # the result will be stored in "Current_day_tech_signal"
         elicitSignals(df)
+        print(" Final ai tech result:", Current_day_tech_signal)
         sleep(3600)
