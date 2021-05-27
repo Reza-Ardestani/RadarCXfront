@@ -88,4 +88,4 @@ def fetchData_and_check():
 
         # Synchronizicly we runn this fun & wait till it ends
         conditionsChecker()
-        time.sleep(300) # 300 sec
+        time.sleep(1) # 300 sec

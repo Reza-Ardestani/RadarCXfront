@@ -147,7 +147,7 @@ def chk(request):
         fetchData_and_check_status = "running"
         # bgthread.fetchData_and_check() // wrong, we need a thread
         coinsData_thread.start()
-    return HttpResponse("Conditions table has been manually check!")
+    return HttpResponse("Conditions table has been manually checked!")
 
 ####
 ai_tech_status = "notRunning"
