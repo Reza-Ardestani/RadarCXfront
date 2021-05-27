@@ -81,6 +81,9 @@ class new_cond(View):
         user  = User.objects.filter(username=username).first()
         c = Condition()
         c.name = request.POST["cond_name"]
+        if c.name == '':
+            messages.error(request, "Condition name is required!")
+            return redirect('conditions') 
         c.type = request.POST["cond_type"]
         c.quantity = request.POST["amount"]
         c.coin = request.POST["coin"]
