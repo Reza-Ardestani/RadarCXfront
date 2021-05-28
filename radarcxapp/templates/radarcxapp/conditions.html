@@ -47,38 +47,54 @@
           </button>
         </div>
         <div class="modal-body">
-
-          <label for='cond_name'>NAME: </label>
-          <input type="text" id="cond_name" name="cond_name">
-          <br>
-          <select id="cond_type" name="cond_type">
-            <option value="realtime">Realtime Price</option>
-            <!-- <option value="volume">Volume</option> -->
-            <!-- <option value="maverage">Moving Average</option> -->
-          </select>
-          <br>
-          <select id="coin" name="coin">
-            {% for coin in coins %}
-            <option value="{{ coin.name }}">{{ coin.name }}</option>
-            {% endfor %}
-          </select>
-          <select id="trigger" name="trigger">
-            <option value=">">></option>
-            <option value="<">
-              << /option>
-          </select>
-          <input type="number" id="amount" name="amount" step="0.01">
-          <label>$, NOTIFY ME!</label>
-          <br>
-          <!-- <input class="submit" type="submit" id="submit" value="Add condition"> -->
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary submit" id="submit">Add</button>
+          <div class="form-group">
+            <input class="form-control" type="text" id="cond_name" name="cond_name"
+              placeholder="Name your new condition...">
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                If
+              </div>
+              <div class="col">
+                <select class="form-control" id="cond_type" name="cond_type">
+                  <option class="form-control" value="realtime">Realtime Price</option>
+                  <!-- <option value="volume">Volume</option> -->
+                  <!-- <option value="maverage">Moving Average</option> -->
+                </select>
+              </div>
+              <div class="col">
+                of
+              </div>
+              <div class="col">
+                <select class="form-control" id="coin" name="coin">
+                  {% for coin in coins %}
+                  <option class="form-control" value="{{ coin.name }}">{{ coin.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col">
+                became
+              </div>
+              <div class="col">
+                <select class="form-control" id="trigger" name="trigger">
+                  <option class="form-control" value=">"> > </option>
+                  <option class="form-control" value="<"> < </option>
+                </select>
+              </div>
+              <div class="col">
+                <input class="form-control" type="number" id="amount" name="amount" step="0.01">
+              </div>
+              <div class="col">
+                $, NOTIFY ME!
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary submit" id="submit">Add</button>
+          </div>
         </div>
       </div>
-    </div>
   </form>
 </div>
 {% endblock %}
