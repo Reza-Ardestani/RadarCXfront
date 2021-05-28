@@ -81,7 +81,10 @@
 			<a class="nav-link" href="{% url 'signals' %}">Signals</a>
 		  </li>
 		  <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-			<a class="nav-link" href="#">About</a>
+			<a class="nav-link" href="{% url 'about' %}">About</a>
+		  </li>
+      <li class="nav-item {% if request.resolver_match.url_name == 'contact us' %}active{% endif %}">
+			<a class="nav-link" href="{% url 'about' %}">Contact us</a>
 		  </li>
 		</ul>
 		<ul class="navbar-nav ml-auto">

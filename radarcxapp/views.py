@@ -173,3 +173,9 @@ def fundamental(request):
 
 def sentiment(request):
     return render(request, 'radarcxapp/sentiment.html')
+
+def about(request):
+    return render(request, 'radarcxapp/about.html')
+
+def contact_us(request):
+    return render(request, 'radarcxapp/contact_us.html')

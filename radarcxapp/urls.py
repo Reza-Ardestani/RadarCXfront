@@ -18,5 +18,7 @@ urlpatterns = [
     url('technical', views.technical, name='technical'),
     url('fundamental', views.fundamental, name='fundamental'),
     url('sentiment', views.sentiment, name='sentiment'),
+    url('about', views.about, name='about'),
+    url('contact_us', views.contact_us, name='contact_us'),
     # url('log', views.log, name='log'),
 ]
