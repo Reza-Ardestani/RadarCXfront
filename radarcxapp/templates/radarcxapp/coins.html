@@ -18,14 +18,14 @@
             <tr>
                 <td>
                     {% with 'radarcxapp/img/coins/'|add:coin.name|lower|add:'.png' as image_static %}
-                    <img src="{% static image_static %}"  class="responsive">
+                    <img src="{% static image_static %}"  class="responsive"><span style="font-size: small !important; color: white">  {{coin.name}}</span>
                     {% endwith %}
                 </td>
                 <td>
-                    <span id="{{ coin.name|add:'-USD' }}"></span>
+                    <span id="{{ coin.name|add:'-USD' }}" style="font-size: small !important; color: white"></span>
                 </td>
                 <td>
-                    <span id="{{ coin.name|add:'-USD-old'}}"></span>
+                    <span id="{{ coin.name|add:'-USD-old'}}" style="font-size: small !important; color: white"></span>
                 </td>
                 <td id="{{ coin.name|add:'-USD-pstat'}}">
                     <img src="" id="{{ coin.name|add:'-USD-stat'}}" class="responsive">
