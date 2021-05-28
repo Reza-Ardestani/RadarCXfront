@@ -1,3 +1,4 @@
+import os
 import requests
 import json as json_parser
 from datetime import datetime, timedelta # for iranTimeZone func
@@ -28,16 +29,16 @@ def UTC_to_IR_TimeZone(delay = 3):
     return sent_time
 
 def send_to_users(body,subscriber_tokens,
-    apikey= "9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03",
-    token= "6e83d4164baf569f345ab556b01347b1178776c5" ,
-    title="Notification for your triggered condition",
-    url="https://radarcx.herokuapp.com/",
-    icon="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
-    onclick='open-link',
-    image="https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
-    content=None,
-    json=None,
-    sent_time=None):
+    apikey = os.environ.get('APIKEY'),
+    token = os.environ.get('TOKEN'),
+    title = "Notification for your triggered condition",
+    url = "https://radarcx.herokuapp.com/",
+    icon = "https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
+    onclick = 'open-link',
+    image = "https://png.pngtree.com/element_our/md/20180515/md_5afb099d307d3.jpg",
+    content = None,
+    json = None,
+    sent_time = None):
 
     urlNajva = 'https://app.najva.com/notification/api/v1/notifications/'
 
