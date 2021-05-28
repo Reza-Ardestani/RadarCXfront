@@ -176,12 +176,13 @@ def ai_tech(request):
 
 def overall(request):
     return render(request, 'radarcxapp/overall.html')
-####
+#####
 from .ai_tech import Current_day_tech_signal
 
 def technical(request):
+    global Current_day_tech_signal
     context = {
-        'Current_day_tech_signal' : Current_day_tech_signal,
+        'Current_day_tech_signal' : Current_day_tech_signal[0],
     }
     return render(request, 'radarcxapp/technical.html',context)
 
