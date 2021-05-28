@@ -10,33 +10,6 @@
 {% endfor %}
 {% endif %}
 
-<div class="content-section">
-  <form action="/new_cond" method="POST">{% csrf_token %}
-    <label for='cond_name'>NAME: </label>
-    <input type="text" id="cond_name" name="cond_name">
-    <br>
-    <select id="cond_type" name="cond_type">
-      <option value="realtime">Realtime Price</option>
-      <!-- <option value="volume">Volume</option> -->
-      <!-- <option value="maverage">Moving Average</option> -->
-    </select>
-    <br>
-    <select id="coin" name="coin">
-      {% for coin in coins %}
-      <option value="{{ coin.name }}">{{ coin.name }}</option>
-      {% endfor %}
-    </select>
-    <select id="trigger" name="trigger">
-      <option value=">">></option>
-      <option value="<"><</option>
-    </select>
-    <input type="number" id="amount" name="amount" step="0.01">
-    <label>$, NOTIFY ME!</label>
-    <br>
-    <input class="submit" type="submit" id="submit" value="Add condition">
-
-  </form>
-</div>
 {% for condition in conditions %}
 <article class="media content-section">
   <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
@@ -56,4 +29,56 @@
   </div>
 </article>
 {% endfor %}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-circle btn-md" data-toggle="modal"
+  data-target="#exampleModal">+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <form action="/new_cond" method="POST">{% csrf_token %}
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Condition</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <label for='cond_name'>NAME: </label>
+          <input type="text" id="cond_name" name="cond_name">
+          <br>
+          <select id="cond_type" name="cond_type">
+            <option value="realtime">Realtime Price</option>
+            <!-- <option value="volume">Volume</option> -->
+            <!-- <option value="maverage">Moving Average</option> -->
+          </select>
+          <br>
+          <select id="coin" name="coin">
+            {% for coin in coins %}
+            <option value="{{ coin.name }}">{{ coin.name }}</option>
+            {% endfor %}
+          </select>
+          <select id="trigger" name="trigger">
+            <option value=">">></option>
+            <option value="<">
+              << /option>
+          </select>
+          <input type="number" id="amount" name="amount" step="0.01">
+          <label>$, NOTIFY ME!</label>
+          <br>
+          <!-- <input class="submit" type="submit" id="submit" value="Add condition"> -->
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary submit" id="submit">Add</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 {% endblock %}
