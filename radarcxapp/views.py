@@ -147,7 +147,9 @@ def chk(request):
         fetchData_and_check_status = "running"
         # bgthread.fetchData_and_check() // wrong, we need a thread
         coinsData_thread.start()
-    return HttpResponse("Conditions table has been manually checked!")
+        return HttpResponse("Conditions table checker has been manually started!")
+
+    return HttpResponse("Conditions table checker is already running!")
 
 ####
 ai_tech_status = "notRunning"
@@ -157,7 +159,9 @@ def ai_tech(request):
     if ai_tech_status == "notRunning":
         technical_signal_thread.start()
         ai_tech_status = "running"
-    return HttpResponse("Technical signal has been manually started!")
+        return HttpResponse("Technical signal has been manually started!")
+
+    return HttpResponse("Technical signal is already running!")
 
 
 #####
