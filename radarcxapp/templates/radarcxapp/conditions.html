@@ -46,6 +46,12 @@
       <!-- <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> -->
     </div>
     <h2><a class="article-title" href="">{{ condition.name }}</a></h2>
+    <span>
+      <form action="/del_cond" method="POST">{% csrf_token %}
+        <input type="hidden" name="cond_id" value="{{ condition.id }}">
+        <input class="submit" type="submit" id="submit" name="submit" value="Delete">
+      </form>
+    </span>
     <!-- <p class="article-content">{{ post.content }}</p> -->
   </div>
 </article>
