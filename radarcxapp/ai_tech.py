@@ -6,7 +6,7 @@ import pandas as pd
 import yfinance as yf
 import ta
 ''' For the time being we pass data via global var, Upgrate it by using DB'''
-Current_day_tech_signal = 'Not Calculated'
+Current_day_tech_signal = ['Not Calculated']
 
 
 def loadFromGoogleDrive(url = None):
@@ -40,15 +40,15 @@ def elicitSignals(df):
     # implementing naive RSI based elicitSignals
     rsi = df['ta_rsi'].iloc[-1] # current day rsi
     if rsi > 80:
-        Current_day_tech_signal = "Strong Sell"
+        Current_day_tech_signal[0] = "Strong Sell"
     elif rsi > 65:
-         Current_day_tech_signal = "Sell"
+         Current_day_tech_signal[0] = "Sell"
     elif rsi > 45:
-        Current_day_tech_signal = "Neutral"
+        Current_day_tech_signal[0] = "Neutral"
     elif rsi > 25:
-        Current_day_tech_signal = "Buy"
+        Current_day_tech_signal[0] = "Buy"
     else:
-        Current_day_tech_signal = " Strong Buy"
+        Current_day_tech_signal[0] = " Strong Buy"
 
 def tech_signal():
     global Current_day_tech_signal

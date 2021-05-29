@@ -5,111 +5,137 @@
 <html>
 
 <head>
-    {% block someheader %}{% endblock %}
-    <title>
-        {% if title %}
-        Trading App - {{ title }}
-        {% else %}
-        Trading App
-        {% endif %}
-    </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'radarcxapp/CSS/override.css' %}">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="manifest" href="/manifest.json">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {% if user.is_authenticated %}
-    <!-- Najva Push Notification -->
-    <script type="text/javascript">
-        (function () {
-            var now = new Date();
-            var version = now.getFullYear().toString() + "0" + now.getMonth() + "0" + now.getDate() +
-                "0" + now.getHours();
-            var head = document.getElementsByTagName("head")[0];
-            var link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = "https://app.najva.com/static/css/local-messaging.css" + "?v=" + version;
-            head.appendChild(link);
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.async = true;
-            script.src = "https://app.najva.com/static/js/scripts/herokuapp716-website-25701-9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03.js" + "?v=" + version;
-            head.appendChild(script);
-        })()
-    </script>
-    <!-- END NAJVA PUSH NOTIFICATION -->
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- User-specific tokens -->
-    <script>
-        window.najvaUserSubscribed = function (najva_user_token) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", 'https://radarcx.herokuapp.com/najva-token', true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            xhr.setRequestHeader("najva-token", najva_user_token);
-            xhr.send();
-        }
-    </script>
-    <!-- End -->
+  <!-- Title -->
+  <title>
+    {% if title %}
+    Trading App - {{ title }}
+    {% else %}
+    Trading App
     {% endif %}
+  </title>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'radarcxapp/CSS/override.css' %}">
+  
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  {% if user.is_authenticated %}
+  <!-- Najva Push Notification -->
+  <script type="text/javascript">
+    (function () {
+      var now = new Date();
+      var version = now.getFullYear().toString() + "0" + now.getMonth() + "0" + now.getDate() +
+        "0" + now.getHours();
+      var head = document.getElementsByTagName("head")[0];
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://app.najva.com/static/css/local-messaging.css" + "?v=" + version;
+      head.appendChild(link);
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.async = true;
+      script.src = "https://app.najva.com/static/js/scripts/herokuapp716-website-25701-9e48e9f0-41e1-4f0a-a3d0-dd34b8313f03.js" + "?v=" + version;
+      head.appendChild(script);
+    })()
+  </script>
+  <!-- END NAJVA PUSH NOTIFICATION -->
+
+  <!-- User-specific tokens -->
+  <script>
+    window.najvaUserSubscribed = function (najva_user_token) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", 'https://radarcx.herokuapp.com/najva-token', true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+      xhr.setRequestHeader("najva-token", najva_user_token);
+      xhr.send();
+    }
+  </script>
+  <!-- End -->
+  {% endif %}
+
+  {% block someheader %}{% endblock %}
+
 </head>
 
 <body class="mybody">
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark mynav" style="font-size: small !important;">
-	  <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-bitcoin"> Trader-app</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	  </button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><i class="fa fa-btc"></i> Trader-app</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-		  <li class="nav-item {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'coins' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'coins' %}">Coins<span class="sr-only">(current)</span></a>
-		  </li>
-		  {% if user.is_authenticated %}
-		  <li class="nav-item {% if request.resolver_match.url_name == 'conditions' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'conditions' %}">Conditions</a>
-		  </li>
-		  {% endif %}
-		  <li class="nav-item {% if request.resolver_match.url_name == 'signals' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'signals' %}">Signals</a>
-		  </li>
-		  <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'about' %}">About</a>
-		  </li>
-      <li class="nav-item {% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'contact_us' %}">Contact us</a>
-		  </li>
-		</ul>
-		<ul class="navbar-nav ml-auto">
-		{% if user.is_authenticated %}
-		<li class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> Profile</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</a>
-		</li>
-		{% else %}
-		<li class="nav-item {% if request.resolver_match.url_name == 'register' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'register' %}"><span class="glyphicon glyphicon-user"> Register</a>
-		</li>
-		<li class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-			<a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</a>
-		</li>
-		{% endif %}
-		</ul>
-	  </div>
-	</nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li
+          class="nav-item {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'coins' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'coins' %}">Coins<span class="sr-only">(current)</span></a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'conditions' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'conditions' %}">Conditions</a>
+        </li>
+        {% endif %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'signals' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'signals' %}">Signals</a>
+        </li>
+        <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+        <li class="nav-item {% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'contact_us' %}">Contact us</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'profile' %}"><i class="fa fa-user-circle-o"></i> Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'register' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a>
+        </li>
+        <li class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
 
-    <center>
-        {% block dbody %}{% endblock %}
-    </center>
+  <br>
+
+  <center>
+    {% block dbody %}{% endblock %}
+  </center>
 </body>
 
 </html>

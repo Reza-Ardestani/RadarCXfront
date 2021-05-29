@@ -140,11 +140,6 @@ def del_cond(request):
     return redirect('conditions')
 
 
-def about(request):
-    return HttpResponse("about")
-
-def contact_us(request):
-    return HttpResponse("shit")
 ####
 # chk url , this url make fetchData_and_check run one time
 ''' fetchData_and_check func has a not ending loop,
@@ -160,7 +155,9 @@ def chk(request):
         fetchData_and_check_status = "running"
         # bgthread.fetchData_and_check() // wrong, we need a thread
         coinsData_thread.start()
-    return HttpResponse("Conditions table has been manually checked!")
+        return HttpResponse("Conditions table checker has been manually started!")
+
+    return HttpResponse("Conditions table checker is already running!")
 
 ####
 ai_tech_status = "notRunning"
@@ -170,19 +167,34 @@ def ai_tech(request):
     if ai_tech_status == "notRunning":
         technical_signal_thread.start()
         ai_tech_status = "running"
-    return HttpResponse("Technical signal has been manually started!")
+        return HttpResponse("Technical signal has been manually started!")
+
+    return HttpResponse("Technical signal is already running!")
 
 
 #####
 
 def overall(request):
     return render(request, 'radarcxapp/overall.html')
+#####
+from .ai_tech import Current_day_tech_signal
 
 def technical(request):
-    return render(request, 'radarcxapp/technical.html')
+    global Current_day_tech_signal
+    context = {
+        'Current_day_tech_signal' : Current_day_tech_signal[0],
+    }
+    return render(request, 'radarcxapp/technical.html',context)
 
+####
 def fundamental(request):
     return render(request, 'radarcxapp/fundamental.html')
 
 def sentiment(request):
     return render(request, 'radarcxapp/sentiment.html')
+
+def about(request):
+    return render(request, 'radarcxapp/about.html')
+
+def contact_us(request):
+    return render(request, 'radarcxapp/contact_us.html')
