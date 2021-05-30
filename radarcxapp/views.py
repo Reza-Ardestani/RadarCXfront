@@ -43,7 +43,7 @@ class delete_coin(View):
         favorite_coin_name = request.POST["coin"]
         favorite_coin = FavoriteCoins.objects.filter(user=user,favorite_coin__name=favorite_coin_name).last()
         favorite_coin.delete()
-        messages.success(request, "The coin deleted successfully!")
+        messages.success(request, "The coin is deleted successfully!")
         return redirect('coins')
 # End of deleting coin by user ---> '/delete_coin
 
@@ -59,7 +59,7 @@ class add_coin(View):
         coin = Coin.objects.filter(name=favorite_coin).first()
         f_coin.favorite_coin = coin
         f_coin.save()
-        messages.success(request, "Your favorite coin added successfully!")
+        messages.success(request, "Your favorite coin has been added successfully!")
         return redirect('coins')
 # End of adding coin by user ---> '/add_coin
 
@@ -96,7 +96,7 @@ class new_cond(View):
         c.smaller_or_greater = request.POST["trigger"]
         c.creator = user
         c.save()
-        messages.success(request, "Your condition added successfully!")
+        messages.success(request, "Your condition has been added !")
         return redirect('conditions')
 # End of new condition capturing ---> '/new_cond
 
