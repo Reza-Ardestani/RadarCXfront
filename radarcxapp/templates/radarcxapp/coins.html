@@ -16,9 +16,10 @@
         <table class="table table-striped table-bordered mydatatable" style="width: 60%">
 			<tr>
 				<td>Coin</td>
-				<td>Last Price</td>
-				<td>Old Price</td>
-				<td>Status</td>
+				<td>Price</td>
+				<td>24h %</td>
+				<td>Volume(24h)</td>
+				<td>Market Cap</td>
 
             {% for coin in fav_coins %}
             <tr>
@@ -31,10 +32,13 @@
                     <span id="{{ coin.name|add:'-USD' }}" style="font-size: small !important; color: white"></span>
                 </td>
                 <td>
-                    <span id="{{ coin.name|add:'-USD-old'}}" style="font-size: small !important; color: white"></span>
+                    <span id="{{ coin.name|add:'-USD-24'}}" style="font-size: small !important; color: white"></span>
                 </td>
-                <td id="{{ coin.name|add:'-USD-pstat'}}">
-                    <img src="" id="{{ coin.name|add:'-USD-stat'}}" class="responsive">
+                <td>
+                    <span id="{{ coin.name|add:'-USD-volume'}}" style="font-size: small !important; color: white"></span>
+                </td>
+				<td>
+                    <span id="{{ coin.name|add:'-USD-MarketCap'}}" style="font-size: small !important; color: white"></span>
                 </td>
             </tr>
 			{% endfor %}
@@ -70,33 +74,19 @@
     </center>
 </div>
 
+{% for coin in fav_coins %}
 <script>
-    {% for coin in fav_coins %}setInterval(getCoin, 2000, "{{ coin.name }}", "USD");{% endfor %}
+    setInterval(getCoin, 2000, "{{ coin.name }}", "USD");
     async function getCoin(coin1, coin2) {
-        const api_url = 'https://min-api.cryptocompare.com/data/price?fsym=' + coin1 + '&tsyms=' + coin2
+        const api_url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + coin1 + '&tsyms=' + coin2;
         const response = await fetch(api_url);
         const data = await response.json();
-        const {
-            USD
-        } = data;
-        var newPrice = USD;
-        var oldPrice = document.getElementById(coin1 + '-' + coin2).textContent;
-        document.getElementById(coin1 + '-' + coin2 + '-old').textContent = oldPrice;
-        document.getElementById(coin1 + '-' + coin2).textContent = newPrice;
-        var imgdiff = document.createElement("img");
-
-        if (newPrice > oldPrice) {
-            imgdiff.src = "{% static 'radarcxapp/img/diff/gain.png' %}";
-        } else if (newPrice < oldPrice) {
-            imgdiff.src = "{% static 'radarcxapp/img/diff/loss.png' %}";
-        } else {
-            imgdiff.src = "{% static 'radarcxapp/img/diff/court.png' %}";
-        }
-        imgdiff.setAttribute("id", coin1 + '-' + coin2 + '-stat')
-        imgdiff.setAttribute("width", "30")
-        imgdiff.setAttribute("height", "30")
-        var parent = document.getElementById(coin1 + '-' + coin2 + '-pstat');
-        parent.replaceChild(imgdiff, parent.childNodes[1]);
+        var {PRICE, CHANGE24HOUR, VOLUME24HOUR, MKTCAP} = data.DISPLAY.{{ coin.name }}.USD;
+        document.getElementById(coin1 + '-' + coin2).textContent = PRICE;
+		document.getElementById(coin1 + '-' + coin2 + '-24').textContent = CHANGE24HOUR;
+		document.getElementById(coin1 + '-' + coin2 + '-volume').textContent = VOLUME24HOUR;
+		document.getElementById(coin1 + '-' + coin2 + '-MarketCap').textContent = MKTCAP;
     }
 </script>
+{% endfor %}
 {% endblock %}
