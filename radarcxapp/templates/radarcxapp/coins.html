@@ -19,6 +19,7 @@
 				<td>Price</td>
 				<td>24h %</td>
 				<td>Volume(24h)</td>
+				<td>Market Cap</td>
 
             {% for coin in fav_coins %}
             <tr>
@@ -35,6 +36,9 @@
                 </td>
                 <td>
                     <span id="{{ coin.name|add:'-USD-volume'}}" style="font-size: small !important; color: white"></span>
+                </td>
+				<td>
+                    <span id="{{ coin.name|add:'-USD-MarketCap'}}" style="font-size: small !important; color: white"></span>
                 </td>
             </tr>
 			{% endfor %}
@@ -77,10 +81,11 @@
         const api_url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + coin1 + '&tsyms=' + coin2;
         const response = await fetch(api_url);
         const data = await response.json();
-        var {PRICE, CHANGE24HOUR, VOLUME24HOUR} = data.DISPLAY.{{ coin.name }}.USD;
+        var {PRICE, CHANGE24HOUR, VOLUME24HOUR, MKTCAP} = data.DISPLAY.{{ coin.name }}.USD;
         document.getElementById(coin1 + '-' + coin2).textContent = PRICE;
 		document.getElementById(coin1 + '-' + coin2 + '-24').textContent = CHANGE24HOUR;
 		document.getElementById(coin1 + '-' + coin2 + '-volume').textContent = VOLUME24HOUR;
+		document.getElementById(coin1 + '-' + coin2 + '-MarketCap').textContent = MKTCAP;
     }
 </script>
 {% endfor %}
