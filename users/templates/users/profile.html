@@ -12,7 +12,7 @@
     {% endfor %}
 {% endif %}
 
-    <div class="content-section">
+    <div class="container p-3 my-3 bg-white">
       <div class="media">
         <!-- <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"> -->
         <div class="media-body">
@@ -21,7 +21,7 @@
     </div>
 	
     </div>
-			<form method="POST" style="width: 50%" enctype="multipart/form-data">
+			<form method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 				<fieldset class="form-group">
 					<legend class="border-bottom mb-4">Profile Info</legend>
