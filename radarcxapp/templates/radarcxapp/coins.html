@@ -4,89 +4,97 @@
 {% block dbody %}
 
 {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-    {% endfor %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
 {% endif %}
 
-<div class="dynamic-body">
-    <center>
-        <table class="table table-striped table-bordered mydatatable" style="width: 60%">
-			<tr>
-				<td>Coin</td>
-				<td>Price</td>
-				<td>24h %</td>
-				<td>Volume(24h)</td>
-				<td>Market Cap</td>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-borderless table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Coin</th>
+                    <th>Price</th>
+                    <th>24h %</th>
+                    <th>Volume(24h)</th>
+                    <th>Market Cap</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for coin in fav_coins %}
+                <tr>
+                    <td>
+                        {% with 'radarcxapp/img/coins/'|add:coin.name|lower|add:'.png' as image_static %}
+                        <img src="{% static image_static %}" class="img-fluid" alt="{{ coin.name }}-logo"><span><small> {{coin.name}}</small></span>
+                        {% endwith %}
+                    </td>
+                    <td>
+                        <small id="{{ coin.name|add:'-USD' }}"><i class="fa fa-spinner fa-spin"></i></small>
+                    </td>
+                    <td>
+                        <small id="{{ coin.name|add:'-USD-24'}}"><i class="fa fa-spinner fa-spin"></i></small>
+                    </td>
+                    <td>
+                        <small id="{{ coin.name|add:'-USD-volume'}}"><i class="fa fa-spinner fa-spin"></i></small>
+                    </td>
+                    <td>
+                        <small id="{{ coin.name|add:'-USD-MarketCap'}}"><i class="fa fa-spinner fa-spin"></i></small>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    {% if user.is_authenticated %}
+    {% if all_coins %}
+    <form action="/add_coin" method="POST">{% csrf_token %}
+        <select id="coin" name="coin" style="height: 25px; width: 70px">
+            {% for coin in all_coins %}
+            <option value="{{ coin|first }}">{{ coin|first }}</option>
+            {% endfor %}
+        </select>
+        <input class="submit" type="submit" id="submit" value="Add coin to the list"
+            style="height: 25px; width: 200px; border: 0px; padding:0px">
+    </form>
+    {% endif %}
+    <br>
+    {% if fav_coins %}
+    <form action="/delete_coin" method="POST">{% csrf_token %}
+        <select id="coin" name="coin" style="height: 25px; width: 70px">
 
             {% for coin in fav_coins %}
-            <tr>
-                <td>
-                    {% with 'radarcxapp/img/coins/'|add:coin.name|lower|add:'.png' as image_static %}
-                    <img src="{% static image_static %}"  class="responsive" style="min-width:25px"><span style="font-size: small !important; color: white">  {{coin.name}}</span>
-                    {% endwith %}
-                </td>
-                <td>
-                    <span id="{{ coin.name|add:'-USD' }}" style="font-size: small !important; color: white"></span>
-                </td>
-                <td>
-                    <span id="{{ coin.name|add:'-USD-24'}}" style="font-size: small !important; color: white"></span>
-                </td>
-                <td>
-                    <span id="{{ coin.name|add:'-USD-volume'}}" style="font-size: small !important; color: white"></span>
-                </td>
-				<td>
-                    <span id="{{ coin.name|add:'-USD-MarketCap'}}" style="font-size: small !important; color: white"></span>
-                </td>
-            </tr>
-			{% endfor %}
+            <option value="{{ coin.name }}">{{ coin.name }}</option>
+            {% endfor %}
 
-            {% if user.is_authenticated %}
-			{% if all_coins %}
-				<form action="/add_coin" method="POST">{% csrf_token %}
-					<select id="coin" name="coin" style="height: 25px; width: 70px">
-						{% for coin in all_coins %}
-						<option value="{{ coin|first }}">{{ coin|first }}</option>
-						{% endfor %}
-					</select>
-					<input class="submit" type="submit" id="submit" value="Add coin to the list" style="height: 25px; width: 200px; border: 0px; padding:0px">
-				</form>
-			{% endif %}
-			<br>
-			{% if fav_coins %}
-				<form action="/delete_coin" method="POST">{% csrf_token %}
-					<select id="coin" name="coin"  style="height: 25px; width: 70px">
+        </select>
+        <input class="submit" type="submit" id="submit" value="Delete coin from the list"
+            style="height: 25px; width: 200px; border: 0px; padding:0px">
+    </form>
+    {% endif %}
 
-						{% for coin in fav_coins %}
-						<option value="{{ coin.name }}">{{ coin.name }}</option>
-						{% endfor %}
-
-					</select>
-					<input class="submit" type="submit" id="submit" value="Delete coin from the list"  style="height: 25px; width: 200px; border: 0px; padding:0px">
-				</form>
-			{% endif %}
-
-			{% endif %}
-
-        </table>
-    </center>
+    {% endif %}
 </div>
 
 {% for coin in fav_coins %}
 <script>
-    setInterval(getCoin, 2000, "{{ coin.name }}", "USD");
-    async function getCoin(coin1, coin2) {
+    async function get{{ coin.name }}(coin1, coin2){
         const api_url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + coin1 + '&tsyms=' + coin2;
         const response = await fetch(api_url);
         const data = await response.json();
-        var {PRICE, CHANGE24HOUR, VOLUME24HOUR, MKTCAP} = data.DISPLAY.{{ coin.name }}.USD;
+        var { PRICE, CHANGE24HOUR, VOLUME24HOUR, MKTCAP } = data.DISPLAY.{{ coin.name }}.USD;
         document.getElementById(coin1 + '-' + coin2).textContent = PRICE;
-		document.getElementById(coin1 + '-' + coin2 + '-24').textContent = CHANGE24HOUR;
-		document.getElementById(coin1 + '-' + coin2 + '-volume').textContent = VOLUME24HOUR;
-		document.getElementById(coin1 + '-' + coin2 + '-MarketCap').textContent = MKTCAP;
+        document.getElementById(coin1 + '-' + coin2 + '-24').textContent = CHANGE24HOUR;
+        document.getElementById(coin1 + '-' + coin2 + '-volume').textContent = VOLUME24HOUR;
+        document.getElementById(coin1 + '-' + coin2 + '-MarketCap').textContent = MKTCAP;
     }
+    setInterval(get{{ coin.name }}, 2000, "{{ coin.name }}", "USD");
 </script>
 {% endfor %}
 {% endblock %}
