@@ -10,34 +10,34 @@
 {% endfor %}
 {% endif %}
 
-{% for condition in conditions %}
-<article class="container media">
-  <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
-  <div class="media-body">
-    <div class="article-metadata">
-      <!-- <a class="mr-2" href="#">{{ .author }}</a> -->
-      <!-- <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> -->
+<div class="container">
+  {% for condition in conditions %}
+  <article class="container media">
+    <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
+    <div class="media-body">
+      <div class="article-metadata">
+        <!-- <a class="mr-2" href="#">{{ .author }}</a> -->
+        <!-- <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> -->
+      </div>
+      <h2><a class="article-title" href="">{{ condition.name }}</a></h2>
+      <span>
+        <form action="/del_cond" method="POST">{% csrf_token %}
+          <input type="hidden" name="cond_id" value="{{ condition.id }}">
+          <input class="submit" type="submit" id="submit" name="submit" value="Delete">
+        </form>
+      </span>
+      <!-- <p class="article-content">{{ post.content }}</p> -->
     </div>
-    <h2><a class="article-title" href="">{{ condition.name }}</a></h2>
-    <span>
-      <form action="/del_cond" method="POST">{% csrf_token %}
-        <input type="hidden" name="cond_id" value="{{ condition.id }}">
-        <input class="submit" type="submit" id="submit" name="submit" value="Delete">
-      </form>
-    </span>
-    <!-- <p class="article-content">{{ post.content }}</p> -->
-  </div>
-</article>
-{% endfor %}
+  </article>
+  {% endfor %}
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-circle btn-md" data-toggle="modal"
-  data-target="#exampleModal">+</button>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-circle btn-md" data-toggle="modal"
+    data-target="#exampleModal">+</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <form action="/new_cond" method="POST">{% csrf_token %}
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -47,54 +47,36 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
+          <form action="/new_cond" method="POST" class="form-inline">{% csrf_token %}
             <input class="form-control" type="text" id="cond_name" name="cond_name"
               placeholder="Name your new condition...">
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col">
-                If
-              </div>
-              <div class="col">
-                <select class="form-control" id="cond_type" name="cond_type">
-                  <option class="form-control" value="realtime">Realtime Price</option>
-                  <!-- <option value="volume">Volume</option> -->
-                  <!-- <option value="maverage">Moving Average</option> -->
-                </select>
-              </div>
-              <div class="col">
-                of
-              </div>
-              <div class="col">
-                <select class="form-control" id="coin" name="coin">
-                  {% for coin in coins %}
-                  <option class="form-control" value="{{ coin.name }}">{{ coin.name }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                became
-              </div>
-              <div class="col">
-                <select class="form-control" id="trigger" name="trigger">
-                  <option class="form-control" value=">"> > </option>
-                  <option class="form-control" value="<"> < </option>
-                </select>
-              </div>
-              <div class="col">
-                <input class="form-control" type="number" id="amount" name="amount" step="0.01">
-              </div>
-              <div class="col">
-                $, NOTIFY ME!
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary submit" id="submit">Add</button>
-          </div>
+            <br>
+            <label for> If </label> 
+            <select class="form-control" id="cond_type" name="cond_type">
+              <option class="form-control" value="realtime">Realtime Price</option>
+            </select>
+            of
+            <select class="form-control" id="coin" name="coin">
+              {% for coin in coins %}
+              <option class="form-control" value="{{ coin.name }}">{{ coin.name }}</option>
+              {% endfor %}
+            </select>
+            became
+            <select class="form-control" id="trigger" name="trigger">
+              <option class="form-control" value=">"> > </option>
+              <option class="form-control" value="<"> < </option>
+            </select>
+            <input class="form-control" type="number" id="amount" name="amount" step="0.01">
+            $, NOTIFY ME!
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary submit" id="submit">Add</button>
         </div>
       </div>
-  </form>
+    </div>
+    </form>
+  </div>
 </div>
+
+
 {% endblock %}
