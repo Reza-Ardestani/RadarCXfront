@@ -144,10 +144,20 @@ def del_cond(request):
 # chk url , this url make fetchData_and_check run one time
 ''' fetchData_and_check func has a not ending loop,
     so we should only run it one time with the help of following global var'''
-fetchData_and_check_status = "notRunning"
 
+fetchData_and_check_status = "notRunning"
 ''' initiating fetchData_and_check func thread '''
 coinsData_thread = threading.Thread(target=bgthread.fetchData_and_check)
+
+# Heroku kill all threads after being 30 min idle
+# so we need to create them for each start up:
+
+if fetchData_and_check_status == "notRunning":
+    # "if" is somehow redundent(added for improving clarity)
+    ''' comment next line in your local machine if you'd like'''
+    ''' But Do not forget to uncomment it on the server '''
+    coinsData_thread.start()
+    fetchData_and_check_status = "running"
 
 def chk(request):
     global fetchData_and_check_status
