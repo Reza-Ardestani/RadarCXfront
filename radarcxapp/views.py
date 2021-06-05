@@ -162,6 +162,18 @@ def chk(request):
 ####
 ai_tech_status = "notRunning"
 technical_signal_thread = threading.Thread(target=ai_tech.tech_signal)
+
+# Heroku kill all threads after being 30 min idle
+# so we need to create them for each start up:
+
+if ai_tech_status == "notRunning":
+    # "if" is somehow redundent(added for improving clarity)
+    ''' comment next line in your local machine if you'd like'''
+    ''' But Do not forget to uncomment it on the server '''
+    technical_signal_thread.start()
+    ai_tech_status = "running"
+
+
 def ai_tech(request):
     global ai_tech_status
     if ai_tech_status == "notRunning":
