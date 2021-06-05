@@ -16,7 +16,7 @@
   <div class="mt-3">
     <div class="media bg-white rounded px-1 py-2">
       {% with 'radarcxapp/img/coins/'|add:condition.coin|lower|add:'.png' as image_static %}
-        <img src="{% static image_static %}" class="mr-4">
+        <img src="{% static image_static %}" class="mr-4 pic-control">
       {% endwith %}
       <div class="media-body">
         <form id="form_{{ condition.id }}" action="/del_cond" method="POST">{% csrf_token %}
