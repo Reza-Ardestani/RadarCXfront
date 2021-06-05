@@ -29,7 +29,7 @@
                 <tr>
                     <td>
                         {% with 'radarcxapp/img/coins/'|add:coin.name|lower|add:'.png' as image_static %}
-                        <img src="{% static image_static %}" class="img-fluid" alt="{{ coin.name }}-logo"><span><small> {{coin.name}}</small></span>
+                        <img src="{% static image_static %}" class="img-fluid pic-control" alt="{{ coin.name }}-logo"><span><small> {{coin.name}}</small></span>
                         {% endwith %}
                     </td>
                     <td>

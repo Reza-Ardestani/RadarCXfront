@@ -120,3 +120,7 @@
 .project_widget .pw_content .pw_meta span {
     font-weight: 500
 }
+
+.pic-control {
+    max-width: 50px;
+}
