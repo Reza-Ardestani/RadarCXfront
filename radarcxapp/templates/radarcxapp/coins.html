@@ -55,19 +55,19 @@
     {% if user.is_authenticated %}
     {% if all_coins %}
     <form action="/add_coin" method="POST">{% csrf_token %}
-        <select id="coin" name="coin" style="height: 25px; width: 70px">
+        <select id="coin" name="coin" style="height: 25px; width: 70px; background-color: black; color: white">
             {% for coin in all_coins %}
             <option value="{{ coin|first }}">{{ coin|first }}</option>
             {% endfor %}
         </select>
         <input class="submit" type="submit" id="submit" value="Add coin to the list"
-            style="height: 25px; width: 200px; border: 0px; padding:0px">
+            style="height: 25px; width: 200px; border: 0px; padding:0px; background-color: black; color: white">
     </form>
     {% endif %}
     <br>
     {% if fav_coins %}
     <form action="/delete_coin" method="POST">{% csrf_token %}
-        <select id="coin" name="coin" style="height: 25px; width: 70px">
+        <select id="coin" name="coin" style="height: 25px; width: 70px; background-color: black; color: white">
 
             {% for coin in fav_coins %}
             <option value="{{ coin.name }}">{{ coin.name }}</option>
@@ -75,7 +75,7 @@
 
         </select>
         <input class="submit" type="submit" id="submit" value="Delete coin from the list"
-            style="height: 25px; width: 200px; border: 0px; padding:0px">
+            style="height: 25px; width: 200px; border: 0px; padding:0px; background-color: black; color: white">
     </form>
     {% endif %}
 
