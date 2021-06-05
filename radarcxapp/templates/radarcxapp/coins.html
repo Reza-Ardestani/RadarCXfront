@@ -27,10 +27,22 @@
         <tbody>
             {% for coin in fav_coins %}
             <tr>
+                <form id="form_{{ coin.name }}" action="/delete_coin" method="POST">{% csrf_token %}
+                    <input type="hidden" name="coin" value="{{ coin.name }}">
+                </form>
                 <td>
                     {% with 'radarcxapp/img/coins/'|add:coin.name|lower|add:'.png' as image_static %}
-                    <img src="{% static image_static %}" class="img-fluid pic-control" alt="{{ coin.name }}-logo"><span><small> {{coin.name}}</small></span>
-                    {% endwith %}
+                    <img src="{% static image_static %}" class="img-fluid pic-control" alt="{{ coin.name }}-logo">
+                    {% endwith %}                        
+                    <span>
+                        <small> {{coin.name}} 
+                            {% if user.is_authenticated %}
+                            <a href="javascript:{}" onclick="document.getElementById('form_{{ coin.name }}').submit();">
+                                <i class="fa fa-trash" style="color: red;"></i>
+                            </a>
+                            {% endif %}
+                        </small>
+                    </span>
                 </td>
                 <td>
                     <small id="{{ coin.name|add:'-USD' }}"><i class="fa fa-spinner fa-spin"></i></small>
@@ -62,21 +74,6 @@
         style="height: 25px; width: 200px; border: 0px; padding:0px; background-color: black; color: white">
 </form>
 {% endif %}
-<br>
-{% if fav_coins %}
-<form action="/delete_coin" method="POST">{% csrf_token %}
-    <select id="coin" name="coin" style="height: 25px; width: 70px; background-color: black; color: white">
-
-        {% for coin in fav_coins %}
-        <option value="{{ coin.name }}">{{ coin.name }}</option>
-        {% endfor %}
-
-    </select>
-    <input class="submit" type="submit" id="submit" value="Delete coin from the list"
-        style="height: 25px; width: 200px; border: 0px; padding:0px; background-color: black; color: white">
-</form>
-{% endif %}
-
 {% endif %}
 
 {% for coin in fav_coins %}
