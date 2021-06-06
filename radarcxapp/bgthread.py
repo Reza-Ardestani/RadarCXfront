@@ -82,8 +82,9 @@ def fetchData_and_check():
         ''' getting data and storing them in DB '''
         # response comes as json
         if iterations > 100: # limiting number of requests
-        # roughtly every 15 min we get prices updated 
+        # roughtly every 15 min we get prices updated
             iterations = 0
+            print("getting prices updated every 15 min")
             for nameOfCoin in coins:
                 parameters["fsym"] =nameOfCoin
                 response = requests.get(url, params=parameters)
