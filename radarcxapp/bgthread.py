@@ -83,9 +83,11 @@ def fetchData_and_check():
         # response comes as json
         if iterations > 100 or iterations == 1: # limiting number of requests
         # roughtly every 15 min we get prices updated
-            iterations = 0
+
             if iterations == 1:
                 iterations = 2
+            else:
+                iterations = 0
 
             print("getting prices updated every 15 min")
             for nameOfCoin in coins:
