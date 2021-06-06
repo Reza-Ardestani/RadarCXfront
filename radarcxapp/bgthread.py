@@ -73,20 +73,25 @@ def fetchData_and_check():
                 initiating_coin = Coin.objects.create(name=coinName)
                 initiating_coin.save()
 
+    iterations = 0
     while(True):
+        iterations +=1
         print("here I receive data of all coins and store them in DB")
         url = 'https://min-api.cryptocompare.com/data/price'
         parameters = {'fsym': "BTC",'tsyms': "USD"}
         ''' getting data and storing them in DB '''
         # response comes as json
-        for nameOfCoin in coins:
-            parameters["fsym"] =nameOfCoin
-            response = requests.get(url, params=parameters)
-            data = response.json()
-            c = Coin.objects.filter(name=parameters["fsym"]).first()
-            c.realtime_price=data[parameters["tsyms"]]
-            c.save()
+        if iterations > 100: # limiting number of requests
+        # roughtly every 15 min we get prices updated 
+            iterations = 0
+            for nameOfCoin in coins:
+                parameters["fsym"] =nameOfCoin
+                response = requests.get(url, params=parameters)
+                data = response.json()
+                c = Coin.objects.filter(name=parameters["fsym"]).first()
+                c.realtime_price=data[parameters["tsyms"]]
+                c.save()
 
         # Synchronizicly we runn this fun & wait till it ends
         conditionsChecker()
-        time.sleep(1) # 300 sec
+        time.sleep(10) # 300 sec
