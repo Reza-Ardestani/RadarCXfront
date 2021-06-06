@@ -85,7 +85,7 @@ def fetchData_and_check():
         # roughtly every 15 min we get prices updated
             iterations = 0
             if iterations == 1:
-                iterations = 1
+                iterations = 2
 
             print("getting prices updated every 15 min")
             for nameOfCoin in coins:
