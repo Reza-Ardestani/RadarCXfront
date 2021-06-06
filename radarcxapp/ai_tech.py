@@ -54,16 +54,16 @@ def tech_signal():
     global Current_day_tech_signal
     # based on daily data, we provide signals for bitcoin
     # the result will be available on "Current_day_tech_signal"
-    print(" before loop :", Current_day_tech_signal)
+    #print(" before loop :", Current_day_tech_signal)
     while(True):
         # for the time being, we use yfinance as the source of data
         df = loadFrom_yfinance()
-        print(" after loadFrom_yfinance :", Current_day_tech_signal)
+        #print(" after loadFrom_yfinance :", Current_day_tech_signal)
         #Using ta for tech analysis
         technicalCalculations(df)
-        print(" after technicalCalculations func  :", Current_day_tech_signal)
+        #print(" after technicalCalculations func  :", Current_day_tech_signal)
         # based on  our meta-knowlege we elicit signals out of data
         # the result will be stored in "Current_day_tech_signal"
         elicitSignals(df)
-        print(" Final ai tech result:", Current_day_tech_signal)
+        #print(" Final ai tech result:", Current_day_tech_signal)
         time.sleep(3600)

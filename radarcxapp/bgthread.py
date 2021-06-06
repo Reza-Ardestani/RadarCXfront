@@ -19,6 +19,7 @@ def conditionsChecker():
     ''' note: we have not implemented 'equal' and 'moving_average','volume' yet. '''
     conditions = Condition.objects.all()
     for condition in conditions:
+        print('here in for loop of conditions checker func')
         coin_quantity = Coin.objects.filter(name=condition.coin).last().realtime_price
         if (condition.triggered == True):
             continue
@@ -73,7 +74,7 @@ def fetchData_and_check():
                 initiating_coin.save()
 
     while(True):
-        # print("here I receive data of all coins and store them in DB")
+        print("here I receive data of all coins and store them in DB")
         url = 'https://min-api.cryptocompare.com/data/price'
         parameters = {'fsym': "BTC",'tsyms': "USD"}
         ''' getting data and storing them in DB '''
