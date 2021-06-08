@@ -12,7 +12,7 @@
 {% endif %}
 
 <div class="container">
-  {% for condition in conditions %}
+  {% for condition in conditions reversed %}
   <div class="mt-3">
     <div class="media bg-white rounded px-1 py-2">
       {% with 'radarcxapp/img/coins/'|add:condition.coin|lower|add:'.png' as image_static %}
