@@ -32,7 +32,11 @@
         </h5>
         {{ condition.coin }} {{ condition.smaller_or_greater }} {{ condition.quantity }}$
         <br>
-        Triggered? : {{ condition.triggered }}
+		{% if condition.triggered %}
+			<p  style="color: green">Triggered? : {{ condition.triggered }}</p>
+		{% else %}
+			<p  style="color: red">Triggered? : {{ condition.triggered }}</p>	
+		{% endif %}
       </span>
       </div>
     </div>
