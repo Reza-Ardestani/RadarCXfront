@@ -203,8 +203,21 @@ from .ai_tech import Current_day_tech_signal
 
 def technical(request):
     global Current_day_tech_signal
+    color = ''
+    if (Current_day_tech_signal == "Strong Sell"):
+        color = 'danger'
+    elif (Current_day_tech_signal == "Sell"):
+        color = 'warning'
+    elif (Current_day_tech_signal == "Neutral"):
+        color = 'success'
+    elif (Current_day_tech_signal == "Buy"):
+        color = 'info'
+    elif (Current_day_tech_signal == "Strong Buy"):
+        color = 'primary'
+
     context = {
         'Current_day_tech_signal' : Current_day_tech_signal[0],
+        'color': color,
     }
     return render(request, 'radarcxapp/technical.html',context)
 
