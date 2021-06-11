@@ -4,11 +4,11 @@
 {% endblock %} {% block dbody %}
 <center style="width: 100%">
 	<h1 class="display-4">
-		<span class="badge badge-secondary {% if {{ Current_day_tech_signal }} == 'Strong Sell' %}bg-{{color}} display-1{% endif %}">Strong Sell</span>
-		<span class="badge badge-secondary {% if {{ Current_day_tech_signal }} == 'Sell' %}bg-{{color}} display-1{% endif %}">Sell</span>
-		<span class="badge badge-secondary {% if {{ Current_day_tech_signal }} == 'Neutral' %}bg-{{color}} display-1{% endif %}">Neutral</span>
-		<span class="badge badge-secondary {% if {{ Current_day_tech_signal }} == 'Buy' %}bg-{{color}} display-1{% endif %}">Buy</span>
-		<span class="badge badge-secondary {% if {{ Current_day_tech_signal }} == 'Strong Buy' %}bg-{{color}} display-1{% endif %}">Strong Buy</span>
+		<span class="badge badge-secondary {% if Current_day_tech_signal == 'Strong Sell' %}bg-{{color}} display-1{% endif %}">Strong Sell</span>
+		<span class="badge badge-secondary {% if Current_day_tech_signal == 'Sell' %}bg-{{color}} display-1{% endif %}">Sell</span>
+		<span class="badge badge-secondary {% if Current_day_tech_signal == 'Neutral' %}bg-{{color}} display-1{% endif %}">Neutral</span>
+		<span class="badge badge-secondary {% if Current_day_tech_signal == 'Buy' %}bg-{{color}} display-1{% endif %}">Buy</span>
+		<span class="badge badge-secondary {% if Current_day_tech_signal == 'Strong Buy' %}bg-{{color}} display-1{% endif %}">Strong Buy</span>
 
 	</h1>
 	<p>This signal has brought to you from our Naive AI system, Please do your own research as well.</p>
