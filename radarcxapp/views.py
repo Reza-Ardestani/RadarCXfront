@@ -204,15 +204,15 @@ from .ai_tech import Current_day_tech_signal
 def technical(request):
     global Current_day_tech_signal
     color = ''
-    if (Current_day_tech_signal == "Strong Sell"):
+    if (Current_day_tech_signal[0] == "Strong Sell"):
         color = 'danger'
-    elif (Current_day_tech_signal == "Sell"):
+    elif (Current_day_tech_signal[0] == "Sell"):
         color = 'warning'
-    elif (Current_day_tech_signal == "Neutral"):
+    elif (Current_day_tech_signal[0] == "Neutral"):
         color = 'success'
-    elif (Current_day_tech_signal == "Buy"):
+    elif (Current_day_tech_signal[0] == "Buy"):
         color = 'info'
-    elif (Current_day_tech_signal == "Strong Buy"):
+    elif (Current_day_tech_signal[0] == "Strong Buy"):
         color = 'primary'
 
     context = {
