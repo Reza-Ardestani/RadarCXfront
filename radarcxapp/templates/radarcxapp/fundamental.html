@@ -9,20 +9,49 @@
 
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-container" style="max-width: 480px; max-height: 830px; width: 99%; height: auto">
+  <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://s.tradingview.com/embed-widget/timeline/?#%7B%22width%22%3A480%2C%22height%22%3A830%2C%22isTransparent%22%3Afalse%2C%22displayMode%22%3A%22regular%22%2C%22utm_source%22%3A%22localhost%22%2C%22utm_medium%22%3A%22widget_new%22%2C%22utm_campaign%22%3A%22timeline%22%7D" style="box-sizing: border-box; height: calc(798px); max-width: 480px; width: 100%"></iframe>
   <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span class="blue-text"> History</span></a> by TradingView</div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-  {
-  "autosize": true
-  "colorTheme": "light",
-  "isTransparent": false,
-  "displayMode": "regular",
-  "locale": "en"
-}
-  </script>
+  
 
 
 
+
+<style>
+	.tradingview-widget-copyright {
+		font-size: 13px !important;
+		line-height: 32px !important;
+		text-align: center !important;
+		vertical-align: middle !important;
+		font-family: 'Trebuchet MS', Arial, sans-serif !important;
+		color: #9db2bd !important;
+	}
+
+	.tradingview-widget-copyright .blue-text {
+		color: #2962FF !important;
+	}
+
+	.tradingview-widget-copyright a {
+		text-decoration: none !important;
+		color: #9db2bd !important;
+	}
+
+	.tradingview-widget-copyright a:visited {
+		color: #9db2bd !important;
+	}
+
+	.tradingview-widget-copyright a:hover .blue-text {
+		color: #38acdb !important;
+	}
+
+	.tradingview-widget-copyright a:active .blue-text {
+		color: #299dcd !important;
+	}
+
+	.tradingview-widget-copyright a:visited .blue-text {
+		color: #2962FF !important;
+	}
+	</style></div>
 
 </div>
 <!-- TradingView Widget END -->
