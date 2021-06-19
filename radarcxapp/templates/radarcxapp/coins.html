@@ -45,9 +45,11 @@
         <tbody>
             {% for coin in fav_coins %}
             <tr>
+                {% if user.is_authenticated %}
                 <form id="form_{{ coin.name }}" action="/delete_coin" method="POST">{% csrf_token %}
                     <input type="hidden" name="coin" value="{{ coin.name }}">
                 </form>
+                {% endif %}
                 <td>
                     {% with 'radarcxapp/img/coins/'|add:coin.name|lower|add:'.png' as image_static %}
                     <img src="{% static image_static %}" class="img-fluid pic-control" alt="{{ coin.name }}-logo">
