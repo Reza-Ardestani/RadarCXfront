@@ -73,7 +73,7 @@
             <input type="hidden" name="cond_type" value="realtime">
             <div class="col-auto">
             <select class="form-control" id="coin" name="coin">
-              {% for coin in coins %}
+              {% for coin in coins|dictsort:"name" %}
               <option class="form-control" value="{{ coin.name }}">{{ coin.name }}</option>
               {% endfor %}
             </select>
